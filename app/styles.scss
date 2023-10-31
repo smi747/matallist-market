@@ -1,0 +1,335 @@
+@import "mixins";
+@import "reset";
+
+* {
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.header {
+  width: 100%;
+  position: fixed;
+}
+
+.header__menu {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navigation {
+  display: flex;
+  align-items: center;
+  color: white;
+  gap: 70px;
+  font-family: "Noto Sans", sans-serif;
+
+  transition: color 0.5s;
+
+  @include desktopsmall {
+    gap: 30px;
+  }
+  @include tablet {
+    gap: 20px;
+  }
+  @include tabletsmall {
+    gap: 10px;
+  }
+}
+
+.navigation__link {
+  color: white;
+  text-decoration: none;
+  transition: color 0.5s;
+  font-size: 20px;
+  letter-spacing: 1px;
+  @include desktopsmall {
+    font-size: 18px;
+  }
+  @include tablet {
+    font-size: 15px;
+  }
+  @include tabletsmall {
+    font-size: 15px;
+    letter-spacing: 0;
+    display: none;
+  }
+  @include mobile {
+    display: none;
+  }
+}
+
+.menu_changed .navigation__link {
+  color: black;
+}
+
+.navigation__logo {
+  display: block;
+  position: relative;
+  width: 250px;
+  @include tablet {
+    width: 170px;
+  }
+  @include tabletsmall {
+    width: 170px;
+  }
+  @include mobile {
+    width: 150px;
+  }
+}
+
+.menu_changed .logo_1 {
+  filter: brightness(0);
+}
+
+.logo_0 {
+  width: 100%;
+  position: absolute;
+}
+
+.logo_1 {
+  width: 100%;
+  transition: filter 0.5s;
+}
+
+.menu__right {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-right: 30px;
+  @include tablet {
+    position: relative;
+    top: 2px;
+  }
+  @include tabletsmall {
+    position: relative;
+    top: 2px;
+    gap: 15px;
+    margin-right: 15px;
+  }
+  @include mobile {
+    position: relative;
+    top: 2px;
+    gap: 10px;
+    margin-right: 15px;
+  }
+}
+
+.right_l {
+  position: relative;
+  top: -2px;
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  gap: 1px;
+}
+
+.menu__text {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 20px;
+  letter-spacing: 1px;
+  color: white;
+  text-decoration: none;
+  transition: color 0.5s;
+
+  @include desktopsmall {
+    font-size: 18px;
+  }
+  @include tablet {
+    font-size: 15px;
+  }
+  @include tabletsmall {
+    font-size: 15px;
+  }
+  @include mobile {
+    font-size: 13px;
+  }
+}
+
+.menu__mail {
+  @include mobile {
+    display: none;
+  }
+}
+
+.menu_changed .menu__text {
+  color: black;
+}
+
+.socials {
+  display: flex;
+  gap: 20px;
+  transition: filter 0.5s;
+  @include tabletsmall {
+    gap: 20px;
+  }
+}
+
+.menu_changed .socials {
+  filter: brightness(0);
+}
+
+.icon {
+  width: 30px;
+  @include tablet {
+    width: 23px;
+  }
+  @include tabletsmall {
+    width: 23px;
+  }
+}
+
+.right_c {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  @include tablet {
+    @media screen and (max-width: 951px) {
+      display: none;
+    }
+  }
+  @include tabletsmall {
+    gap: 5px;
+    display: none;
+    @media screen and (min-width: 591px) {
+      display: flex;
+    }
+  }
+  @include mobile {
+    gap: 4px;
+    display: flex;
+    order: -1;
+  }
+}
+
+.social_link {
+  @include mobile {
+    display: none;
+  }
+}
+
+.social_link_p {
+  display: none;
+  @include tablet {
+    @media screen and (min-width: 768px) and (max-width: 951px) {
+      display: block;
+    }
+  }
+  @include tabletsmall {
+    @media screen and (max-width: 590px) {
+      display: block;
+    }
+  }
+  @include mobile {
+    display: none;
+  }
+}
+
+.social_link_wa {
+  @include mobile {
+    display: block;
+    @media screen and (max-width: 350px) {
+      display: none;
+    }
+  }
+}
+
+.right_r {
+  width: 40px;
+  transition: filter 0.5s;
+  cursor: pointer;
+  @include tablet {
+    width: 32px;
+  }
+  @include tabletsmall {
+    width: 32px;
+  }
+  @include mobile {
+    width: 30px;
+  }
+}
+
+.menu_changed .right_r {
+  filter: brightness(0);
+}
+
+.section_1 {
+  background-image: linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.3) 0%,
+      rgba(0, 0, 0, 0.3) 100%
+    ),
+    url("images/background_01.jpg");
+  background-size: cover;
+  background-position: center 25%;
+  width: 100%;
+  height: 1080px;
+  @include mobile {
+    height: 930px;
+  }
+}
+
+.section_2 {
+  height: 1080px;
+  @include mobile {
+    height: 930px;
+  }
+}
+
+.section_3 {
+  height: 1080px;
+  background-color: black;
+  @include mobile {
+    height: 930px;
+  }
+}
+
+.section_4 {
+  height: 1080px;
+  background-color: black;
+  @include mobile {
+    height: 930px;
+  }
+}
+
+.vp {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+}
+
+.viewport_0 {
+  display: none;
+  @include desktop {
+    display: block;
+  }
+}
+.viewport_1 {
+  display: none;
+  @include desktopsmall {
+    display: block;
+  }
+}
+.viewport_2 {
+  display: none;
+  @include tablet {
+    display: block;
+  }
+}
+.viewport_3 {
+  display: none;
+  @include tabletsmall {
+    display: block;
+  }
+}
+.viewport_4 {
+  display: none;
+  @include mobile {
+    display: block;
+  }
+}
