@@ -13,6 +13,7 @@ html {
 .header {
   width: 100%;
   position: fixed;
+  z-index: 100;
 }
 
 .header__menu {
@@ -284,6 +285,7 @@ html {
 .section_3 {
   height: 1080px;
   background-color: black;
+  padding: 100px;
   @include mobile {
     height: 930px;
   }

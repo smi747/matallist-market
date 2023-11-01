@@ -7,6 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <title>Металлист Маркет</title>
 </head>
 <body class="body">
@@ -15,8 +16,8 @@
             <nav class="navigation">
                 <a href="#" class="navigation__logo"><img src="images/logo_0.png" alt="" class="logo_0"><img src="images/logo_1.png" alt="" class="logo_1"></a>
                 <a href="#catalog" class="navigation__link">КАТАЛОГ</a>
-                <a href="#" class="navigation__link">УСЛУГИ</a>
-                <a href="#" class="navigation__link">КОНТАКТЫ</a>
+                <a href="#gallery" class="navigation__link">УСЛУГИ</a>
+                <a href="#contacts" class="navigation__link">КОНТАКТЫ</a>
             </nav>
             <div class="menu__right">
                 <div class="right_l">
@@ -40,7 +41,64 @@
     <main>
         <section class="section_1"></section>
         <section class="section_2" id="catalog"></section>
-        <section class="section_3" id="gallery"></section>
+        <section class="section_3" id="gallery">
+            <style>
+                :root {--swiper-navigation-color: white;}
+                .swiper {
+                  width: 100%;
+                  padding-top: 50px;
+                  padding-bottom: 50px;
+                }
+            
+                .swiper-slide {
+                  background-position: center;
+                  background-size: cover;
+                  width: 600px;
+                  height: 700px;
+                  background-color: #000;
+                }
+            
+                .swiper-slide img {
+                  display: block;
+                  width: 100%;
+                }
+              </style>
+              <div class="swiper mySwiper">
+                <div class="swiper-wrapper">
+                  <div class="swiper-slide">
+                    <img src="https://swiperjs.com/demos/images/nature-1.jpg" />
+                  </div>
+                  <div class="swiper-slide">
+                    <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
+                  </div>
+                  <div class="swiper-slide">
+                    <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
+                  </div>
+                  <div class="swiper-slide">
+                    <img src="https://swiperjs.com/demos/images/nature-4.jpg" />
+                  </div>
+                  <div class="swiper-slide">
+                    <img src="https://swiperjs.com/demos/images/nature-5.jpg" />
+                  </div>
+                  <div class="swiper-slide">
+                    <img src="https://swiperjs.com/demos/images/nature-6.jpg" />
+                  </div>
+                  <div class="swiper-slide">
+                    <img src="https://swiperjs.com/demos/images/nature-7.jpg" />
+                  </div>
+                  <div class="swiper-slide">
+                    <img src="https://swiperjs.com/demos/images/nature-8.jpg" />
+                  </div>
+                  <div class="swiper-slide">
+                    <img src="https://swiperjs.com/demos/images/nature-9.jpg" />
+                  </div>
+                </div>
+                <div class="swiper-pagination"></div>
+                <div class="swiper-button-next"></div>
+          <div class="swiper-button-prev"></div>
+              </div>
+        <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+        </section>
         <section class="section_4" id="contacts"></section>
 
         <div class="vp viewport_0">>1400</div>
