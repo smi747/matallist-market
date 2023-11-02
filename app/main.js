@@ -44,20 +44,39 @@ var swiper = new Swiper(".mySwiper", {
 
 
 
-function click_1() {
+function get_photos(x) {
+  let tmp;
+  if (x == 0)
+    tmp = ["images/slider/01/IMG_4318.jpg"];
+  if (x == 1)
+    tmp = [];
+  if (x == 2)
+    tmp = ["images/slider/03/IMG_1216.jpg", "images/slider/03/IMG_1217.jpg"];
+  if (x == 3)
+    tmp = ["images/slider/04/IMG_4316.jpg", "images/slider/04/IMG_4317.jpg", "images/slider/04/IMG_5322.jpg", "images/slider/04/4.jpg"];
+  if (x == 4)
+    tmp = ["images/slider/05/10.jpg", "images/slider/05/IMG_3837.PNG", "images/slider/05/IMG_3838.PNG", "images/slider/05/IMG_3850.PNG", "images/slider/05/5.JPG", "images/slider/05/6.JPG"];
+  if (x == 5)
+    tmp = ["images/slider/06/1.jpg"];
+  if (x == 6)
+    tmp = ["images/slider/07/IMG_3844.PNG"];
+
   var element = document.createElement("div");
   element.classList.add("cover_menu");
   element.setAttribute("onclick", "this.remove()");
   var cross = document.createElement("div");
   cross.classList.add("cross");
-  var photo_1 = document.createElement("img");
-  photo_1.setAttribute("src", "images/slider/01/IMG_4318.jpg");
-  photo_1.classList.add("cover_menu_photo");
+
+  for (const elem of tmp) {
+    var photo = document.createElement("img");
+    photo.setAttribute("src", elem);
+    photo.classList.add("cover_menu_photo");
+    element.appendChild(photo);
+  }
+  
   element.append(cross)
-  element.appendChild(photo_1);
-  element.appendChild(photo_1.cloneNode());
-  element.appendChild(photo_1.cloneNode());
   body.appendChild(element);
+  /*
   fetch('http://localhost:3000/?q=test')
   .then((response) => {
     return response.text();
@@ -65,4 +84,5 @@ function click_1() {
   .then((data) => {
     alert(data);
   });
+  */
 }

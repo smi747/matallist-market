@@ -338,16 +338,19 @@ html {
 }
 .cover_menu_photo {
   height: 50vh;
+  margin-bottom: 20px;
 }
 .cross {
   position: fixed;
   top: 0;
-  right: 25%;
-  margin: 50px;
+  margin-top: 30px;
   width: 50px;
   height: 50px;
   background-size: cover;
   background-image: url("images/icons/close.png");
+}
+.cross:hover {
+  cursor: pointer;
 }
 
 .section_4 {
