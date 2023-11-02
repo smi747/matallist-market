@@ -43,54 +43,82 @@
         <section class="section_2" id="catalog"></section>
         <section class="section_3" id="gallery">
             <style>
-                :root {--swiper-navigation-color: white;}
+                :root {
+                --swiper-navigation-color: white;
+                --swiper-theme-color: white;
+                --swiper-pagination-bullet-inactive-color: gray;
+                }
                 .swiper {
                   width: 100%;
-                  padding-top: 50px;
+                  padding-top: 80px;
                   padding-bottom: 50px;
                 }
             
                 .swiper-slide {
                   background-position: center;
                   background-size: cover;
-                  width: 600px;
-                  height: 700px;
+                  width: 46vh;
+                  height: 65vh;
                   background-color: #000;
+                  overflow: hidden;
+                  position: relative;
                 }
+                @media screen and (max-width: 1400px) {
+                  .swiper {
+                    padding-top: 70px;
+                    padding-bottom: 40px;
+                  }
+                  }
+                  @media screen and (max-width: 1200px) {
+                    .swiper {
+                      padding-top: 60px;
+                      padding-bottom: 30px;
+                    }
+                  }
+                  @media screen and (max-width: 767px) {
+                    .swiper {
+                      padding-top: 40px;
+                      padding-bottom: 30px;
+                    }
+                  }
+                  @media screen and (max-width: 450px) {
+                    .swiper {
+                      padding-top: 20px;
+                      padding-bottom: 30px;
+                    }
+                  }
             
                 .swiper-slide img {
                   display: block;
-                  width: 100%;
+                  min-height: 100%;
+                  object-fit: cover;
                 }
               </style>
               <div class="swiper mySwiper">
                 <div class="swiper-wrapper">
                   <div class="swiper-slide">
-                    <img src="https://swiperjs.com/demos/images/nature-1.jpg" />
+                    <div class="subtext">ГИБКА МЕТАЛЛА</div>
+                    <img src="images/slider/01/IMG_4318.jpg" />
                   </div>
                   <div class="swiper-slide">
-                    <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
+                    <div class="subtext">ЛАЗЕРНАЯ РЕЗКА</div>
+                    <img src="images/slider/03/IMG_1216.jpg" />
                   </div>
                   <div class="swiper-slide">
-                    <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
+                    <div class="subtext">ПЛАЗМЕННАЯ РЕЗКА</div>
+                    <img src="images/slider/04/IMG_4316.jpg" />
                   </div>
                   <div class="swiper-slide">
-                    <img src="https://swiperjs.com/demos/images/nature-4.jpg" />
+                    <div class="subtext">РЕЗКА ЛЕНТОЧНОПИЛЬНЫМ СТАНКОМ</div>
+                    <img src="images/slider/05/10.jpg" />
                   </div>
                   <div class="swiper-slide">
-                    <img src="https://swiperjs.com/demos/images/nature-5.jpg" />
+                    <div class="subtext">РУБКА ГИЛЬОТИНОЙ</div>
+                    <img src="images/slider/06/Рубка гильотиной.jpg" />
                   </div>
                   <div class="swiper-slide">
-                    <img src="https://swiperjs.com/demos/images/nature-6.jpg" />
-                  </div>
-                  <div class="swiper-slide">
-                    <img src="https://swiperjs.com/demos/images/nature-7.jpg" />
-                  </div>
-                  <div class="swiper-slide">
-                    <img src="https://swiperjs.com/demos/images/nature-8.jpg" />
-                  </div>
-                  <div class="swiper-slide">
-                    <img src="https://swiperjs.com/demos/images/nature-9.jpg" />
+                    <div class="subtext">СВЕРЛЕНИЕ ОТВЕРСТИЙ</div>
+                    <img src="images/slider/07/IMG_3844.PNG" />
                   </div>
                 </div>
                 <div class="swiper-pagination"></div>

@@ -285,9 +285,41 @@ html {
 .section_3 {
   height: 1080px;
   background-color: black;
-  padding: 100px;
+  padding: 100px 0;
   @include mobile {
     height: 930px;
+  }
+}
+
+.subtext {
+  color: white;
+  position: absolute;
+  bottom: 0;
+  font-family: "Noto Sans", sans-serif;
+  font-size: 20px;
+  background-color: black;
+  width: 100%;
+  text-align: center;
+  padding-top: 10px;
+
+  @include desktopsmall {
+    padding-top: 10px;
+    font-size: 18px;
+  }
+  @include tablet {
+    padding-top: 12px;
+    font-size: 14px;
+    line-height: 12px;
+  }
+  @include tabletsmall {
+    padding-top: 10px;
+    font-size: 12px;
+    line-height: 12px;
+  }
+  @include mobile {
+    padding-top: 10px;
+    font-size: 12px;
+    line-height: 11px;
   }
 }
 
