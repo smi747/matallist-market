@@ -365,6 +365,8 @@ html {
   padding-top: 150px;
   color: white;
   @include mobile {
+    padding: 0 40px;
+    padding-top: 150px;
     height: 930px;
   }
 }
