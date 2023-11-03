@@ -30,8 +30,6 @@ html {
   gap: 70px;
   font-family: "Noto Sans", sans-serif;
 
-  transition: color 0.5s;
-
   @include desktopsmall {
     gap: 30px;
   }
@@ -44,11 +42,14 @@ html {
 }
 
 .navigation__link {
+  position: relative;
   color: white;
   text-decoration: none;
   transition: color 0.5s;
+  transition: background-color 0.5s, color 0.5s;
   font-size: 20px;
   letter-spacing: 1px;
+  background-color: transparent;
   @include desktopsmall {
     font-size: 18px;
   }
@@ -354,11 +355,159 @@ html {
 }
 
 .section_4 {
+  display: flex;
   height: 1080px;
   background-color: black;
+  padding: 0 100px;
+  padding-top: 150px;
+  color: white;
   @include mobile {
     height: 930px;
   }
+}
+
+.contacts_l {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+}
+
+.contacts__buttons {
+  display: flex;
+  gap: 50px;
+  font-family: "Noto Sans", sans-serif;
+  font-size: 25px;
+}
+
+.cbutton {
+  position: relative;
+  cursor: pointer;
+  background-color: black;
+  transition: all 0.5s;
+}
+
+.selected_city {
+  background-color: white;
+  color: black;
+}
+
+.selected_link {
+  background-color: white;
+  color: black;
+}
+
+.menu_changed .selected_link {
+  background-color: black;
+  color: white;
+}
+
+.triangle_l {
+  position: absolute;
+  width: 0;
+  height: 0;
+  right: 100%;
+  border-bottom: 34px solid transparent;
+  border-left: 34px solid transparent;
+  top: 0;
+  transition: border-color 0.5s;
+}
+
+.triangle_r {
+  position: absolute;
+  width: 0;
+  height: 0;
+  left: 100%;
+  border-top: 34px solid transparent;
+  border-right: 34px solid transparent;
+  top: 0;
+  transition: border-color 0.5s;
+}
+
+.selected_city .triangle_l {
+  border-bottom: 34px solid white;
+}
+
+.selected_city .triangle_r {
+  border-top: 34px solid white;
+}
+
+a .triangle_l {
+  border-bottom: 27px solid transparent;
+  border-left: 27px solid transparent;
+  @include desktopsmall {
+    border-bottom: 24px solid transparent;
+    border-left: 24px solid transparent;
+  }
+  @include tablet {
+    border-bottom: 20px solid transparent;
+    border-left: 20px solid transparent;
+  }
+}
+
+a .triangle_r {
+  border-top: 27px solid transparent;
+  border-right: 27px solid transparent;
+  @include desktopsmall {
+    border-top: 24px solid transparent;
+    border-right: 24px solid transparent;
+  }
+  @include tablet {
+    border-top: 20px solid transparent;
+    border-right: 20x solid transparent;
+  }
+}
+
+.selected_link .triangle_l {
+  border-bottom: 27px solid white;
+  @include desktopsmall {
+    border-bottom: 24px solid white;
+  }
+  @include tablet {
+    border-bottom: 20px solid white;
+  }
+}
+
+.selected_link .triangle_r {
+  border-top: 27px solid white;
+  @include desktopsmall {
+    border-top: 24px solid white;
+  }
+  @include tablet {
+    border-top: 20px solid white;
+  }
+}
+
+.menu_changed .selected_link .triangle_l {
+  border-bottom: 27px solid black;
+  @include desktopsmall {
+    border-bottom: 24px solid black;
+  }
+  @include tablet {
+    border-bottom: 20px solid black;
+  }
+}
+
+.menu_changed .selected_link .triangle_r {
+  border-top: 27px solid black;
+  @include desktopsmall {
+    border-top: 24px solid black;
+  }
+  @include tablet {
+    border-top: 20px solid black;
+  }
+}
+
+.contacts_section {
+  font-family: "Noto Sans", sans-serif;
+  font-size: 15px;
+  color: gray;
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+
+.contacts__text {
+  font-family: "Noto Sans", sans-serif;
+  font-size: 18px;
 }
 
 .vp {

@@ -42,8 +42,6 @@ var swiper = new Swiper(".mySwiper", {
   },
 });
 
-
-
 function get_photos(x) {
   let tmp;
   if (x == 0)
@@ -85,4 +83,78 @@ function get_photos(x) {
     alert(data);
   });
   */
+}
+
+function set_city(x) {
+  if (x == "msc") {
+    let elems = document.getElementsByClassName("vlg");
+    for (let elem of elems) 
+      elem.setAttribute("style", "display: none");
+    elems = document.getElementsByClassName("msc");
+    for (let elem of elems) 
+      elem.setAttribute("style", "display: block");
+    document.getElementsByClassName("cbutton_1")[0].classList.add("selected_city");
+    document.getElementsByClassName("cbutton_2")[0].classList.remove("selected_city");
+  }
+  if (x == "vlg") {
+    let elems = document.getElementsByClassName("msc");
+    for (let elem of elems) 
+      elem.setAttribute("style", "display: none");
+    elems = document.getElementsByClassName("vlg");
+    for (let elem of elems) 
+      elem.setAttribute("style", "display: block");
+      document.getElementsByClassName("cbutton_1")[0].classList.remove("selected_city");
+      document.getElementsByClassName("cbutton_2")[0].classList.add("selected_city");
+  }
+}
+
+function set_city(x) {
+  if (x == "msc") {
+    let elems = document.getElementsByClassName("vlg");
+    for (let elem of elems) 
+      elem.setAttribute("style", "display: none");
+    elems = document.getElementsByClassName("msc");
+    for (let elem of elems) 
+      elem.setAttribute("style", "display: block");
+    document.getElementsByClassName("cbutton_1")[0].classList.add("selected_city");
+    document.getElementsByClassName("cbutton_2")[0].classList.remove("selected_city");
+  }
+  if (x == "vlg") {
+    let elems = document.getElementsByClassName("msc");
+    for (let elem of elems) 
+      elem.setAttribute("style", "display: none");
+    elems = document.getElementsByClassName("vlg");
+    for (let elem of elems) 
+      elem.setAttribute("style", "display: block");
+      document.getElementsByClassName("cbutton_1")[0].classList.remove("selected_city");
+      document.getElementsByClassName("cbutton_2")[0].classList.add("selected_city");
+  }
+}
+
+window.addEventListener("scroll", set_section);
+
+function set_section() {
+  var tmp = document.getElementById('contacts').getBoundingClientRect();
+  if (document.documentElement.scrollTop >= tmp.top + window.scrollY) {
+    document.getElementById('catalog_id').classList.remove("selected_link");
+    document.getElementById('gallery_id').classList.remove("selected_link");
+    document.getElementById('contacts_id').classList.add("selected_link");
+    return;}
+  tmp = document.getElementById('gallery').getBoundingClientRect();
+  if (document.documentElement.scrollTop >= tmp.top + window.scrollY) {
+    document.getElementById('catalog_id').classList.remove("selected_link");
+    document.getElementById('gallery_id').classList.add("selected_link");
+    document.getElementById('contacts_id').classList.remove("selected_link");
+    return;
+  }
+  tmp = document.getElementById('catalog').getBoundingClientRect();
+  if (document.documentElement.scrollTop >= tmp.top + window.scrollY) {
+    document.getElementById('catalog_id').classList.add("selected_link");
+    document.getElementById('gallery_id').classList.remove("selected_link");
+    document.getElementById('contacts_id').classList.remove("selected_link");
+    return;
+  }
+  document.getElementById('catalog_id').classList.remove("selected_link");
+    document.getElementById('gallery_id').classList.remove("selected_link");
+    document.getElementById('contacts_id').classList.remove("selected_link");
 }

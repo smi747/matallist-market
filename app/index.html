@@ -15,9 +15,9 @@
         <div class="header__menu" id="menu">
             <nav class="navigation">
                 <a href="#" class="navigation__logo"><img src="images/logo_0.png" alt="" class="logo_0"><img src="images/logo_1.png" alt="" class="logo_1"></a>
-                <a href="#catalog" class="navigation__link">КАТАЛОГ</a>
-                <a href="#gallery" class="navigation__link">УСЛУГИ</a>
-                <a href="#contacts" class="navigation__link">КОНТАКТЫ</a>
+                <a href="#catalog" id="catalog_id" class="navigation__link"><div class="triangle_l"></div>КАТАЛОГ<div class="triangle_r"></div></a>
+                <a href="#gallery" id="gallery_id" class="navigation__link"><div class="triangle_l"></div>УСЛУГИ<div class="triangle_r"></div></a>
+                <a href="#contacts" id="contacts_id" class="navigation__link"><div class="triangle_l"></div>КОНТАКТЫ<div class="triangle_r"></div></a>
             </nav>
             <div class="menu__right">
                 <div class="right_l">
@@ -127,7 +127,29 @@
               </div>
         <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
         </section>
-        <section class="section_4" id="contacts"></section>
+        <section class="section_4" id="contacts">
+          <div class="contacts_l">
+            <div class="contacts__buttons">
+              <div class="cbutton cbutton_1 selected_city" onclick="set_city('msc')"><div class="triangle_l"></div>МОСКВА<div class="triangle_r"></div></div>
+              <div class="cbutton cbutton_2" onclick="set_city('vlg')"><div class="triangle_l"></div>ВОЛГОГРАД<div class="triangle_r"></div></div>
+            </div>
+            <div class="contacts__textblock">
+              <h2 class="contacts_section">АДРЕС</h2>
+              <p class="contacts__text msc">115088 Москва,<br>ул. Угрешская 18/1</p>
+              <p style="display: none;" class="contacts__text vlg">404130 Волгоградская область,<br>г.Волжский, ул. Горького 45Г</p>
+              <h2 class="contacts_section">ТЕЛЕФОН</h2>
+              <p class="contacts__text msc">+7-926-000-92-88</p>
+              <p style="display: none;" class="contacts__text vlg">+7-960-889-7667</p>
+              <h2 class="contacts_section">ЭЛЕКТРОННАЯ ПОЧТА</h2>
+              <p class="contacts__text">zakaz@metallistmarket.ru</p>
+              <h2 class="contacts_section">МЫ В СЕТИ</h2>
+              <p class="contacts__text">Телеграм</p>
+              <p class="contacts__text">ВКонтакте</p>
+              
+            </div>
+          </div>
+          <div class="contacts_r"></div>
+        </section>
 
         <div class="vp viewport_0">>1400</div>
         <div class="vp viewport_1">1200-1400</div>
