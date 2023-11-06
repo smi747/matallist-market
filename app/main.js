@@ -16,7 +16,11 @@ window.addEventListener("scrollend", centring);
 function centring() {
   let tmp = document.getElementById('catalog').getBoundingClientRect();
   if (Math.abs(tmp.top) <= 90 ) {
-          location.hash = "#catalog";
+    catalog.scrollIntoView();
+  }
+  tmp = document.getElementById('gallery').getBoundingClientRect();
+  if (tmp.top > 0  && tmp.top <= 90) {
+    gallery.scrollIntoView();
   }
 }
   
