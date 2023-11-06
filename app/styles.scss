@@ -273,17 +273,71 @@ html {
   background-size: cover;
   background-position: center 25%;
   width: 100%;
-  height: 1080px;
+  height: 100vh;
+}
+
+.main_text_2 {
+  position: absolute;
+  text-align: right;
+  right: 0;
+  bottom: 0;
+  color: white;
+  font-family: "Noto Sans", sans-serif;
+  font-weight: 700;
+  font-size: 40px;
+  letter-spacing: 1px;
+  height: fit-content;
+  padding-bottom: 20px;
+  @include desktopsmall {
+    font-size: 35px;
+  }
+  @include tablet {
+    font-size: 30px;
+  }
+  @include tabletsmall {
+    font-size: 22px;
+  }
   @include mobile {
-    height: 930px;
+    font-size: 15px;
+  }
+}
+
+.main_text_2_text {
+  padding-right: 15px;
+  @include mobile {
+    padding-right: 5px;
+  }
+}
+
+.lines_bottom {
+  background-image: url("images/lines_bottom.png");
+  height: 100px;
+  width: 1000px;
+  background-size: cover;
+  @include desktopsmall {
+    height: 90px;
+    width: 900px;
+  }
+  @include tablet {
+    height: 70px;
+    width: 700px;
+  }
+  @include tabletsmall {
+    height: 50px;
+    width: 500px;
+  }
+  @include mobile {
+    height: 34px;
+    width: 340px;
   }
 }
 
 .section_2 {
-  height: 1080px;
+  height: 100vh;
+  /*height: 1080px;
   @include mobile {
     height: 930px;
-  }
+  }*/
 }
 
 .section_3 {
@@ -291,7 +345,14 @@ html {
   background-color: black;
   padding: 100px 0;
   padding-top: 150px;
+  @include tablet {
+    padding-top: 80px;
+  }
+  @include tabletsmall {
+    padding-top: 80px;
+  }
   @include mobile {
+    padding-top: 100px;
     //height: 930px;
   }
 }
@@ -361,25 +422,25 @@ html {
 .section_4 {
   display: flex;
   justify-content: space-between;
-  height: 1080px;
+  //height: 1080px;
   background-color: black;
-  padding: 150px 150px 0 150px;
+  padding: 150px 150px 100px 150px;
   color: white;
   @include desktopsmall {
-    padding: 120px 100px 0 100px;
+    padding: 120px 100px 100px 100px;
   }
   @include tablet {
-    padding: 100px 60px 0 60px;
+    padding: 100px 60px 80px 60px;
   }
   @include tabletsmall {
     justify-content: flex-start;
-    padding: 80px 50px 0 50px;
+    padding: 80px 50px 50px 50px;
     flex-direction: column;
     gap: 30px;
   }
   @include mobile {
     justify-content: flex-start;
-    padding: 70px 30px 0 30px;
+    padding: 70px 30px 30px 30px;
     flex-direction: column;
     gap: 30px;
   }
@@ -557,7 +618,7 @@ a .triangle_r {
     width: 20px;
     height: 20px;
     border-top: 20px solid transparent;
-    border-right: 20x solid transparent;
+    border-right: 20px solid transparent;
   }
 }
 

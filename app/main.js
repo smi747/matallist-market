@@ -1,24 +1,24 @@
 window.addEventListener("scroll", bringmenu);
 
 function bringmenu() {
-  if (window.innerWidth > 450) {
-    if (document.documentElement.scrollTop >= 1020 && document.documentElement.scrollTop <= 2100) {
-      document.getElementById("menu").classList.add("menu_changed");
-      
-    } else {
-        document.getElementById("menu").classList.remove("menu_changed");
-    }
+let tmp = document.getElementById('catalog').getBoundingClientRect();
+  if (document.documentElement.scrollTop >= tmp.top + window.scrollY - 30 && document.documentElement.scrollTop <= tmp.bottom + window.scrollY - 30) {
+    document.getElementById("menu").classList.add("menu_changed");
+    
+  } else {
+      document.getElementById("menu").classList.remove("menu_changed");
   }
-  else {
-    if (document.documentElement.scrollTop >= 900 && document.documentElement.scrollTop <= 1830) {
-      document.getElementById("menu").classList.add("menu_changed");
-      
-    } else {
-        document.getElementById("menu").classList.remove("menu_changed");
-    }
+  
+}
+
+window.addEventListener("scrollend", centring);
+
+function centring() {
+  let tmp = document.getElementById('catalog').getBoundingClientRect();
+  if (Math.abs(tmp.top) <= 90 ) {
+          location.hash = "#catalog";
   }
 }
-  
   
 var swiper = new Swiper(".mySwiper", {
   effect: "coverflow",
@@ -139,20 +139,20 @@ window.addEventListener("scroll", set_section);
 
 function set_section() {
   var tmp = document.getElementById('contacts').getBoundingClientRect();
-  if (document.documentElement.scrollTop >= tmp.top + window.scrollY) {
+  if (document.documentElement.scrollTop >= tmp.top + window.scrollY - 1) {
     document.getElementById('catalog_id').classList.remove("selected_link");
     document.getElementById('gallery_id').classList.remove("selected_link");
     document.getElementById('contacts_id').classList.add("selected_link");
     return;}
   tmp = document.getElementById('gallery').getBoundingClientRect();
-  if (document.documentElement.scrollTop >= tmp.top + window.scrollY) {
+  if (document.documentElement.scrollTop >= tmp.top + window.scrollY - 1) {
     document.getElementById('catalog_id').classList.remove("selected_link");
     document.getElementById('gallery_id').classList.add("selected_link");
     document.getElementById('contacts_id').classList.remove("selected_link");
     return;
   }
   tmp = document.getElementById('catalog').getBoundingClientRect();
-  if (document.documentElement.scrollTop >= tmp.top + window.scrollY) {
+  if (document.documentElement.scrollTop >= tmp.top + window.scrollY - 1) {
     document.getElementById('catalog_id').classList.add("selected_link");
     document.getElementById('gallery_id').classList.remove("selected_link");
     document.getElementById('contacts_id').classList.remove("selected_link");
