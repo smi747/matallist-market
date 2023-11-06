@@ -656,6 +656,32 @@ a .triangle_r {
   color: white;
 }
 
+.end_wrap {
+  background-color: rgb(40, 40, 40);
+  color: rgb(212, 212, 212);
+  width: 100%;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 12px;
+}
+
+.end_wrap {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  padding: 15px 0;
+}
+
+.smi_link {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 5px;
+}
+
+.smi_ {
+  width: 20px;
+}
+
 .vp {
   position: fixed;
   bottom: 0;
