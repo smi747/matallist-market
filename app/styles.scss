@@ -287,12 +287,12 @@ html {
 }
 
 .section_3 {
-  height: 1080px;
+  //height: 1080px;
   background-color: black;
   padding: 100px 0;
   padding-top: 150px;
   @include mobile {
-    height: 930px;
+    //height: 930px;
   }
 }
 
