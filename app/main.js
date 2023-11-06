@@ -118,6 +118,8 @@ function set_city(x) {
       elem.setAttribute("style", "display: block");
     document.getElementsByClassName("cbutton_1")[0].classList.add("selected_city");
     document.getElementsByClassName("cbutton_2")[0].classList.remove("selected_city");
+    msc_map.setAttribute("style", "display: block");
+    vlg_map.setAttribute("style", "display: none");
   }
   if (x == "vlg") {
     let elems = document.getElementsByClassName("msc");
@@ -126,8 +128,10 @@ function set_city(x) {
     elems = document.getElementsByClassName("vlg");
     for (let elem of elems) 
       elem.setAttribute("style", "display: block");
-      document.getElementsByClassName("cbutton_1")[0].classList.remove("selected_city");
-      document.getElementsByClassName("cbutton_2")[0].classList.add("selected_city");
+    document.getElementsByClassName("cbutton_1")[0].classList.remove("selected_city");
+    document.getElementsByClassName("cbutton_2")[0].classList.add("selected_city");
+    msc_map.setAttribute("style", "display: none");
+    vlg_map.setAttribute("style", "display: block");
   }
 }
 
