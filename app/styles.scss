@@ -343,8 +343,10 @@ html {
   //height: 1080px;
   background-color: black;
   padding: 100px 0;
+
+  padding-top: 70px;
   @include desktopsmall {
-    padding-top: 70px;
+    padding-top: 60px;
   }
   @include tablet {
     padding-top: 30px;
