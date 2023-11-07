@@ -343,12 +343,14 @@ html {
   //height: 1080px;
   background-color: black;
   padding: 100px 0;
-  padding-top: 150px;
+  @include desktopsmall {
+    padding-top: 70px;
+  }
   @include tablet {
-    padding-top: 80px;
+    padding-top: 30px;
   }
   @include tabletsmall {
-    padding-top: 80px;
+    padding-top: 30px;
   }
   @include mobile {
     padding-top: 100px;
