@@ -714,6 +714,11 @@ a .triangle_r {
   }
 }
 
+.contacts__socials {
+  display: flex;
+  gap: 10px;
+}
+
 .contacts__phone,
 .contacts__mail,
 .contacts__link {
