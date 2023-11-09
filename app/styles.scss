@@ -276,6 +276,44 @@ html {
   height: 100vh;
 }
 
+.main_text_1 {
+  position: absolute;
+  top: 85px;
+  color: white;
+  font-family: "Noto Sans", sans-serif;
+  font-size: 20px;
+
+  @include tablet {
+    top: 60px;
+  }
+  @include tabletsmall {
+    top: 57px;
+  }
+  @include mobile {
+    top: 52px;
+  }
+}
+
+.main_text_1_text {
+  padding-top: 10px;
+  padding-left: 27px;
+  @include tablet {
+    font-size: 15px;
+    padding-top: 8px;
+    padding-left: 17px;
+  }
+  @include tabletsmall {
+    font-size: 12px;
+    padding-top: 2px;
+    padding-left: 17px;
+  }
+  @include mobile {
+    font-size: 11px;
+    padding-top: 2px;
+    padding-left: 16px;
+  }
+}
+
 .main_text_2 {
   position: absolute;
   text-align: right;
@@ -305,6 +343,29 @@ html {
   padding-right: 15px;
   @include mobile {
     padding-right: 5px;
+  }
+}
+
+.lines_top {
+  background-image: url("images/lines_top.png");
+  height: 20px;
+  width: 758px;
+  background-size: cover;
+  @include desktopsmall {
+    height: 17px;
+    width: 610px;
+  }
+  @include tablet {
+    height: 15px;
+    width: 460px;
+  }
+  @include tabletsmall {
+    height: 13px;
+    width: 350px;
+  }
+  @include mobile {
+    height: 10px;
+    width: 310px;
   }
 }
 
