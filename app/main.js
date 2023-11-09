@@ -162,7 +162,8 @@ function set_section() {
     document.getElementById('contacts_id').classList.remove("selected_link");
     return;
   }
-  document.getElementById('catalog_id').classList.remove("selected_link");
+    document.getElementById('catalog_id').classList.remove("selected_link");
     document.getElementById('gallery_id').classList.remove("selected_link");
     document.getElementById('contacts_id').classList.remove("selected_link");
 }
+
