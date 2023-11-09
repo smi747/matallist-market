@@ -418,8 +418,9 @@ html {
     padding: 4px 0;
   }
   @include mobile {
-    font-size: 20px;
-    padding: 4px 0;
+    font-size: 21px;
+    padding: 5px 0;
+    height: 38px;
   }
 }
 
@@ -465,10 +466,10 @@ html {
     border-left: 44px solid transparent;
   }
   @include mobile {
-    width: 35px;
-    height: 35px;
-    border-bottom: 35px solid rgba(255, 255, 255, 0.3);
-    border-left: 35px solid transparent;
+    width: 38px;
+    height: 38px;
+    border-bottom: 38px solid rgba(255, 255, 255, 0.3);
+    border-left: 38px solid transparent;
   }
 }
 
@@ -503,11 +504,11 @@ html {
     border-right: 44px solid transparent;
   }
   @include mobile {
-    width: 35px;
-    height: 35px;
+    width: 38px;
+    height: 38px;
     left: 99.99%;
-    border-top: 35px solid rgba(255, 255, 255, 0.3);
-    border-right: 35px solid transparent;
+    border-top: 38px solid rgba(255, 255, 255, 0.3);
+    border-right: 38px solid transparent;
   }
 }
 
@@ -523,7 +524,7 @@ html {
     border-bottom: 44px solid rgba(255, 255, 255, 0.7);
   }
   @include mobile {
-    border-bottom: 35px solid rgba(255, 255, 255, 0.7);
+    border-bottom: 38px solid rgba(255, 255, 255, 0.7);
   }
 }
 
@@ -539,7 +540,7 @@ html {
     border-top: 44px solid rgba(255, 255, 255, 0.7);
   }
   @include mobile {
-    border-top: 35px solid rgba(255, 255, 255, 0.7);
+    border-top: 38px solid rgba(255, 255, 255, 0.7);
   }
 }
 
@@ -758,7 +759,7 @@ html {
   right: 99.99%;
   border-bottom: 34px solid transparent;
   border-left: 34px solid transparent;
-  top: 0;
+  bottom: 0;
   transition: border-color 0.5s;
   @media screen and (max-width: 1200px) {
     width: 27px;
