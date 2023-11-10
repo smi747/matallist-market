@@ -306,6 +306,17 @@ html {
   }
 }
 
+/* hide scrollbar but allow scrolling */
+.main__menu {
+  -ms-overflow-style: none; /* for Internet Explorer, Edge */
+  scrollbar-width: none; /* for Firefox */
+  overflow-y: scroll;
+}
+
+.main__menu::-webkit-scrollbar {
+  display: none; /* for Chrome, Safari, and Opera */
+}
+
 .main__menu.opened {
   right: 0;
 }
