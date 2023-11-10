@@ -812,6 +812,22 @@ html {
   z-index: 101;
   overflow: scroll;
 }
+
+/* hide scrollbar but allow scrolling */
+.cover_menu {
+  -ms-overflow-style: none; /* for Internet Explorer, Edge */
+  scrollbar-width: none; /* for Firefox */
+  overflow-y: scroll;
+}
+
+.cover_menu::-webkit-scrollbar {
+  display: none; /* for Chrome, Safari, and Opera */
+}
+
+.main__menu.opened {
+  right: 0;
+}
+
 .cover_menu_photo {
   height: 50vh;
   margin-bottom: 20px;
