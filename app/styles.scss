@@ -300,6 +300,9 @@ html {
   @include mobile {
     width: 100%;
     right: -100%;
+    border: none;
+
+    font-size: 22px;
   }
 }
 
@@ -319,6 +322,9 @@ html {
     padding: 5px 5px 5px 10px;
   }
   @include tabletsmall {
+    padding: 5px 5px 5px 10px;
+  }
+  @include mobile {
     padding: 5px 5px 5px 10px;
   }
 }
@@ -344,9 +350,16 @@ html {
     width: 45px;
     height: 36px;
   }
+  @include mobile {
+    width: 45px;
+    height: 36px;
+  }
 }
 
 .cart_number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-size: 12px;
   text-align: center;
   position: absolute;
@@ -404,6 +417,10 @@ html {
     height: 54px;
   }
   @include tabletsmall {
+    width: 54px;
+    height: 54px;
+  }
+  @include mobile {
     width: 54px;
     height: 54px;
   }
