@@ -64,11 +64,11 @@ function get_photos(x) {
   if (x == 3)
     tmp = ["images/slider/04/IMG_4316.jpg", "images/slider/04/IMG_4317.jpg", "images/slider/04/IMG_5322.jpg", "images/slider/04/4.jpg"];
   if (x == 4)
-    tmp = ["images/slider/05/10.jpg", "images/slider/05/IMG_3837.PNG", "images/slider/05/IMG_3838.PNG", "images/slider/05/IMG_3850.PNG", "images/slider/05/5.JPG", "images/slider/05/6.JPG"];
+    tmp = ["images/slider/05/10.jpg", "images/slider/05/IMG_3837.jpg", "images/slider/05/IMG_3838.jpg", "images/slider/05/IMG_3850.jpg", "images/slider/05/5.jpg", "images/slider/05/6.JPG"];
   if (x == 5)
     tmp = ["images/slider/06/1.jpg"];
   if (x == 6)
-    tmp = ["images/slider/07/IMG_3844.PNG"];
+    tmp = ["images/slider/07/IMG_3844.jpg"];
 
   var element = document.createElement("div");
   element.classList.add("cover_menu");
