@@ -35,11 +35,29 @@
                     <a href="tel:+79260009288" class="header__phone menu__text">+7-926-000-92-88</a>
                     <a href="tel:+79608897667" class="header__phone menu__text">+7-960-889-76-67</a>
                 </div>
-                <img src="images/icons/menu.png" alt="" class="right_r">
+                <img src="images/icons/menu.png" alt="" class="right_r" onclick="main__menu.classList.add('opened')">
             </div>
         </div>
     </header>
     <main>
+      <div class="main__menu" id="main__menu">
+        <div class="menu__firstrow">
+          <div class="cart_wrap" onclick="main__menu.classList.remove('opened')"><div class="menu__cart"><div class="cart_number">0</div></div><div class="cart_price">0.0<br>руб.</div></div>
+          <div class="main__menu_close" onclick="main__menu.classList.remove('opened')"></div>
+        </div>
+        <div class="main__menu_links">
+          <a href="#catalog" class="main__menu_link" onclick="main__menu.classList.remove('opened')">Каталог</a>
+          <a href="#gallery" class="main__menu_link" onclick="main__menu.classList.remove('opened')">Услуги</a>
+          <a href="#contacts" class="main__menu_link" onclick="main__menu.classList.remove('opened')">Контакты</a>
+        </div>
+        <div class="another_links">
+          <p class="another_link">Страница 1</p>
+          <p class="another_link">Страница 2</p>
+          <p class="another_link">Страница 3</p>
+          <p class="another_link">Страница 4</p>
+          <p class="another_link">Страница 5</p>
+        </div>
+      </div>
         <section class="section_1">
           <div class="main_text_1">
             <div class="lines_top"></div>

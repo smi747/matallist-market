@@ -11,6 +11,13 @@ let tmp = document.getElementById('catalog').getBoundingClientRect();
   
 }
 
+document.addEventListener("mouseup", function(event) {
+  var obj = document.getElementById("main__menu");
+  if (!obj.contains(event.target)) {
+    main__menu.classList.remove("opened");
+  }
+});
+
 window.addEventListener("scrollend", centring);
 
 function centring() {
