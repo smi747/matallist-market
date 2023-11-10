@@ -1,5 +1,7 @@
 window.addEventListener("scroll", bringmenu);
 
+
+
 function bringmenu() {
 let tmp = document.getElementById('catalog').getBoundingClientRect();
   if (document.documentElement.scrollTop >= tmp.top + window.scrollY - 30 && document.documentElement.scrollTop <= tmp.bottom + window.scrollY - 30) {
@@ -10,6 +12,8 @@ let tmp = document.getElementById('catalog').getBoundingClientRect();
   }
   
 }
+
+window.onresize = bringmenu;
 
 document.addEventListener("mouseup", function(event) {
   var obj = document.getElementById("main__menu");
