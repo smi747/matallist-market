@@ -1453,6 +1453,11 @@ textarea:focus {
   border: 1px solid gray;
   border-radius: 5px;
   background-color: white;
+  color: black;
+}
+
+.form_select:focus {
+  outline: none;
 }
 
 .form_jur_text {
