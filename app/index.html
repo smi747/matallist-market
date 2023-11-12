@@ -42,7 +42,7 @@
     <main>
       <div class="main__menu" id="main__menu">
         <div class="menu__firstrow">
-          <div class="cart_wrap" onclick="main__menu.classList.remove('opened')"><div class="menu__cart"><div class="cart_number">0</div></div><div class="cart_price"><p>0.0<br>руб.</p></div></div>
+          <div class="cart_wrap" onclick="main__menu.classList.remove('opened');cart.classList.add('openedcart')"><div class="menu__cart"><div class="cart_number">0</div></div><!--<div class="cart_price"><p>0.0<br>руб.</p></div>--></div>
           <div class="main__menu_close" onclick="main__menu.classList.remove('opened')"></div>
         </div>
         <div class="main__menu_links">
@@ -68,7 +68,8 @@
             <div class="main_text_2_text">ГИБКИЕ РЕШЕНИЯ,<br>СТАЛЬНОЙ ПОДХОД.</div>
             <div class="lines_bottom"></div></div>
         </section>
-        <section class="section_2" id="catalog"></section>
+        <section class="section_2" id="catalog">
+        </section>
         <section class="section_3" id="gallery">
             <style>
                 :root {
@@ -194,7 +195,72 @@
         <div class="vp viewport_4">less450</div>
         <footer class="footer">
           <div class="end_wrap"><p>Design and development by </p><a href="https://smi.works" class="smi_link"><img src="images/icons/smi.png" alt="" class="smi_"></a></div></footer>
-    </main>
+    
+          <div class="cart openedcart" id="cart"><div class="cart_" id="cart_">
+            <div class="cart_row_1">
+              <div class="cart_row_1_text">КОРЗИНА</div>
+              <div class="cart_row_1_close" onclick="cart.classList.remove('openedcart')"></div>
+            </div>
+            <div class="cart_row_2"><div class="cart_row_2_text">Наименование</div><div class="cart_row_2_text">Количество (тонн/метров)</div></div>
+            <div class="positions">
+            <div class="cart_position">
+              <div class="position_name">Балка двутавровая низколегированная 20К1 09Г2С</div>
+              <div class="position_quantity"><input type="text" class="position_quantity_i" value="100">&nbsp;/&nbsp;<input type="text" class="position_quantity_i" value="1000"></div>
+              <div class="position_close"><div class="position_close_img" onclick="this.parentNode.parentNode.remove();"></div></div>
+            </div>
+            <div class="cart_position">
+              <div class="position_name">Балка двутавровая низколегированная 20К1 09Г2С</div>
+              <div class="position_quantity"><input type="text" class="position_quantity_i" value="100">&nbsp;/&nbsp;<input type="text" class="position_quantity_i" value="1000"></div>
+              <div class="position_close"><div class="position_close_img" onclick="this.parentNode.parentNode.remove();"></div></div>
+            </div>
+            <div class="cart_position">
+              <div class="position_name">Балка двутавровая низколегированная 20К1 09Г2С</div>
+              <div class="position_quantity"><input type="text" class="position_quantity_i" value="100">&nbsp;/&nbsp;<input type="text" class="position_quantity_i" value="1000"></div>
+              <div class="position_close"><div class="position_close_img" onclick="this.parentNode.parentNode.remove();"></div></div>
+            </div></div>
+            <div class="form_wrap">
+            <div class="cart_row_3">ОФОРМЛЕНИЕ ЗАКАЗА</div>
+            <form method="post" class="cart_form">
+              <div class="form_section">
+                <label for="form-name" class="form_text">Имя/название организации</label>
+                <input type="text" name="form-name" id="form-name" class="form_input" required>
+              </div>
+              <div class="form_section">
+                <label for="form-phone" class="form_text">Телефон</label>
+                <input type="text" name="form-phone" id="form-phone" class="form_input" required>
+              </div>
+              <div class="form_section">
+                <label for="form-mail" class="form_text">E-mail</label>
+                <input type="text" name="form-mail" id="form-mail" class="form_input" required>
+              </div>
+              <div class="form_section">
+                <label for="form-city" class="form_text">Город отгрузки</label>
+                <select name="form-city" id="form-city" class="form_select">
+                  <option value="msc" selected="selected">Москва</option>
+                  <option value="vlg">Волгоград</option>
+                </select>
+              </div>
+              <p class="form_jur_text">Для юридических лиц, укажите ваш ИНН или прикрепите файл с реквизитами.</p>
+              <div class="form_section">
+                <label for="form-inn" class="form_text">ИНН</label>
+                <input type="text" name="form-inn" id="form-inn" class="form_input" required>
+              </div>
+              <div class="form_section">
+                <label for="form-reqs" class="form_text">Файл с реквизитами</label>
+                <input type="file" name="form-reqs" id="form-reqs" class="form_inputfile">
+                <label for="form-reqs" class="form_inputfile_actual">Выберите файл</label>
+              </div>
+              <div class="form_section form_section_area">
+                <label for="form-comms" class="form_text">Комментарии к заказу</label>
+                <textarea id="form-comms" name="form-comms" class="form_input form_textarea" rows="5" cols="30"></textarea>
+              </div>
+              <div class="form_section form_section_submit">
+                <input type="submit" class="form_submitbutton" value="ОТПРАВИТЬ"></form>
+              </div>
+            </form>
+          </div>
+          </div></div>
+        </main>
     <script src="main.min.js"></script>
 </body>
 </html>

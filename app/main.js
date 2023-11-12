@@ -20,6 +20,10 @@ document.addEventListener("mouseup", function(event) {
   if (!obj.contains(event.target)) {
     main__menu.classList.remove("opened");
   }
+  obj = document.getElementById("cart_");
+  if (!obj.contains(event.target)) {
+    cart.classList.remove("openedcart");
+  }
 });
 
 window.addEventListener("scrollend", centring);
@@ -178,3 +182,15 @@ function set_section() {
     document.getElementById('contacts_id').classList.remove("selected_link");
 }
 
+var inputs = document.querySelectorAll( '.form_inputfile' );
+Array.prototype.forEach.call( inputs, function( input )
+{
+	var label	 = input.nextElementSibling,
+		labelVal = label.innerHTML;
+
+	input.addEventListener( 'change', function( e )
+	{
+		var fileName = e.target.value.split( '\\' ).pop();
+		label.innerHTML = fileName;
+	});
+});
