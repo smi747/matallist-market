@@ -362,13 +362,13 @@ html {
 
   border-bottom: gray solid 1px;
   @include tablet {
-    padding: 5px 5px 5px 10px;
+    padding: 5px 5px 5px 20px;
   }
   @include tabletsmall {
-    padding: 5px 5px 5px 10px;
+    padding: 5px 5px 5px 20px;
   }
   @include mobile {
-    padding: 5px 5px 5px 10px;
+    padding: 5px 5px 5px 20px;
   }
 }
 
