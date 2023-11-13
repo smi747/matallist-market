@@ -1331,7 +1331,7 @@ a .triangle_r {
 }
 
 .cart_position:hover {
-  background-color: rgba(180, 180, 180);
+  background-color: lightgray;
 }
 
 .position_quantity {
@@ -1534,6 +1534,24 @@ textarea:focus {
 .form_submitbutton {
 }
 
+.backto {
+  padding: 5px 15px;
+  background: white;
+  color: black;
+  border: 0 none;
+  cursor: pointer;
+  border-radius: 5px;
+  font-family: "Noto Sans", sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+  text-align: center;
+  transition: background-color 0.2s;
+}
+
+.backto:hover {
+  background: lightgray;
+}
+
 input[type="submit"] {
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -1547,4 +1565,55 @@ input[type="submit"] {
   font-family: "Noto Sans", sans-serif;
   font-size: 20px;
   font-weight: 700;
+}
+
+.cart_add {
+  color: gray;
+  grid-template-columns: 100%;
+  text-align: center;
+}
+
+.ed_izm {
+  position: absolute;
+  bottom: -9px;
+  text-align: center;
+  width: 100%;
+  font-size: 10px;
+  @include tabletsmall {
+    bottom: -12px;
+  }
+  @include mobile {
+    bottom: -12px;
+  }
+}
+
+.input_wrap {
+  position: relative;
+}
+
+.total_weight {
+  grid-template-columns: 1fr;
+  font-family: "Noto Sans", sans-serif;
+  font-size: 18px;
+  background-color: black;
+  padding: 4px 4px 6px 4px;
+  padding-right: 35px;
+
+  @include tabletsmall {
+    padding-right: 25px;
+    font-size: 15px;
+  }
+  @include mobile {
+    padding-right: 25px;
+    font-size: 15px;
+  }
+}
+
+.total_weight:hover {
+  background-color: black;
+}
+
+.total_weight_text {
+  color: white;
+  text-align: end;
 }
