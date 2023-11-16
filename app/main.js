@@ -3,11 +3,6 @@ window.addEventListener("scroll", bringmenu);
 
 
 function bringmenu() {
-if (window.innerWidth > window.innerHeight) {
-  section_1.setAttribute("style", "position: relative");
-}
-else
-  section_1.setAttribute("style", "")
 let tmp = document.getElementById('catalog').getBoundingClientRect();
   if (document.documentElement.scrollTop >= tmp.top + window.scrollY - 30 && document.documentElement.scrollTop <= tmp.bottom + window.scrollY - 30) {
     document.getElementById("menu").classList.add("menu_changed");
@@ -88,7 +83,6 @@ function get_photos(x) {
   element.setAttribute("onclick", "this.remove()");
   var cross = document.createElement("div");
   cross.classList.add("cross");
-  cross.classList.add("other_opacity_elements_s");
 
   for (const elem of tmp) {
     var photo = document.createElement("img");

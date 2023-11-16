@@ -552,12 +552,22 @@ html {
 
   @include desktopsmall {
     min-height: 420px;
+
+    @media screen and (max-height: 420px) {
+      position: relative;
+    }
   }
   @include tablet {
     min-height: 370px;
+    @media screen and (max-height: 370px) {
+      position: relative;
+    }
   }
   @include tabletsmall {
     min-height: 270px;
+    @media screen and (max-height: 270px) {
+      position: relative;
+    }
   }
   @include mobile {
     min-height: 200px;
