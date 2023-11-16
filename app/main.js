@@ -3,6 +3,11 @@ window.addEventListener("scroll", bringmenu);
 
 
 function bringmenu() {
+if (window.innerWidth > window.innerHeight) {
+  section_1.setAttribute("style", "position: relative");
+}
+else
+  section_1.setAttribute("style", "")
 let tmp = document.getElementById('catalog').getBoundingClientRect();
   if (document.documentElement.scrollTop >= tmp.top + window.scrollY - 30 && document.documentElement.scrollTop <= tmp.bottom + window.scrollY - 30) {
     document.getElementById("menu").classList.add("menu_changed");
