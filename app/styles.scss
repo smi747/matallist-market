@@ -45,7 +45,6 @@ html {
   position: relative;
   color: white;
   text-decoration: none;
-  transition: color 0.5s;
   transition: background-color 0.5s, color 0.5s;
   font-size: 20px;
   letter-spacing: 1px;
@@ -69,8 +68,33 @@ html {
   }
 }
 
+.navigation__link:hover {
+  transition: background-color 0.5s, color 0.5s, opacity 0.5s;
+  opacity: 0.7;
+}
+
 .menu_changed .navigation__link {
   color: black;
+}
+
+.menu_changed .navigation__link:hover {
+  transition: background-color 0.5s, color 0.5s, opacity 0.5s;
+  opacity: 0.5;
+}
+
+.other_opacity_elements:hover {
+  opacity: 0.7;
+  transition: background-color 0.5s, color 0.5s, opacity 0.5s;
+}
+
+.other_opacity_elements_s:hover {
+  opacity: 0.5;
+  transition: background-color 0.5s, color 0.5s, opacity 0.5s;
+}
+
+.menu_changed .other_opacity_elements:hover {
+  opacity: 0.5;
+  transition: background-color 0.5s, color 0.5s, opacity 0.5s;
 }
 
 .navigation__logo {
@@ -650,6 +674,7 @@ html {
   background-color: rgba(255, 255, 255, 0.3);
   padding: 10px 0;
   cursor: pointer;
+  color: white;
   transition: background-color 0.5s;
   @include desktopsmall {
     font-size: 40px;
@@ -670,17 +695,16 @@ html {
   }
 }
 
-.podrobnee a {
-  color: white;
+.podrobnee__text {
   transition: color 0.5s;
 }
 
 .podrobnee:hover {
+  color: black;
   background-color: rgba(255, 255, 255, 0.7);
 }
 
-.podrobnee:hover a {
-  color: black;
+.podrobnee__text:hover {
   transition: color 0.5s;
 }
 
@@ -1007,11 +1031,25 @@ html {
 .selected_link {
   background-color: white;
   color: black;
+  opacity: 1;
 }
 
 .menu_changed .selected_link {
   background-color: black;
   color: white;
+  opacity: 1;
+}
+
+.selected_link:hover {
+  background-color: white;
+  color: black;
+  opacity: 1;
+}
+
+.menu_changed .selected_link:hover {
+  background-color: black;
+  color: white;
+  opacity: 1;
 }
 
 .triangle_l {
@@ -1279,9 +1317,7 @@ a .triangle_r {
   margin: 80px auto 50px;
   padding-bottom: 15px;
   width: 730px;
-  background-image: url("images/casrtpage.png");
   background-color: rgb(240, 240, 240);
-  background-size: contain;
 
   @include tabletsmall {
     width: 450px;
