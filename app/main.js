@@ -83,6 +83,7 @@ function get_photos(x) {
   element.setAttribute("onclick", "this.remove()");
   var cross = document.createElement("div");
   cross.classList.add("cross");
+  cross.classList.add("other_opacity_elements_s");
 
   for (const elem of tmp) {
     var photo = document.createElement("img");

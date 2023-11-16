@@ -168,7 +168,7 @@ html {
   top: -2px;
   display: flex;
   flex-direction: column;
-  align-items: end;
+  align-items: flex-end;
   gap: 1px;
 }
 
@@ -214,6 +214,8 @@ html {
   @include mobile {
     gap: 7px;
     margin-right: 5px;
+    top: 1px;
+    position: relative;
   }
 }
 
@@ -398,7 +400,7 @@ html {
 
 .cart_wrap {
   display: flex;
-  align-items: end;
+  align-items: flex-end;
   gap: 20px;
   cursor: pointer;
   @include tabletsmall {
@@ -517,7 +519,7 @@ html {
   margin: 20px 0;
   display: flex;
   flex-direction: column;
-  align-items: start;
+  align-items: flex-start;
   justify-content: center;
   gap: 20px;
 }
@@ -676,6 +678,7 @@ html {
   cursor: pointer;
   color: white;
   transition: background-color 0.5s;
+  z-index: 1;
   @include desktopsmall {
     font-size: 40px;
     padding: 8px 0;
@@ -915,7 +918,7 @@ html {
   width: 50px;
   height: 50px;
   background-size: cover;
-  background-image: url("images/icons/close.png");
+  background-image: url("images/icons/close2.png");
 }
 .cross:hover {
   cursor: pointer;
@@ -926,23 +929,23 @@ html {
   justify-content: space-between;
   //height: 1080px;
   background-color: black;
-  padding: 150px 150px 100px 150px;
+  padding: 155px 150px 100px 150px;
   color: white;
   @include desktopsmall {
-    padding: 120px 100px 100px 100px;
+    padding: 125px 100px 100px 100px;
   }
   @include tablet {
-    padding: 100px 60px 80px 60px;
+    padding: 105px 60px 80px 60px;
   }
   @include tabletsmall {
     justify-content: flex-start;
-    padding: 80px 50px 50px 50px;
+    padding: 85px 50px 50px 50px;
     flex-direction: column;
     gap: 30px;
   }
   @include mobile {
     justify-content: flex-start;
-    padding: 70px 30px 30px 30px;
+    padding: 75px 30px 30px 30px;
     flex-direction: column;
     gap: 30px;
   }
@@ -1663,15 +1666,15 @@ input[type="submit"] {
 
 .ed_izm {
   position: absolute;
-  bottom: -9px;
+  bottom: -10px;
   text-align: center;
   width: 100%;
   font-size: 10px;
   @include tabletsmall {
-    bottom: -12px;
+    bottom: -13px;
   }
   @include mobile {
-    bottom: -12px;
+    bottom: -13px;
   }
 }
 
@@ -1715,6 +1718,7 @@ input[type="submit"] {
   top: 68%;
   background-size: contain;
   cursor: pointer;
+  z-index: 1;
 
   @include mobile {
     width: 80px;
