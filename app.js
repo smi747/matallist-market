@@ -68,7 +68,8 @@ app.get("/", function(request, response){
 });
 
 app.get('/express_backend', (req, res) => { //Строка 9
-    res.send({ express: 'YOUR EXPRESS BACKEND IS CONNECTED TO REACT' }); //Строка 10
+    get_db().then((data) => {res.send({ express: JSON.stringify(data) })})
+     //Строка 10
   }); //Строка 11
   
 app.use(express.static('app'));
