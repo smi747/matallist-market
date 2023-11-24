@@ -1,3 +1,28 @@
+require('dotenv').config();
+const {Sequelize} = require('sequelize');
+
+const sequelize = new Sequelize(
+    process.env.DB_NAME,
+    process.env.DB_USER,
+    process.env.DS_PASSWORD,
+     {
+       host: process.env.DB_HOST,
+       port: process.env.DB_PORT,
+       dialect: 'mysql'
+     }
+   );
+
+sequelize.authenticate();
+
+const Positions = require("./Positions")(sequelize);
+
+let datadb;
+async function get_db() {
+    const res = Positions.findAll();
+    
+    return await res;
+}
+
 var _getAllFilesFromFolder = function(dir) {
 
     var filesystem = require("fs");
@@ -33,11 +58,13 @@ app.post("/user", jsonParser, function (request, response) {
   
 app.get("/", function(request, response){
       
-    response.sendFile(__dirname + "//app/index.html");
     if (request.query.q === "test") {
-        let tmp = JSON.stringify(5);
-        response.json(tmp);
+        get_db().then((res) => {
+            let tmp = JSON.stringify(res);
+            response.json(tmp);});
+        return;
     }
+    response.sendFile(__dirname + "//app/index.html");
 });
   
 app.use(express.static('app'));
