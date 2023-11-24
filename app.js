@@ -66,7 +66,12 @@ app.get("/", function(request, response){
     }
     response.sendFile(__dirname + "//app/index.html");
 });
+
+app.get('/express_backend', (req, res) => { //Строка 9
+    res.send({ express: 'YOUR EXPRESS BACKEND IS CONNECTED TO REACT' }); //Строка 10
+  }); //Строка 11
   
 app.use(express.static('app'));
   
 app.listen(3000);
+

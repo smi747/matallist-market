@@ -104,28 +104,7 @@ function get_photos(x) {
   */
 }
 
-function set_city(x) {
-  if (x == "msc") {
-    let elems = document.getElementsByClassName("vlg");
-    for (let elem of elems) 
-      elem.setAttribute("style", "display: none");
-    elems = document.getElementsByClassName("msc");
-    for (let elem of elems) 
-      elem.setAttribute("style", "display: block");
-    document.getElementsByClassName("cbutton_1")[0].classList.add("selected_city");
-    document.getElementsByClassName("cbutton_2")[0].classList.remove("selected_city");
-  }
-  if (x == "vlg") {
-    let elems = document.getElementsByClassName("msc");
-    for (let elem of elems) 
-      elem.setAttribute("style", "display: none");
-    elems = document.getElementsByClassName("vlg");
-    for (let elem of elems) 
-      elem.setAttribute("style", "display: block");
-      document.getElementsByClassName("cbutton_1")[0].classList.remove("selected_city");
-      document.getElementsByClassName("cbutton_2")[0].classList.add("selected_city");
-  }
-}
+
 
 function set_city(x) {
   if (x == "msc") {
@@ -194,3 +173,54 @@ Array.prototype.forEach.call( inputs, function( input )
 		label.innerHTML = fileName;
 	});
 });
+
+import React from 'react';
+import { createRoot } from 'react-dom/client';
+import { useEffect, useState } from 'react';
+
+const root = createRoot(document.getElementById('app'));
+function App() {
+  
+  const [state, setState] = useState(null);
+
+  const callBackendAPI = async () => {
+    const response = await fetch('/express_backend');
+    const body = await response.json();
+
+    if (response.status !== 200) {
+      throw Error(body.message)
+    }
+    return body;
+  };
+  
+  // получение GET маршрута с сервера Express, который соответствует GET из server.js 
+  useEffect(() => {
+    callBackendAPI()
+    .then(res => setState(res.express))
+    .catch(err => console.log(err));
+  }, [])
+
+  return (
+    <div className="App">
+      <header className="App-header">
+        <p>
+          Edit <code>src/App.js</code> and save to reload.
+        </p>
+        <a
+          className="App-link"
+          href="https://reactjs.org"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Learn React
+        </a>
+      </header>
+
+      {/* вывод данных, полученных с сервера Express */}
+      <div className="qwert">
+          {state}
+      </div>
+    </div>
+  );
+}
+root.render(<App />)

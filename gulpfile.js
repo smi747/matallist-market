@@ -6,15 +6,34 @@ const uglify = require('gulp-uglify-es').default;
 const browserSync = require('browser-sync').create();
 const clean = require('gulp-clean');
 
+var gulp = require('gulp'); // 1
+var browserify = require('browserify'); //2
+var babelify = require('babelify'); //3
+var source = require('vinyl-source-stream'); //4
+var streamify = require('gulp-streamify');
+
 
 function scripts() {
-    return src([
+   /* return src([
         'app/main.js'
     ])
+    .pipe(babel({
+        presets: ["@babel/preset-env", "@babel/preset-react"]
+      }))
         .pipe(concat('main.min.js'))
         .pipe(uglify())
         .pipe(dest('app/'))
-        .pipe(browserSync.stream())
+        .pipe(browserSync.stream())*/
+        return browserify('app/main.js')
+        .transform(babelify) //———–> transpiles es6 to es5
+        .bundle()
+        .on('error', (err)=>{
+        console.log('JS Error', err);
+        })
+        .pipe(source('main.min.js'))
+        .pipe(streamify(uglify()))
+        .pipe(dest('app/js'))
+        .pipe(browserSync.stream());
 }
 
 function styles() {
