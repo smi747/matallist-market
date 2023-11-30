@@ -178,10 +178,10 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { useEffect, useState } from 'react';
 
-const root = createRoot(document.getElementById('app'));
+const root = createRoot(document.getElementById('reactcatalog'));
 function App() {
   
-  const [state, setState] = useState(null);
+  const [state, setState] = useState([]);
 
   const callBackendAPI = async () => {
     const response = await fetch('/express_backend');
@@ -190,36 +190,21 @@ function App() {
     if (response.status !== 200) {
       throw Error(body.message)
     }
-    return body;
+    return JSON.parse(body.express);
   };
   
   // получение GET маршрута с сервера Express, который соответствует GET из server.js 
   useEffect(() => {
     callBackendAPI()
-    .then(res => setState(res.express))
+    .then(res => setState(res))
     .catch(err => console.log(err));
   }, [])
+  
+
 
   return (
     <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-
-      {/* вывод данных, полученных с сервера Express */}
-      <div className="qwert">
-          {state}
-      </div>
+      {state.map((x) => {return(<div key={x.idposition} style={{display: 'flex', gap: '20px'}}><div>{x.name}</div><div>{x.mark}</div><div>{x.units}</div></div>)})}
     </div>
   );
 }

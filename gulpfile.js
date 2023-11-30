@@ -81,3 +81,5 @@ exports.browsersync = browsersync;
 exports.build = series(cleanDist, building);
 
 exports.default = parallel(styles, scripts, browsersync, watching);
+
+exports.update = parallel(styles, scripts);
