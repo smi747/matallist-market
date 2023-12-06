@@ -75,7 +75,6 @@ app.get('/express_backend', (req, res) => { //Строка 9
   }); //Строка 11
   
 app.use(express.static('app'));
-app.use(express.static('app/js'));
   
 app.listen(3000);
 
