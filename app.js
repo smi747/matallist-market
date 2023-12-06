@@ -17,8 +17,10 @@ sequelize.authenticate();
 const Positions = require("./Positions")(sequelize);
 
 let datadb;
-async function get_db() {
-    const res = Positions.findAll();
+async function get_db(ofs, lim) {
+    const res = Positions.findAll({
+
+        offset: ofs, limit: lim});
     
     return await res;
 }
@@ -68,11 +70,12 @@ app.get("/", function(request, response){
 });
 
 app.get('/express_backend', (req, res) => { //Строка 9
-    get_db().then((data) => {res.send({ express: JSON.stringify(data) })})
+    get_db(parseInt(req.query.ofs), parseInt(req.query.lim)).then((data) => {res.send({ express: JSON.stringify(data) })})
      //Строка 10
   }); //Строка 11
   
 app.use(express.static('app'));
+app.use(express.static('app/js'));
   
 app.listen(3000);
 

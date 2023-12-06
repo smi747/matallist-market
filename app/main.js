@@ -104,6 +104,8 @@ function get_photos(x) {
   */
 }
 
+window.get_photos=get_photos;
+
 
 
 function set_city(x) {
@@ -132,6 +134,8 @@ function set_city(x) {
     vlg_map.setAttribute("style", "display: block");
   }
 }
+
+window.set_city=set_city;
 
 window.addEventListener("scroll", set_section);
 
@@ -184,7 +188,10 @@ function App() {
   const [state, setState] = useState([]);
 
   const callBackendAPI = async () => {
-    const response = await fetch('/express_backend');
+    const response = await fetch('/express_backend?' + new URLSearchParams({
+      ofs: 0,
+      lim: 15,
+  }));
     const body = await response.json();
 
     if (response.status !== 200) {
