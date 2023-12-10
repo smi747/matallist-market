@@ -199,7 +199,7 @@ const Paginate = ({ postsPerPage, totalPosts, paginate, selectedPage }) => {
   }
 
   return (
-     <div className="pagination-container">
+     <div className={pageNumbers.length > 1 ? "pagination-container":"pagination-container pagination-container_hide"}>
         <ul className="pagination">
           {selectedPage - 5 >= 0 && <li
             key={-1}
@@ -232,7 +232,11 @@ function App() {
   
   const [state, setState] = useState({count: 0, rows: []});
   const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage] = useState(50);
+  const [postsPerPage] = useState(15);
+  const [cattree, setCattree] = useState(JSON.stringify({}));
+  const [currentcat, setCurrentcat] = useState("");
+  const [currentsubcat, setCurrentsubcat] = useState("");
+  const [selectedcat, setSelectedcat] = useState("");
 
   const paginate = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -242,35 +246,60 @@ function App() {
     const response = await fetch('/express_backend?' + new URLSearchParams({
       ofs: postsPerPage * (currentPage - 1),
       lim: postsPerPage,
+      selcat: selectedcat,
   }));
     const body = await response.json();
 
     if (response.status !== 200) {
       throw Error(body.message)
     }
-    return JSON.parse(body.express);
+    return body;
   };
   
   // получение GET маршрута с сервера Express, который соответствует GET из server.js 
   useEffect(() => {
     callBackendAPI()
-    .then(res => setState(res))
+    .then(res => {setState(JSON.parse(res.express));setCattree(JSON.parse(res.catinfo))})
     .catch(err => console.log(err));
-  }, [currentPage])
+  }, [currentPage, selectedcat])
   
 
+  let catlist = []
+  for (let obj in cattree) {
+    catlist.push(<li key={obj} onClick={() => setCurrentcat(obj)}>{obj}</li>);
+  }
+  if (currentcat != "") {
+    catlist = [];
+    for (let obj in cattree[currentcat]) {
+      catlist.push(<li key={obj} onClick={() => setCurrentsubcat(obj)}>{obj}</li>);
+    }
+  }
+  if (currentsubcat != "") {
+    catlist = [];
+    for (let obj in cattree[currentcat][currentsubcat]) {
+      catlist.push(<li key={obj} onClick={() => setSelectedcat(obj)}>{obj}</li>);
+    }
+  }
+  if (selectedcat != "") {
+    catlist = [];
+  }
 
   return (
     <div>
     <div className="App">
-      {state.rows.map((x) => {return(<div key={x.idposition} style={{display: 'flex', gap: '20px'}}><div>{x.name}</div><div>{x.mark}</div><div>{x.units}</div></div>)})}
+      {selectedcat}
+      {currentcat != "" && <div onClick={() => {selectedcat != "" ? (function() {setSelectedcat("");setCurrentPage(1);})() : currentsubcat != "" ? setCurrentsubcat("") : setCurrentcat("");}}>Назад</div>}
+      {selectedcat != "" && state.rows.map((x) => {return(<div key={x.idposition} style={{display: 'flex', gap: '20px'}}><div>{x.name}</div><div>{x.mark}</div><div>{x.units}</div></div>)})}
     </div>
-    <Paginate className="pagination"
+    <ul>
+      {catlist}
+    </ul>
+    {selectedcat != "" && <Paginate className="pagination"
     postsPerPage={postsPerPage}
     totalPosts={state.count}
     paginate={paginate}
     selectedPage={currentPage}
-    /></div>
+    />}</div>
   );
 }
 root.render(<App />)

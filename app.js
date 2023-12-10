@@ -17,11 +17,14 @@ sequelize.authenticate();
 const Positions = require("./Positions")(sequelize);
 
 let datadb;
-async function get_db(ofs, lim) {
-    const res = Positions.findAndCountAll({
-        //where: {subsubcat:'Круг инструментальный'},
-
-        offset: ofs, limit: lim});
+async function get_db(ofs, lim, selcat) {
+    console.log(selcat);
+    let res = {count: 0, rows: []};
+    if (selcat !="") {
+        res = Positions.findAndCountAll({
+            where: {subsubcat:selcat},
+            offset: ofs, limit: lim});
+    }
     
     return await res;
 }
@@ -70,8 +73,11 @@ app.get("/", function(request, response){
     response.sendFile(__dirname + "//app/index.html");
 });
 
+var fs=require('fs');
+var cattree=fs.readFileSync('cattree.json', 'utf8');
+
 app.get('/express_backend', (req, res) => { //Строка 9
-    get_db(parseInt(req.query.ofs), parseInt(req.query.lim)).then((data) => {res.send({ express: JSON.stringify(data) })})
+    get_db(parseInt(req.query.ofs), parseInt(req.query.lim), req.query.selcat).then((data) => {res.send({ express: JSON.stringify(data), catinfo: cattree })})
      //Строка 10
   }); //Строка 11
   
