@@ -1777,3 +1777,8 @@ input[type="submit"] {
 .pagination-container_hide {
   display: none;
 }
+
+.catlist:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}

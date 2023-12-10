@@ -266,18 +266,18 @@ function App() {
 
   let catlist = []
   for (let obj in cattree) {
-    catlist.push(<li key={obj} onClick={() => setCurrentcat(obj)}>{obj}</li>);
+    catlist.push(<li className='catlist' key={obj} onClick={() => setCurrentcat(obj)}>{obj}</li>);
   }
   if (currentcat != "") {
     catlist = [];
     for (let obj in cattree[currentcat]) {
-      catlist.push(<li key={obj} onClick={() => setCurrentsubcat(obj)}>{obj}</li>);
+      catlist.push(<li className='catlist' key={obj} onClick={() => setCurrentsubcat(obj)}>{obj}</li>);
     }
   }
   if (currentsubcat != "") {
     catlist = [];
     for (let obj in cattree[currentcat][currentsubcat]) {
-      catlist.push(<li key={obj} onClick={() => setSelectedcat(obj)}>{obj}</li>);
+      catlist.push(<li className='catlist' key={obj} onClick={() => setSelectedcat(obj)}>{obj}</li>);
     }
   }
   if (selectedcat != "") {
@@ -288,7 +288,7 @@ function App() {
     <div>
     <div className="App">
       {selectedcat}
-      {currentcat != "" && <div onClick={() => {selectedcat != "" ? (function() {setSelectedcat("");setCurrentPage(1);})() : currentsubcat != "" ? setCurrentsubcat("") : setCurrentcat("");}}>Назад</div>}
+      {currentcat != "" && <div className='catlist' onClick={() => {selectedcat != "" ? (function() {setSelectedcat("");setCurrentPage(1);})() : currentsubcat != "" ? setCurrentsubcat("") : setCurrentcat("");}}>Назад</div>}
       {selectedcat != "" && state.rows.map((x) => {return(<div key={x.idposition} style={{display: 'flex', gap: '20px'}}><div>{x.name}</div><div>{x.mark}</div><div>{x.units}</div></div>)})}
     </div>
     <ul>
