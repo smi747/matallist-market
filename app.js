@@ -18,7 +18,8 @@ const Positions = require("./Positions")(sequelize);
 
 let datadb;
 async function get_db(ofs, lim) {
-    const res = Positions.findAll({
+    const res = Positions.findAndCountAll({
+        //where: {subsubcat:'Круг инструментальный'},
 
         offset: ofs, limit: lim});
     

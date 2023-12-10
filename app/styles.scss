@@ -1762,3 +1762,14 @@ input[type="submit"] {
     }
   }
 }
+
+.pagination {
+  display: flex;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.pagination_selected {
+  color: red;
+  text-decoration: underline 1px red;
+}

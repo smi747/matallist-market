@@ -183,14 +183,65 @@ import { createRoot } from 'react-dom/client';
 import { useEffect, useState } from 'react';
 
 const root = createRoot(document.getElementById('reactcatalog'));
+
+const Paginate = ({ postsPerPage, totalPosts, paginate, selectedPage }) => {
+  const pageNumbers = [];
+  if (Math.ceil(totalPosts / postsPerPage) < 10)
+    for (let i = 1; i <= Math.ceil(totalPosts / postsPerPage); i++) {
+      pageNumbers.push(i);
+    }
+  else {
+    let leftBorder = selectedPage - 3 <= 0 ? 1 : selectedPage - 3 - (Math.ceil(totalPosts / postsPerPage) - selectedPage - 3 <= 0 ? Math.abs(Math.ceil(totalPosts / postsPerPage) - selectedPage - 3) : 0);
+    let rightBorder = Math.ceil(totalPosts / postsPerPage) - selectedPage - 3 <= 0 ? Math.ceil(totalPosts / postsPerPage) : selectedPage + 3 + (selectedPage - 3 <= 0 ? Math.abs(selectedPage - 3 - 1) : 0);
+    for (let i = leftBorder; i <= rightBorder; i++) {
+      pageNumbers.push(i);
+   }
+  }
+
+  return (
+     <div className="pagination-container">
+        <ul className="pagination">
+          {selectedPage - 5 >= 0 && <li
+            key={-1}
+            onClick={() => paginate(1)}
+            className={"pagination"}>...
+          </li>
+          }
+            {pageNumbers.map((number) => (
+              <li
+                 key={number}
+                 onClick={() => paginate(number)}
+                 className={number == selectedPage ? "pagination pagination_selected" : "pagination"}
+              >
+                 {number}
+              </li>
+           ))}
+            {Math.ceil(totalPosts / postsPerPage) - selectedPage - 3 > 0 && <li
+              key={-2}
+              onClick={() => paginate(Math.ceil(totalPosts / postsPerPage))}
+              className={"pagination"}>...
+            </li>
+            }
+        </ul>
+     </div>
+  );
+};
+
+
 function App() {
   
-  const [state, setState] = useState([]);
+  const [state, setState] = useState({count: 0, rows: []});
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage] = useState(50);
+
+  const paginate = (pageNumber) => {
+    setCurrentPage(pageNumber);
+ };
 
   const callBackendAPI = async () => {
     const response = await fetch('/express_backend?' + new URLSearchParams({
-      ofs: 0,
-      lim: 15,
+      ofs: postsPerPage * (currentPage - 1),
+      lim: postsPerPage,
   }));
     const body = await response.json();
 
@@ -205,14 +256,21 @@ function App() {
     callBackendAPI()
     .then(res => setState(res))
     .catch(err => console.log(err));
-  }, [])
+  }, [currentPage])
   
 
 
   return (
+    <div>
     <div className="App">
-      {state.map((x) => {return(<div key={x.idposition} style={{display: 'flex', gap: '20px'}}><div>{x.name}</div><div>{x.mark}</div><div>{x.units}</div></div>)})}
+      {state.rows.map((x) => {return(<div key={x.idposition} style={{display: 'flex', gap: '20px'}}><div>{x.name}</div><div>{x.mark}</div><div>{x.units}</div></div>)})}
     </div>
+    <Paginate className="pagination"
+    postsPerPage={postsPerPage}
+    totalPosts={state.count}
+    paginate={paginate}
+    selectedPage={currentPage}
+    /></div>
   );
 }
 root.render(<App />)
