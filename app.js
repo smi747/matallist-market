@@ -1,5 +1,5 @@
 require('dotenv').config();
-const {Sequelize} = require('sequelize');
+const {Sequelize, Op} = require('sequelize');
 
 const sequelize = new Sequelize(
     process.env.DB_NAME,
@@ -17,13 +17,23 @@ sequelize.authenticate();
 const Positions = require("./Positions")(sequelize);
 
 let datadb;
-async function get_db(ofs, lim, selcat) {
-    console.log(selcat);
+async function get_db(ofs, lim, selcat, searchinp) {
+    console.log(123);
     let res = {count: 0, rows: []};
-    if (selcat !="") {
-        res = Positions.findAndCountAll({
-            where: {subsubcat:selcat},
+    if (selcat == "search" || selcat == "search_") {
+        res = Positions.findAndCountAll({where: {
+            [Op.or]: [
+              { 'name': { [Op.like]: '%' + searchinp + '%' } }
+            ]
+          },
             offset: ofs, limit: lim});
+    }
+    else {
+        if (selcat !="") {
+            res = Positions.findAndCountAll({
+                where: {subsubcat:selcat},
+                offset: ofs, limit: lim});
+        }
     }
     
     return await res;
@@ -77,7 +87,7 @@ var fs=require('fs');
 var cattree=fs.readFileSync('cattree.json', 'utf8');
 
 app.get('/express_backend', (req, res) => { //Строка 9
-    get_db(parseInt(req.query.ofs), parseInt(req.query.lim), req.query.selcat).then((data) => {res.send({ express: JSON.stringify(data), catinfo: cattree })})
+    get_db(parseInt(req.query.ofs), parseInt(req.query.lim), req.query.selcat, req.query.searchinp).then((data) => {res.send({ express: JSON.stringify(data), catinfo: cattree })})
      //Строка 10
   }); //Строка 11
   
