@@ -18,25 +18,46 @@ const Positions = require("./Positions")(sequelize);
 
 let datadb;
 async function get_db(ofs, lim, selcat, searchinp) {
-    console.log(123);
-    let res = {count: 0, rows: []};
+    console.log("get_db()_called");
+    let res = [{count: 0, rows: []}, {count: 0, rows: []}, {count: 0, rows: []}];
     if (selcat == "search" || selcat == "search_") {
-        res = Positions.findAndCountAll({where: {
+        res = [await Positions.findAndCountAll({where: {
             [Op.or]: [
               { 'name': { [Op.like]: '%' + searchinp + '%' } }
             ]
           },
-            offset: ofs, limit: lim});
+            offset: ofs, limit: lim}), {count: 0, rows: []}, {count: 0, rows: []}]
     }
     else {
         if (selcat !="") {
-            res = Positions.findAndCountAll({
+            res = [await Positions.findAndCountAll({
                 where: {subsubcat:selcat},
-                offset: ofs, limit: lim});
+                offset: ofs, limit: lim}),
+                
+                await Positions.findAndCountAll({
+                    where: {subsubcat:selcat},
+                    attributes: [
+                        // specify an array where the first element is the SQL function and the second is the alias
+                        [Sequelize.fn('DISTINCT', Sequelize.col('size')) ,'size'],
+                
+                        // specify any additional columns, e.g. country_code
+                        // 'country_code'
+                
+                    ]}),
+                await Positions.findAndCountAll({
+                    where: {subsubcat:selcat},
+                    attributes: [
+                        // specify an array where the first element is the SQL function and the second is the alias
+                        [Sequelize.fn('DISTINCT', Sequelize.col('mark')) ,'mark'],
+                
+                        // specify any additional columns, e.g. country_code
+                        // 'country_code'
+                
+                    ]})
+                ]
         }
     }
-    
-    return await res;
+    return res;
 }
 
 var _getAllFilesFromFolder = function(dir) {
@@ -87,7 +108,7 @@ var fs=require('fs');
 var cattree=fs.readFileSync('cattree.json', 'utf8');
 
 app.get('/express_backend', (req, res) => { //Строка 9
-    get_db(parseInt(req.query.ofs), parseInt(req.query.lim), req.query.selcat, req.query.searchinp).then((data) => {res.send({ express: JSON.stringify(data), catinfo: cattree })})
+    get_db(parseInt(req.query.ofs), parseInt(req.query.lim), req.query.selcat, req.query.searchinp).then((data) => {res.send({ express: JSON.stringify(data[0]), sizes: JSON.stringify(data[1]), marks: JSON.stringify(data[2]),catinfo: cattree })})
      //Строка 10
   }); //Строка 11
   

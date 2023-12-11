@@ -239,6 +239,8 @@ function App() {
   const [selectedcat, setSelectedcat] = useState("");
   const [searchInput, setSearchInput] = useState("");
   const [prevSearchInput, setPrevSearchInput] = useState("");
+  const [optionListSize, setoptionListSize] = useState({count: 0, rows: []});
+  const [optionListMark, setoptionListMark] = useState({count: 0, rows: []});
   
 
   const paginate = (pageNumber) => {
@@ -264,7 +266,7 @@ function App() {
   // получение GET маршрута с сервера Express, который соответствует GET из server.js 
   useEffect(() => {
     callBackendAPI()
-    .then(res => {setState(JSON.parse(res.express));setCattree(JSON.parse(res.catinfo))})
+    .then(res => {setState(JSON.parse(res.express));setoptionListSize(JSON.parse(res.sizes));setoptionListMark(JSON.parse(res.marks));setCattree(JSON.parse(res.catinfo))})
     .catch(err => console.log(err));
   }, [currentPage, selectedcat])
   
@@ -319,6 +321,14 @@ function App() {
       }
     }
   }}/><br />
+  <select >
+    <option key={-1}>"Все размеры"</option>
+    {optionListSize.rows.map((x) => {return(<option key={x.size}>{x.size}</option>)})}
+  </select>
+  <select >
+    <option key={-1}>"Все марки"</option>
+    {optionListMark.rows.map((x) => {return(<option key={x.mark}>{x.mark}</option>)})}
+  </select>
       {(selectedcat == "search" || selectedcat == "search_") ? prevSearchInput == "" ? "Задан пустой поисковой запрос" : "Поиск по запросу: "+prevSearchInput : selectedcat}
       {(selectedcat !="" || currentcat != "") && <div className='catlist' onClick={() => {selectedcat != "" ? (function() {setSelectedcat("");setCurrentPage(1);})() : currentsubcat != "" ? setCurrentsubcat("") : setCurrentcat("");setSearchInput("");}}>Назад</div>}
       {selectedcat != "" && (state.rows.length > 0 ? state.rows.map((x) => {return(<div key={x.idposition} style={{display: 'flex', gap: '20px'}}><div>{x.name}</div><div>{x.mark}</div><div>{x.units}</div></div>)}) : "По данному запросу ничего не найдено")}
