@@ -238,6 +238,7 @@ function App() {
   const [currentsubcat, setCurrentsubcat] = useState("");
   const [selectedcat, setSelectedcat] = useState("");
   const [searchInput, setSearchInput] = useState("");
+  const [prevSearchInput, setPrevSearchInput] = useState("");
   
 
   const paginate = (pageNumber) => {
@@ -252,6 +253,7 @@ function App() {
       searchinp: searchInput,
   }));
     const body = await response.json();
+    setSearchInput("");
 
     if (response.status !== 200) {
       throw Error(body.message)
@@ -301,19 +303,24 @@ function App() {
    onChange={handleChange}
    value={searchInput}
    onKeyUp={event => {
-    setCurrentsubcat("");
-    setCurrentcat("");
     if (event.key === 'Enter') {
+      setCurrentsubcat("");
+      setCurrentcat("");
+      setPrevSearchInput(searchInput);
       setCurrentPage(1);
-      if (selectedcat != "search")
-        setSelectedcat('search');
+      if (searchInput != "") {
+        if (selectedcat != "search")
+          setSelectedcat('search');
+        else {
+          setSelectedcat('search_');
+      }}
       else {
-        setSelectedcat('search_');
+        setState({count: 0, rows: []});
       }
     }
   }}/><br />
-      {selectedcat}
-      {(selectedcat !="" || currentcat != "") && <div className='catlist' onClick={() => {selectedcat != "" ? (function() {setSelectedcat("");setCurrentPage(1);})() : currentsubcat != "" ? setCurrentsubcat("") : setCurrentcat("");}}>Назад</div>}
+      {(selectedcat == "search" || selectedcat == "search_") ? prevSearchInput == "" ? "Задан пустой поисковой запрос" : "Поиск по запросу: "+prevSearchInput : selectedcat}
+      {(selectedcat !="" || currentcat != "") && <div className='catlist' onClick={() => {selectedcat != "" ? (function() {setSelectedcat("");setCurrentPage(1);})() : currentsubcat != "" ? setCurrentsubcat("") : setCurrentcat("");setSearchInput("");}}>Назад</div>}
       {selectedcat != "" && (state.rows.length > 0 ? state.rows.map((x) => {return(<div key={x.idposition} style={{display: 'flex', gap: '20px'}}><div>{x.name}</div><div>{x.mark}</div><div>{x.units}</div></div>)}) : "По данному запросу ничего не найдено")}
     </div>
     <ul>
