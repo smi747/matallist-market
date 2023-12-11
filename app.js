@@ -17,7 +17,7 @@ sequelize.authenticate();
 const Positions = require("./Positions")(sequelize);
 
 let datadb;
-async function get_db(ofs, lim, selcat, searchinp) {
+async function get_db(ofs, lim, selcat, searchinp, filt_sz, filt_mk) {
     console.log("get_db()_called");
     let res = [{count: 0, rows: []}, {count: 0, rows: []}, {count: 0, rows: []}];
     if (selcat == "search" || selcat == "search_") {
@@ -30,8 +30,13 @@ async function get_db(ofs, lim, selcat, searchinp) {
     }
     else {
         if (selcat !="") {
+            const where_tmp = {subsubcat:selcat}
+            if (filt_sz != "Все размеры")
+                where_tmp.size = filt_sz;
+            if (filt_mk != "Все марки")
+                where_tmp.mark = filt_mk;
             res = [await Positions.findAndCountAll({
-                where: {subsubcat:selcat},
+                where: where_tmp,
                 offset: ofs, limit: lim}),
                 
                 await Positions.findAndCountAll({
@@ -108,7 +113,7 @@ var fs=require('fs');
 var cattree=fs.readFileSync('cattree.json', 'utf8');
 
 app.get('/express_backend', (req, res) => { //Строка 9
-    get_db(parseInt(req.query.ofs), parseInt(req.query.lim), req.query.selcat, req.query.searchinp).then((data) => {res.send({ express: JSON.stringify(data[0]), sizes: JSON.stringify(data[1]), marks: JSON.stringify(data[2]),catinfo: cattree })})
+    get_db(parseInt(req.query.ofs), parseInt(req.query.lim), req.query.selcat, req.query.searchinp, req.query.filt_size, req.query.filt_mark).then((data) => {res.send({ express: JSON.stringify(data[0]), sizes: JSON.stringify(data[1]), marks: JSON.stringify(data[2]),catinfo: cattree })})
      //Строка 10
   }); //Строка 11
   

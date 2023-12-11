@@ -241,6 +241,11 @@ function App() {
   const [prevSearchInput, setPrevSearchInput] = useState("");
   const [optionListSize, setoptionListSize] = useState({count: 0, rows: []});
   const [optionListMark, setoptionListMark] = useState({count: 0, rows: []});
+  const [optionListSizeSelected, setoptionListSizeSelected] = useState("Все размеры");
+  const [optionListMarkSelected, setoptionListMarkSelected] = useState("Все марки");
+  const [optionListSizeSelectedSend, setoptionListSizeSelectedSend] = useState("Все размеры");
+  const [optionListMarkSelectedSend, setoptionListMarkSelectedSend] = useState("Все марки");
+  const [filtBut, setFiltBut] = useState(false);
   
 
   const paginate = (pageNumber) => {
@@ -252,10 +257,14 @@ function App() {
       ofs: postsPerPage * (currentPage - 1),
       lim: postsPerPage,
       selcat: selectedcat,
-      searchinp: searchInput,
+      searchinp: prevSearchInput,
+      filt_size: optionListSizeSelectedSend,
+      filt_mark: optionListMarkSelectedSend,
   }));
     const body = await response.json();
     setSearchInput("");
+    setoptionListMarkSelectedSend("Все марки");
+    setoptionListSizeSelectedSend("Все размеры");
 
     if (response.status !== 200) {
       throw Error(body.message)
@@ -268,7 +277,7 @@ function App() {
     callBackendAPI()
     .then(res => {setState(JSON.parse(res.express));setoptionListSize(JSON.parse(res.sizes));setoptionListMark(JSON.parse(res.marks));setCattree(JSON.parse(res.catinfo))})
     .catch(err => console.log(err));
-  }, [currentPage, selectedcat])
+  }, [currentPage, selectedcat, filtBut])
   
 
   let catlist = []
@@ -306,31 +315,35 @@ function App() {
    value={searchInput}
    onKeyUp={event => {
     if (event.key === 'Enter') {
-      setCurrentsubcat("");
-      setCurrentcat("");
-      setPrevSearchInput(searchInput);
-      setCurrentPage(1);
+      
       if (searchInput != "") {
+        setCurrentsubcat("");
+        setCurrentcat("");
+        setoptionListSizeSelected("Все размеры");
+        setoptionListMarkSelected("Все марки");
+        setPrevSearchInput(searchInput);
+        setCurrentPage(1);
         if (selectedcat != "search")
           setSelectedcat('search');
         else {
           setSelectedcat('search_');
       }}
-      else {
-        setState({count: 0, rows: []});
-      }
     }
   }}/><br />
-  <select >
-    <option key={-1}>"Все размеры"</option>
+  {selectedcat !="" && selectedcat !="search" && selectedcat !="search_" &&<div>
+    <select value={optionListSizeSelected} onChange={(e) => setoptionListSizeSelected(e.target.value)}>
+    <option key={-1}>Все размеры</option>
     {optionListSize.rows.map((x) => {return(<option key={x.size}>{x.size}</option>)})}
   </select>
-  <select >
-    <option key={-1}>"Все марки"</option>
+  <select value={optionListMarkSelected} onChange={(e) => setoptionListMarkSelected(e.target.value)}>
+    <option key={-1}>Все марки</option>
     {optionListMark.rows.map((x) => {return(<option key={x.mark}>{x.mark}</option>)})}
   </select>
+  <button onClick={(e) => {setoptionListMarkSelectedSend(optionListMarkSelected);setoptionListSizeSelectedSend(optionListSizeSelected);setCurrentPage(1);setFiltBut(!filtBut)}}>Применить</button>
+  <button onClick={(e) => {setoptionListSizeSelected("Все размеры");setoptionListMarkSelected("Все марки");setoptionListMarkSelectedSend("Все марки");setoptionListSizeSelectedSend("Все размеры");setCurrentPage(1);setFiltBut(!filtBut)}}>Сброс</button>
+      </div>}
       {(selectedcat == "search" || selectedcat == "search_") ? prevSearchInput == "" ? "Задан пустой поисковой запрос" : "Поиск по запросу: "+prevSearchInput : selectedcat}
-      {(selectedcat !="" || currentcat != "") && <div className='catlist' onClick={() => {selectedcat != "" ? (function() {setSelectedcat("");setCurrentPage(1);})() : currentsubcat != "" ? setCurrentsubcat("") : setCurrentcat("");setSearchInput("");}}>Назад</div>}
+      {(selectedcat !="" || currentcat != "") && <div className='catlist' onClick={() => {selectedcat != "" ? (function() {setSelectedcat("");setCurrentPage(1);setoptionListSizeSelected("Все размеры");setoptionListMarkSelected("Все марки")})() : currentsubcat != "" ? setCurrentsubcat("") : setCurrentcat("");setSearchInput("");}}>Назад</div>}
       {selectedcat != "" && (state.rows.length > 0 ? state.rows.map((x) => {return(<div key={x.idposition} style={{display: 'flex', gap: '20px'}}><div>{x.name}</div><div>{x.mark}</div><div>{x.units}</div></div>)}) : "По данному запросу ничего не найдено")}
     </div>
     <ul>
