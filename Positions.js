@@ -8,6 +8,7 @@ module.exports = function(sequelize) {
         name: {type:Sequelize.STRING(90)},
         mark: {type:Sequelize.STRING(90)},
         units: {type:Sequelize.STRING(90)},
+        unitssecond: {type:Sequelize.STRING(90)},
         coef: {type:Sequelize.STRING(90)}
     },
     {

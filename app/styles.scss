@@ -1778,7 +1778,7 @@ input[type="submit"] {
   display: none;
 }
 
-.catlist {
+.catlist:hover {
   cursor: pointer;
   text-decoration: underline;
 }

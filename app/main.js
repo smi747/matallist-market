@@ -246,6 +246,10 @@ function App() {
   const [optionListSizeSelectedSend, setoptionListSizeSelectedSend] = useState("Все размеры");
   const [optionListMarkSelectedSend, setoptionListMarkSelectedSend] = useState("Все марки");
   const [filtBut, setFiltBut] = useState(false);
+  const [selectedPosition, setSelectedPosition] = useState({idposition: 0, name: "", size: "", mark: "", coef: "1", units: "", units_1: ""});
+  
+  const [coef_1, setCoef_1] = useState("");
+  const [coef_2, setCoef_2] = useState("");
   
 
   const paginate = (pageNumber) => {
@@ -305,6 +309,37 @@ function App() {
     setSearchInput(e.target.value);
   };
 
+  const showPosition = (x) => {
+    setSelectedPosition(x);
+    setCoef_1("");
+    setCoef_2("");
+  }
+
+
+  var n = new RegExp('^([0-9][0-9]*\\.?[0-9]?[0-9]?[0-9]?)?$', "gm");
+  const handleCoefChange_1 = (e) => {
+    if (n.test(e.target.value)){
+      setCoef_1(e.target.value);
+      if (selectedPosition.units == "тн")
+        setCoef_2((parseFloat(e.target.value) * 1000 / selectedPosition.coef).toFixed(3));
+      else
+        setCoef_2((parseFloat(e.target.value) * selectedPosition.coef / 1000).toFixed(3));
+      if (e.target.value == "")
+        setCoef_1("");
+      }
+  }
+  const handleCoefChange_2 = (e) => {
+    if (n.test(e.target.value)){
+      setCoef_2(e.target.value);
+      if (selectedPosition.units == "тн") 
+        setCoef_1((parseFloat(e.target.value) * selectedPosition.coef / 1000).toFixed(3));
+      else
+        setCoef_1((parseFloat(e.target.value) * 1000 / selectedPosition.coef).toFixed(3));
+      if (e.target.value == "")
+        setCoef_1("");
+      }
+  }
+
   return (
     <div>
     <div className="App">
@@ -343,8 +378,8 @@ function App() {
   <button onClick={(e) => {setoptionListSizeSelected("Все размеры");setoptionListMarkSelected("Все марки");setoptionListMarkSelectedSend("Все марки");setoptionListSizeSelectedSend("Все размеры");setCurrentPage(1);setFiltBut(!filtBut)}}>Сброс</button>
       </div>}
       {(selectedcat == "search" || selectedcat == "search_") ? prevSearchInput == "" ? "Задан пустой поисковой запрос" : "Поиск по запросу: "+prevSearchInput : selectedcat}
-      {(selectedcat !="" || currentcat != "") && <div className='catlist' onClick={() => {selectedcat != "" ? (function() {setSelectedcat("");setCurrentPage(1);setoptionListSizeSelected("Все размеры");setoptionListMarkSelected("Все марки")})() : currentsubcat != "" ? setCurrentsubcat("") : setCurrentcat("");setSearchInput("");}}>Назад</div>}
-      {selectedcat != "" && (state.rows.length > 0 ? state.rows.map((x) => {return(<div key={x.idposition} style={{display: 'flex', gap: '20px'}}><div>{x.name}</div><div>{x.mark}</div><div>{x.units}</div></div>)}) : "По данному запросу ничего не найдено")}
+      {(selectedcat !="" || currentcat != "") && <div className='catlist' onClick={() => {selectedcat != "" ? (function() {setSelectedcat("");setCurrentPage(1);setoptionListSizeSelected("Все размеры");setoptionListMarkSelected("Все марки");setSelectedPosition({idposition: 0, name: "", size: "", mark: "", coef: "1", units: "", units_1: ""})})() : currentsubcat != "" ? setCurrentsubcat("") : setCurrentcat("");setSearchInput("");}}>Назад</div>}
+      {selectedcat != "" && (state.rows.length > 0 ? state.rows.map((x) => {return(<div className="catlist" onClick={(e) => showPosition(x)} key={x.idposition} style={{display: 'flex', gap: '20px'}}><div>{x.name}</div><div>{x.mark}</div><div>{x.units}</div><div>{x.unitssecond}</div></div>)}) : "По данному запросу ничего не найдено")}
     </div>
     <ul>
       {catlist}
@@ -354,7 +389,9 @@ function App() {
     totalPosts={state.count}
     paginate={paginate}
     selectedPage={currentPage}
-    />}</div>
+    />}
+        {selectedPosition.name != "" && <div style={{display: 'flex', gap: '20px', marginTop: '20px'}}><div>{selectedPosition.name}</div><div>{selectedPosition.mark}</div><div><input onChange={(e)=>handleCoefChange_1(e)} value={coef_1}></input>{selectedPosition.units}</div><div><input onChange={(e)=>handleCoefChange_2(e)} value={coef_2}></input>{selectedPosition.unitssecond}</div></div>}
+</div>
   );
 }
 root.render(<App />)
