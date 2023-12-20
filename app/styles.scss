@@ -1842,3 +1842,15 @@ input[type="submit"] {
   height: 25px;
   background-color: black;
 }
+
+.catalog__home {
+  display: flex;
+}
+
+.catalog__home:hover {
+  cursor: pointer;
+}
+
+.catalog__home:hover .navigation-row_elem {
+  text-decoration: underline;
+}
