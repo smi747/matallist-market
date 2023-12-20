@@ -325,7 +325,7 @@ function App() {
       else
         setCoef_2((parseFloat(e.target.value) * selectedPosition.coef / 1000).toFixed(3));
       if (e.target.value == "")
-        setCoef_1("");
+        setCoef_2("");
       }
   }
   const handleCoefChange_2 = (e) => {
