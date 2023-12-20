@@ -1788,11 +1788,13 @@ input[type="submit"] {
 }
 
 .navigation-row {
-  margin: 10px 25px;
+  padding: 18px 25px;
   display: flex;
-  font-size: 22px;
-  font-family: "Times New Roman", Times, serif;
+  background: #f0f0f0;
+  font-size: 18px;
+  font-family: "Noto Sans", sans-serif;
   justify-content: space-between;
+  align-items: center;
 }
 
 .navigation-row_elem:hover {
@@ -1804,11 +1806,39 @@ input[type="submit"] {
   height: 11px;
   width: 18px;
   align-self: center;
-  margin: 0 8px;
+  margin: 0 8px 0 8px;
   background-image: url("images/icons/cat_triangle.png");
   background-size: cover;
 }
 
 .navigation-row__cats {
   display: flex;
+}
+
+.house-ico {
+  height: 18px;
+  width: 18px;
+  margin-top: 3px;
+  margin-right: 10px;
+  background-image: url("images/icons/home.png");
+  background-size: cover;
+}
+
+.navigation-row__searh {
+  padding: 2px 10px;
+  border-radius: 15px;
+  width: 250px;
+  border-style: none;
+
+  ::-webkit-input-placeholder {
+    text-align: right;
+  }
+  :-moz-placeholder {
+    text-align: right;
+  }
+}
+
+.filts-row {
+  height: 25px;
+  background-color: black;
 }
