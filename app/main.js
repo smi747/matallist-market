@@ -408,7 +408,7 @@ function App() {
       {/*(selectedcat == "search" || selectedcat == "search_") ? prevSearchInput == "" ? "Задан пустой поисковой запрос" : "Поиск по запросу: "+prevSearchInput : selectedcat*/}
       {/*(selectedcat !="" || currentcat != "") && <div className='catlist' onClick={() => {selectedcat != "" ? (function() {setSelectedcat("");setCurrentPage(1);setoptionListSizeSelected("Все размеры");setoptionListMarkSelected("Все марки");setSelectedPosition({idposition: 0, name: "", size: "", mark: "", coef: "1", units: "", units_1: ""})})() : currentsubcat != "" ? setCurrentsubcat("") : setCurrentcat("");setSearchInput("");}}>Назад</div>*/}
       <div className='position-list'>
-        {selectedcat != "" && (state.rows.length > 0 ? state.rows.map((x) => {return(<div className="catalog-postition" onClick={(e) => showPosition(x)} key={x.idposition} style={{display: 'flex', gap: '20px'}}><div>{x.name}</div><div>{x.mark}</div></div>)}) : "По данному запросу ничего не найдено")}
+        {selectedcat != "" && (state.rows.length > 0 ? state.rows.map((x) => {return(<div className="catalog-postition" onClick={(e) => showPosition(x)} key={x.idposition} style={{display: 'flex', gap: '20px'}}><div>{x.name}</div><div>{x.size}</div><div>{x.mark}</div></div>)}) : "По данному запросу ничего не найдено")}
       </div>
     </div>
     <ul className='categories-list'>

@@ -41,6 +41,9 @@ async function get_db(ofs, lim, selcat, searchinp, filt_sz, filt_mk) {
                 
                 await Positions.findAndCountAll({
                     where: {subsubcat:selcat},
+                    order: [
+                        ['size', 'ASC'],
+                    ],
                     attributes: [
                         // specify an array where the first element is the SQL function and the second is the alias
                         [Sequelize.fn('DISTINCT', Sequelize.col('size')) ,'size'],
@@ -51,6 +54,9 @@ async function get_db(ofs, lim, selcat, searchinp, filt_sz, filt_mk) {
                     ]}),
                 await Positions.findAndCountAll({
                     where: {subsubcat:selcat},
+                    order: [
+                        ['mark', 'ASC'],
+                    ],
                     attributes: [
                         // specify an array where the first element is the SQL function and the second is the alias
                         [Sequelize.fn('DISTINCT', Sequelize.col('mark')) ,'mark'],

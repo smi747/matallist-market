@@ -7,6 +7,7 @@ module.exports = function(sequelize) {
         idposition: {type: Sequelize.SMALLINT.UNSIGNED, primaryKey: true},
         name: {type:Sequelize.STRING(90)},
         mark: {type:Sequelize.STRING(90)},
+        size: {type:Sequelize.STRING(45)},
         units: {type:Sequelize.STRING(90)},
         unitssecond: {type:Sequelize.STRING(90)},
         coef: {type:Sequelize.STRING(90)}
