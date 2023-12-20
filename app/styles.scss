@@ -1795,6 +1795,7 @@ input[type="submit"] {
   font-family: "Noto Sans", sans-serif;
   justify-content: space-between;
   align-items: center;
+  border-top: solid 1px lightgray;
 }
 
 .navigation-row_elem:hover {
@@ -1853,4 +1854,27 @@ input[type="submit"] {
 
 .catalog__home:hover .navigation-row_elem {
   text-decoration: underline;
+}
+
+.categories-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.category {
+  width: 100%;
+  text-align: center;
+  height: 65px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: solid 1px lightgray;
+  font-family: "Noto Sans", sans-serif;
+  font-size: 20px;
+  transition: all 0.5s;
+}
+
+.category:hover {
+  cursor: pointer;
+  background-color: #d3d3d3;
 }
