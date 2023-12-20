@@ -1765,6 +1765,7 @@ input[type="submit"] {
 
 .pagination {
   display: flex;
+  justify-content: center;
   gap: 5px;
   cursor: pointer;
 }
@@ -1776,11 +1777,6 @@ input[type="submit"] {
 
 .pagination-container_hide {
   display: none;
-}
-
-.catlist:hover {
-  cursor: pointer;
-  text-decoration: underline;
 }
 
 .app {
@@ -1840,8 +1836,10 @@ input[type="submit"] {
 }
 
 .filts-row {
-  height: 25px;
+  height: 30px;
   background-color: black;
+  font-size: 14px;
+  font-family: "Noto Sans", sans-serif;
 }
 
 .catalog__home {
@@ -1877,4 +1875,69 @@ input[type="submit"] {
 .category:hover {
   cursor: pointer;
   background-color: #d3d3d3;
+}
+
+.position-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.catalog-postition {
+  width: 100%;
+  text-align: center;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: solid 1px lightgray;
+  font-family: "Noto Sans", sans-serif;
+  font-size: 16px;
+  transition: all 0.5s;
+}
+
+.catalog-postition:hover {
+  cursor: pointer;
+  background-color: #d3d3d3;
+}
+
+.filts-row__wrap {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: 25px;
+  color: white;
+  gap: 10px;
+}
+
+.filts-row select {
+  background: none;
+  color: white;
+  border: none;
+  appearance: none;
+  -webkit-appearance: none;
+  text-align: right;
+}
+
+.filts-row select:hover {
+  text-decoration: underline 1px solid;
+  cursor: pointer;
+}
+
+.filts-row option {
+  color: black;
+}
+
+.filt-button {
+  background: none;
+  color: white;
+  border: none;
+  display: flex;
+  margin-left: 5px;
+}
+
+.filt-button:hover {
+  text-decoration: underline 1px solid;
+  cursor: pointer;
 }
