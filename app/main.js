@@ -294,14 +294,18 @@ function App() {
       catlist.push(<li className='catlist' key={obj} onClick={() => setCurrentsubcat(obj)}>{obj}</li>);
     }
   }
-  if (currentsubcat != "") {
-    catlist = [];
-    for (let obj in cattree[currentcat][currentsubcat]) {
-      catlist.push(<li className='catlist' key={obj} onClick={() => setSelectedcat(obj)}>{obj}</li>);
-    }
-  }
   if (selectedcat != "") {
     catlist = [];
+  }
+  else
+    if (currentsubcat != "") {
+      catlist = [];
+      if (Object.keys(cattree[currentcat][currentsubcat]).length == 1 && Object.keys(cattree[currentcat][currentsubcat])[0] == currentsubcat)
+        setSelectedcat(currentsubcat);
+      else
+        for (let obj in cattree[currentcat][currentsubcat]) {
+          catlist.push(<li className='catlist' key={obj} onClick={() => setSelectedcat(obj)}>{obj}</li>);
+      }
   }
 
   const handleChange = (e) => {
@@ -339,32 +343,45 @@ function App() {
         setCoef_1("");
       }
   }
+  const unselectCat = () => {
+    setCurrentPage(1);
+    setoptionListSizeSelected("Все размеры");
+    setoptionListMarkSelected("Все марки");
+    setSelectedPosition({idposition: 0, name: "", size: "", mark: "", coef: "1", units: "", units_1: ""});
+  }
 
   return (
     <div>
-    <div className="App">
-    <input
-   type="text"
-   placeholder="Search here"
-   onChange={handleChange}
-   value={searchInput}
-   onKeyUp={event => {
-    if (event.key === 'Enter') {
-      
-      if (searchInput != "") {
-        setCurrentsubcat("");
-        setCurrentcat("");
-        setoptionListSizeSelected("Все размеры");
-        setoptionListMarkSelected("Все марки");
-        setPrevSearchInput(searchInput);
-        setCurrentPage(1);
-        if (selectedcat != "search")
-          setSelectedcat('search');
-        else {
-          setSelectedcat('search_');
-      }}
-    }
-  }}/><br />
+    <div className="app">
+    <div className="navigation-row">
+      <div className="navigation-row__cats">
+        <p className="navigation-row_elem" onClick={() => {setSelectedcat("");setCurrentsubcat("");setCurrentcat("");unselectCat()}}>Каталог</p> {currentcat !="" && <div className='cat-triangle'></div>}<p className="navigation-row_elem" onClick={() => {setSelectedcat("");setCurrentsubcat("");unselectCat()}}>{currentcat}</p> {currentsubcat !="" && <div className='cat-triangle'></div>}<p className="navigation-row_elem" onClick={() => {setSelectedcat("");unselectCat();}}>{currentsubcat}</p> {selectedcat !="" && selectedcat != currentsubcat && <div className='cat-triangle'></div>}{selectedcat !="" && selectedcat != currentsubcat && <p className="navigation-row_elem">{selectedcat}</p>}
+      </div>
+      <input
+        className='navigation-row__searh'
+        type="text"
+        placeholder="Search here"
+        onChange={handleChange}
+        value={searchInput}
+        onKeyUp={event => {
+          if (event.key === 'Enter') {
+            
+            if (searchInput != "") {
+              setCurrentsubcat("");
+              setCurrentcat("");
+              setoptionListSizeSelected("Все размеры");
+              setoptionListMarkSelected("Все марки");
+              setPrevSearchInput(searchInput);
+              setCurrentPage(1);
+              if (selectedcat != "search")
+                setSelectedcat('search');
+              else {
+                setSelectedcat('search_');
+            }}
+          }
+        }}/>
+    </div>
+    <br />
   {selectedcat !="" && selectedcat !="search" && selectedcat !="search_" &&<div>
     <select value={optionListSizeSelected} onChange={(e) => setoptionListSizeSelected(e.target.value)}>
     <option key={-1}>Все размеры</option>
@@ -378,7 +395,7 @@ function App() {
   <button onClick={(e) => {setoptionListSizeSelected("Все размеры");setoptionListMarkSelected("Все марки");setoptionListMarkSelectedSend("Все марки");setoptionListSizeSelectedSend("Все размеры");setCurrentPage(1);setFiltBut(!filtBut)}}>Сброс</button>
       </div>}
       {(selectedcat == "search" || selectedcat == "search_") ? prevSearchInput == "" ? "Задан пустой поисковой запрос" : "Поиск по запросу: "+prevSearchInput : selectedcat}
-      {(selectedcat !="" || currentcat != "") && <div className='catlist' onClick={() => {selectedcat != "" ? (function() {setSelectedcat("");setCurrentPage(1);setoptionListSizeSelected("Все размеры");setoptionListMarkSelected("Все марки");setSelectedPosition({idposition: 0, name: "", size: "", mark: "", coef: "1", units: "", units_1: ""})})() : currentsubcat != "" ? setCurrentsubcat("") : setCurrentcat("");setSearchInput("");}}>Назад</div>}
+      {/*(selectedcat !="" || currentcat != "") && <div className='catlist' onClick={() => {selectedcat != "" ? (function() {setSelectedcat("");setCurrentPage(1);setoptionListSizeSelected("Все размеры");setoptionListMarkSelected("Все марки");setSelectedPosition({idposition: 0, name: "", size: "", mark: "", coef: "1", units: "", units_1: ""})})() : currentsubcat != "" ? setCurrentsubcat("") : setCurrentcat("");setSearchInput("");}}>Назад</div>*/}
       {selectedcat != "" && (state.rows.length > 0 ? state.rows.map((x) => {return(<div className="catlist" onClick={(e) => showPosition(x)} key={x.idposition} style={{display: 'flex', gap: '20px'}}><div>{x.name}</div><div>{x.mark}</div></div>)}) : "По данному запросу ничего не найдено")}
     </div>
     <ul>

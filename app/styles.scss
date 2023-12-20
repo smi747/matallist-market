@@ -1782,3 +1782,33 @@ input[type="submit"] {
   cursor: pointer;
   text-decoration: underline;
 }
+
+.app {
+  padding-top: 92px;
+}
+
+.navigation-row {
+  margin: 10px 25px;
+  display: flex;
+  font-size: 22px;
+  font-family: "Times New Roman", Times, serif;
+  justify-content: space-between;
+}
+
+.navigation-row_elem:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.cat-triangle {
+  height: 11px;
+  width: 18px;
+  align-self: center;
+  margin: 0 8px;
+  background-image: url("images/icons/cat_triangle.png");
+  background-size: cover;
+}
+
+.navigation-row__cats {
+  display: flex;
+}
