@@ -372,7 +372,7 @@ function App() {
       <div className="navigation-row__cats">
         <div className="catalog__home" onClick={() => {setSelectedcat("");setCurrentsubcat("");setCurrentcat("");unselectCat()}}>
           <div className='house-ico'></div>
-          <p className="navigation-row_elem">Каталог</p>
+          <p className="navigation-row_elem" style={{fontWeight: 700}}>Каталог</p>
         </div>
          {currentcat !="" && <div className='cat-triangle'></div>}<p className="navigation-row_elem" onClick={() => {setSelectedcat("");setCurrentsubcat("");unselectCat()}}>{currentcat}</p> {currentsubcat !="" && <div className='cat-triangle'></div>}<p className="navigation-row_elem" onClick={() => {setSelectedcat("");unselectCat();setFiltBut(!filtBut)}}>{currentsubcat}</p> {selectedcat !="search" && selectedcat !="search_" && selectedcat !="" && (selectedcat != currentsubcat || (selectedcat == currentsubcat && Object.keys(cattree[currentcat][currentsubcat]).length > 1)) && <div className='cat-triangle'></div>}{selectedcat !="search" && selectedcat !="search_" && selectedcat !="" && (selectedcat != currentsubcat || (selectedcat == currentsubcat && Object.keys(cattree[currentcat][currentsubcat]).length > 1)) && <p onClick={() => {unselectCat();setFiltBut(!filtBut)}} className="navigation-row_elem">{selectedcat}</p>}
       </div>
