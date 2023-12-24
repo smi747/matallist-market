@@ -235,7 +235,7 @@ function App() {
   
   const [state, setState] = useState({count: 0, rows: []});
   const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage] = useState(15);
+  const [postsPerPage] = useState(16);
   const [cattree, setCattree] = useState(JSON.stringify({}));
   const [currentcat, setCurrentcat] = useState("");
   const [currentsubcat, setCurrentsubcat] = useState("");
@@ -389,7 +389,7 @@ function App() {
     </div>
     <div className='filts-row'>
     {selectedcat !="" && selectedcat !="search" && selectedcat !="search_" && <div className='filts-row__wrap'>
-    <div>
+    <div className='columns_list'><p>Наименование</p><p>Размер</p><p>Марка/ГОСТ</p></div><div>
     <select value={optionListSizeSelected} onChange={(e) => setoptionListSizeSelected(e.target.value)}>
     <option key={-1}>Все размеры</option>
     {optionListSize.rows.map((x) => {return(<option key={x.size}>{x.size}</option>)})}

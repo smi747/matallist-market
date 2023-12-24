@@ -842,7 +842,7 @@ html {
 }
 
 .section_2 {
-  height: 100vh;
+  min-height: 100vh;
   /*height: 1080px;
   @include mobile {
     height: 930px;
@@ -1773,7 +1773,7 @@ input[type="submit"] {
   gap: 15px;
   font-family: "Noto Sans", sans-serif;
   font-size: 16px;
-  margin-bottom: 15px;
+  margin: 25px 15px 0;
 }
 
 .pagination__elem {
@@ -1973,6 +1973,7 @@ input[type="submit"] {
   flex-direction: column;
 }
 
-.react-catalog {
-  height: calc(100% - 92px);
+.columns_list {
+  display: grid;
+  grid-template-columns: 100px 100px 100px;
 }
