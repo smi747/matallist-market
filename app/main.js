@@ -207,14 +207,14 @@ const Paginate = ({ postsPerPage, totalPosts, paginate, selectedPage }) => {
           {selectedPage - 5 >= 0 && <li
             key={-1}
             onClick={() => paginate(1)}
-            className={"pagination"}>...
+            className={"pagination__elem"}>...
           </li>
           }
             {pageNumbers.map((number) => (
               <li
                  key={number}
                  onClick={() => paginate(number)}
-                 className={number == selectedPage ? "pagination pagination_selected" : "pagination"}
+                 className={number == selectedPage ? "pagination__elem pagination__elem_selected" : "pagination__elem"}
               >
                  {number}
               </li>
@@ -222,7 +222,7 @@ const Paginate = ({ postsPerPage, totalPosts, paginate, selectedPage }) => {
             {Math.ceil(totalPosts / postsPerPage) - selectedPage - 3 > 0 && <li
               key={-2}
               onClick={() => paginate(Math.ceil(totalPosts / postsPerPage))}
-              className={"pagination"}>...
+              className={"pagination__elem"}>...
             </li>
             }
         </ul>
@@ -354,7 +354,6 @@ function App() {
   }
 
   return (
-    <div>
     <div className="app">
     <div className="navigation-row">
       <div className="navigation-row__cats">
@@ -408,10 +407,9 @@ function App() {
       {/*(selectedcat == "search" || selectedcat == "search_") ? prevSearchInput == "" ? "Задан пустой поисковой запрос" : "Поиск по запросу: "+prevSearchInput : selectedcat*/}
       {/*(selectedcat !="" || currentcat != "") && <div className='catlist' onClick={() => {selectedcat != "" ? (function() {setSelectedcat("");setCurrentPage(1);setoptionListSizeSelected("Все размеры");setoptionListMarkSelected("Все марки");setSelectedPosition({idposition: 0, name: "", size: "", mark: "", coef: "1", units: "", units_1: ""})})() : currentsubcat != "" ? setCurrentsubcat("") : setCurrentcat("");setSearchInput("");}}>Назад</div>*/}
       <div className='position-list'>
-        {selectedcat != "" && (state.rows.length > 0 ? state.rows.map((x) => {return(<div className="catalog-postition" onClick={(e) => showPosition(x)} key={x.idposition} style={{display: 'flex', gap: '20px'}}><div>{x.name}</div><div>{x.size}</div><div>{x.mark}</div></div>)}) : "По данному запросу ничего не найдено")}
+        {selectedcat != "" && (state.rows.length > 0 ? state.rows.map((x) => {return(<div className="catalog-postition" onClick={(e) => showPosition(x)} key={x.idposition} style={{display: 'flex', gap: '20px'}}><div>{x.name}</div><div>{x.size}</div><div>{x.mark}</div></div>)}) : ((selectedcat == "search" || selectedcat == "search_") ? "По данному запросу ничего не найдено" : ""))}
       </div>
-    </div>
-    <ul className='categories-list'>
+      <ul className='categories-list'>
       {catlist}
     </ul>
     {selectedcat != "" && <Paginate className="pagination"
@@ -421,7 +419,8 @@ function App() {
     selectedPage={currentPage}
     />}
         {selectedPosition.name != "" && <div style={{display: 'flex', gap: '20px', marginTop: '20px'}}><div>{selectedPosition.name}</div><div>{selectedPosition.mark}</div><div><input onChange={(e)=>handleCoefChange_1(e)} value={coef_1}></input>{selectedPosition.units}</div><div><input onChange={(e)=>handleCoefChange_2(e)} value={coef_2}></input>{selectedPosition.unitssecond}</div></div>}
-</div>
+    </div>
+    
   );
 }
 root.render(<App />)
