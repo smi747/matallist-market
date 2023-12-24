@@ -232,8 +232,14 @@ const Paginate = ({ postsPerPage, totalPosts, paginate, selectedPage }) => {
 
 const CatalogPosition = ({x, onClick, selectedPosition, handleCoefChange_1, handleCoefChange_2, coef_1, coef_2}) => {
   return(
-    <div onClick={onClick} className={x.idposition == selectedPosition.idposition ? "catalog-position__wrap catalog-position__wrap_active" : "catalog-position__wrap"}>{/*x.idposition != selectedPosition.idposition*/ true && <div className={"catalog-position"}><div>{x.name}</div><div>{x.size}</div><div>{x.mark}</div><div className='add-position-button'><div className='d24'></div></div></div>}
-    {x.idposition == selectedPosition.idposition && <div className="position__calc"><div className='position_quantity position_quantity_catalog'><p className='position__setcount'>УКАЖИТЕ КОЛИЧЕСТВО:&nbsp;</p><div className='input_wrap'><input className="position_quantity_i" onClick={e => e.stopPropagation()} onChange={(e)=>handleCoefChange_1(e)} value={coef_1}></input><div className="ed_izm">{selectedPosition.units}</div></div>=<div className='input_wrap'><input className="position_quantity_i" onClick={e => e.stopPropagation()} onChange={(e)=>handleCoefChange_2(e)} value={coef_2}></input><div className="ed_izm">{selectedPosition.unitssecond}</div></div></div><div className='position__add-button'>ДОБАВИТЬ В КОРЗИНУ</div></div>}</div>
+    <div onClick={onClick} className={x.idposition == selectedPosition.idposition ? "catalog-position__wrap catalog-position__wrap_active" : "catalog-position__wrap"}>
+      {/*x.idposition != selectedPosition.idposition*/ true && <div className={"catalog-position"}><div>{x.name}</div><div>{x.size}</div><div>{x.mark}</div><div className='addbutton-calc-wrap'>
+        {x.idposition == selectedPosition.idposition && <div className="position__calc">
+          <div className='position_quantity position_quantity_catalog'><p className='position__setcount'>УКАЖИТЕ КОЛИЧЕСТВО:&nbsp;</p>
+          <div className='input_wrap'><input className="position_quantity_i position_quantity_i_catalog" onClick={e => e.stopPropagation()} onChange={(e)=>handleCoefChange_1(e)} value={coef_1}></input><div className="ed_izm">{selectedPosition.units}</div></div>=
+          <div className='input_wrap'><input className="position_quantity_i position_quantity_i_catalog" onClick={e => e.stopPropagation()} onChange={(e)=>handleCoefChange_2(e)} value={coef_2}></input><div className="ed_izm">{selectedPosition.unitssecond}</div></div></div>
+          <div className='position__add-button'>ДОБАВИТЬ В КОРЗИНУ</div></div>}<div className='add-position-button'><div className='d24'></div></div></div></div>}
+    </div>
   );
 };
 

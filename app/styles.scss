@@ -1912,7 +1912,6 @@ input[type="submit"] {
 
 .catalog-position__wrap_active {
   transition: all 0.5s;
-  height: 88px;
 }
 
 .catalog-position__wrap_active:hover {
@@ -2004,9 +2003,8 @@ input[type="submit"] {
 }
 
 .position__calc {
-  display: grid;
-  grid-template-columns: 450px 200px auto;
-  margin-left: 100px;
+  display: flex;
+  gap: 15px;
   align-items: center;
   font-family: "Noto Sans", sans-serif;
   font-size: 16px;
@@ -2018,7 +2016,6 @@ input[type="submit"] {
 }
 
 .add-position-button {
-  margin-left: auto;
   width: 32px;
   border: 1px solid gray;
   border-radius: 5px;
@@ -2071,7 +2068,21 @@ input[type="submit"] {
   border-radius: 5px;
 }
 
+.position__add-button:hover {
+  cursor: pointer;
+}
+
 .position__setcount {
   font-size: 14px;
   color: gray;
+}
+
+.addbutton-calc-wrap {
+  margin-left: auto;
+  display: flex;
+  gap: 15px;
+}
+
+.position_quantity_i_catalog {
+  width: 100px;
 }
