@@ -403,12 +403,12 @@ function App() {
     <div className='filts-row'>
     {selectedcat !="" && selectedcat !="search" && selectedcat !="search_" && <div className='filts-row__wrap'>
     <div className='columns_list'><p>Наименование</p><p>Размер</p><p>Марка/ГОСТ</p></div><div>
-    <select value={optionListSizeSelected} onChange={(e) => setoptionListSizeSelected(e.target.value)}>
+    <select className="filt-select" value={optionListSizeSelected} onChange={(e) => setoptionListSizeSelected(e.target.value)}>
     <option key={-1}>Все размеры</option>
     {optionListSize.rows.map((x) => {return(<option key={x.size}>{x.size}</option>)})}
   </select>&#9662;</div>
   <div>
-  <select value={optionListMarkSelected} onChange={(e) => setoptionListMarkSelected(e.target.value)}>
+  <select className="filt-select" value={optionListMarkSelected} onChange={(e) => setoptionListMarkSelected(e.target.value)}>
     <option key={-1}>Все марки</option>
     {optionListMark.rows.map((x) => {return(<option key={x.mark}>{x.mark}</option>)})}
   </select>&#9662;</div>
