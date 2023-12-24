@@ -57,7 +57,7 @@ var swiper = new Swiper(".mySwiper", {
   pagination: {
     el: ".swiper-pagination",
   },
-  initialSlide: 0,
+  initialSlide: 2,
   navigation: {
     nextEl: '.swiper-button-next',
     prevEl: '.swiper-button-prev',
