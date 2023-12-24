@@ -230,12 +230,19 @@ const Paginate = ({ postsPerPage, totalPosts, paginate, selectedPage }) => {
   );
 };
 
+const CatalogPosition = ({x, onClick, selectedPosition, handleCoefChange_1, handleCoefChange_2, coef_1, coef_2}) => {
+  return(
+    <div onClick={onClick} className={x.idposition == selectedPosition.idposition ? "catalog-position__wrap catalog-position__wrap_active" : "catalog-position__wrap"}>{/*x.idposition != selectedPosition.idposition*/ true && <div className={"catalog-position"}><div>{x.name}</div><div>{x.size}</div><div>{x.mark}</div><div className='add-position-button'><div className='d24'></div></div></div>}
+    {x.idposition == selectedPosition.idposition && <div className="position__calc"><div className='position_quantity position_quantity_catalog'><p className='position__setcount'>УКАЖИТЕ КОЛИЧЕСТВО:&nbsp;</p><div className='input_wrap'><input className="position_quantity_i" onClick={e => e.stopPropagation()} onChange={(e)=>handleCoefChange_1(e)} value={coef_1}></input><div className="ed_izm">{selectedPosition.units}</div></div>=<div className='input_wrap'><input className="position_quantity_i" onClick={e => e.stopPropagation()} onChange={(e)=>handleCoefChange_2(e)} value={coef_2}></input><div className="ed_izm">{selectedPosition.unitssecond}</div></div></div><div className='position__add-button'>ДОБАВИТЬ В КОРЗИНУ</div></div>}</div>
+  );
+};
+
 
 function App() {
   
   const [state, setState] = useState({count: 0, rows: []});
   const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage] = useState(16);
+  const [postsPerPage] = useState(15);
   const [cattree, setCattree] = useState(JSON.stringify({}));
   const [currentcat, setCurrentcat] = useState("");
   const [currentsubcat, setCurrentsubcat] = useState("");
@@ -249,7 +256,7 @@ function App() {
   const [optionListSizeSelectedSend, setoptionListSizeSelectedSend] = useState("Все размеры");
   const [optionListMarkSelectedSend, setoptionListMarkSelectedSend] = useState("Все марки");
   const [filtBut, setFiltBut] = useState(false);
-  const [selectedPosition, setSelectedPosition] = useState({idposition: 0, name: "", size: "", mark: "", coef: "1", units: "", units_1: ""});
+  const [selectedPosition, setSelectedPosition] = useState({idposition: -1, name: "", size: "", mark: "", coef: "1", units: "", units_1: ""});
   
   const [coef_1, setCoef_1] = useState("");
   const [coef_2, setCoef_2] = useState("");
@@ -350,7 +357,7 @@ function App() {
     setoptionListMarkSelected("Все марки");
     setoptionListMarkSelectedSend("Все марки");
     setoptionListSizeSelectedSend("Все размеры");
-    setSelectedPosition({idposition: 0, name: "", size: "", mark: "", coef: "1", units: "", units_1: ""});
+    setSelectedPosition({idposition: -1, name: "", size: "", mark: "", coef: "1", units: "", units_1: ""});
   }
 
   return (
@@ -407,7 +414,7 @@ function App() {
       {/*(selectedcat == "search" || selectedcat == "search_") ? prevSearchInput == "" ? "Задан пустой поисковой запрос" : "Поиск по запросу: "+prevSearchInput : selectedcat*/}
       {/*(selectedcat !="" || currentcat != "") && <div className='catlist' onClick={() => {selectedcat != "" ? (function() {setSelectedcat("");setCurrentPage(1);setoptionListSizeSelected("Все размеры");setoptionListMarkSelected("Все марки");setSelectedPosition({idposition: 0, name: "", size: "", mark: "", coef: "1", units: "", units_1: ""})})() : currentsubcat != "" ? setCurrentsubcat("") : setCurrentcat("");setSearchInput("");}}>Назад</div>*/}
       <div className='position-list'>
-        {selectedcat != "" && (state.rows.length > 0 ? state.rows.map((x) => {return(<div className="catalog-postition" onClick={(e) => showPosition(x)} key={x.idposition} style={{display: 'flex', gap: '20px'}}><div>{x.name}</div><div>{x.size}</div><div>{x.mark}</div></div>)}) : ((selectedcat == "search" || selectedcat == "search_") ? "По данному запросу ничего не найдено" : ""))}
+        {selectedcat != "" && (state.rows.length > 0 ? state.rows.map((x) => {return(<CatalogPosition key={x.idposition} onClick={(e) => {selectedPosition.idposition == x.idposition ? setSelectedPosition({idposition: -1, name: "", size: "", mark: "", coef: "1", units: "", units_1: ""}):showPosition(x);}} x={x} showPosition={showPosition} selectedPosition={selectedPosition} handleCoefChange_1={handleCoefChange_1} handleCoefChange_2={handleCoefChange_2} coef_1={coef_1} coef_2={coef_2}/>)}) : ((selectedcat == "search" || selectedcat == "search_") ? "По данному запросу ничего не найдено" : ""))}
       </div>
       <ul className='categories-list'>
       {catlist}
@@ -418,7 +425,7 @@ function App() {
     paginate={paginate}
     selectedPage={currentPage}
     />}
-        {selectedPosition.name != "" && <div style={{display: 'flex', gap: '20px', marginTop: '20px'}}><div>{selectedPosition.name}</div><div>{selectedPosition.mark}</div><div><input onChange={(e)=>handleCoefChange_1(e)} value={coef_1}></input>{selectedPosition.units}</div><div><input onChange={(e)=>handleCoefChange_2(e)} value={coef_2}></input>{selectedPosition.unitssecond}</div></div>}
+        {/*selectedPosition.name != "" && <div style={{display: 'flex', gap: '20px', marginTop: '20px'}}><div>{selectedPosition.name}</div><div>{selectedPosition.mark}</div><div><input onChange={(e)=>handleCoefChange_1(e)} value={coef_1}></input>{selectedPosition.units}</div><div><input onChange={(e)=>handleCoefChange_2(e)} value={coef_2}></input>{selectedPosition.unitssecond}</div></div>*/}
     </div>
     
   );

@@ -1773,7 +1773,7 @@ input[type="submit"] {
   gap: 15px;
   font-family: "Noto Sans", sans-serif;
   font-size: 16px;
-  margin: 25px 15px 0;
+  margin: 25px 0 15px;
 }
 
 .pagination__elem {
@@ -1899,22 +1899,45 @@ input[type="submit"] {
   flex-direction: column;
 }
 
-.catalog-postition {
-  width: 100%;
-  text-align: center;
-  height: 42px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.catalog-position__wrap {
+  height: 44px;
+  transition: all 0.5s;
+  overflow: hidden;
   border-bottom: solid 1px lightgray;
+}
+
+.catalog-position__wrap:hover {
+  background-color: #d3d3d3;
+}
+
+.catalog-position__wrap_active {
+  transition: all 0.5s;
+  height: 88px;
+}
+
+.catalog-position__wrap_active:hover {
+  background-color: white;
+}
+
+.catalog-position {
+  width: 100%;
+  height: 44px;
+  align-items: center;
   font-family: "Noto Sans", sans-serif;
   font-size: 16px;
   transition: all 0.5s;
+
+  display: grid;
+  padding-left: 100px;
+  grid-template-columns: 450px 200px 200px auto;
 }
 
-.catalog-postition:hover {
+.catalog-position:hover {
   cursor: pointer;
-  background-color: #d3d3d3;
+}
+
+.catalog-position__wrap_active:hover .catalog-position {
+  cursor: unset;
 }
 
 .filts-row__wrap {
@@ -1975,5 +1998,80 @@ input[type="submit"] {
 
 .columns_list {
   display: grid;
-  grid-template-columns: 100px 100px 100px;
+  grid-template-columns: 450px 200px 200px;
+  position: absolute;
+  left: 100px;
+}
+
+.position__calc {
+  display: grid;
+  grid-template-columns: 450px 200px auto;
+  margin-left: 100px;
+  align-items: center;
+  font-family: "Noto Sans", sans-serif;
+  font-size: 16px;
+}
+
+.position_quantity_catalog {
+  justify-content: left;
+  gap: 5px;
+}
+
+.add-position-button {
+  margin-left: auto;
+  width: 32px;
+  border: 1px solid gray;
+  border-radius: 5px;
+  padding: 5px;
+  margin-right: 25px;
+}
+.add-position-button {
+  cursor: pointer;
+}
+.d24 {
+  background: gray;
+  height: 20px;
+  width: 4px;
+  position: relative;
+  left: 8px;
+}
+.d24:after {
+  content: "";
+  height: 4px;
+  width: 20px;
+  background: gray;
+  position: absolute;
+  left: -8px;
+  top: 8px;
+}
+
+.catalog-position__wrap:hover .d24 {
+  background: black;
+}
+
+.catalog-position__wrap:hover .d24:after {
+  background: black;
+}
+
+.catalog-position__wrap_active .d24 {
+  background-color: unset;
+}
+
+.catalog-position__wrap_active:hover .d24 {
+  background-color: unset;
+}
+
+.position__add-button {
+  grid-column-start: 2;
+  grid-column-end: 4;
+  color: white;
+  background-color: black;
+  padding: 5px 10px;
+  width: fit-content;
+  border-radius: 5px;
+}
+
+.position__setcount {
+  font-size: 14px;
+  color: gray;
 }
