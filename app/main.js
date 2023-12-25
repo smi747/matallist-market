@@ -233,7 +233,7 @@ const Paginate = ({ postsPerPage, totalPosts, paginate, selectedPage }) => {
 const CatalogPosition = ({x, onClick, selectedPosition, handleCoefChange_1, handleCoefChange_2, coef_1, coef_2}) => {
   return(
     <div onClick={onClick} className={x.idposition == selectedPosition.idposition ? "catalog-position__wrap catalog-position__wrap_active" : "catalog-position__wrap"}>
-      {/*x.idposition != selectedPosition.idposition*/ true && <div className={"catalog-position"}><div>{x.name}</div><div>{x.size}</div><div>{x.mark}</div><div className='addbutton-calc-wrap'>
+      {/*x.idposition != selectedPosition.idposition*/ true && <div className={"catalog-position"}><div>{x.name}</div><div className='position__size'>{x.size}</div><div className='position__size'>{x.mark}</div><div className='addbutton-calc-wrap'>
         {x.idposition == selectedPosition.idposition && <div className="position__calc">
           <div className='position_quantity position_quantity_catalog'><p className='position__setcount'>УКАЖИТЕ КОЛИЧЕСТВО:&nbsp;</p>
           <div className='input_wrap'><input className="position_quantity_i position_quantity_i_catalog" onClick={e => e.stopPropagation()} onChange={(e)=>handleCoefChange_1(e)} value={coef_1}></input><div className="ed_izm">{selectedPosition.units}</div></div>=
@@ -374,7 +374,7 @@ function App() {
           <div className='house-ico'></div>
           <p className="navigation-row_elem" style={{fontWeight: 700}}>Каталог</p>
         </div>
-         {currentcat !="" && <div className='cat-triangle'></div>}<p className="navigation-row_elem" onClick={() => {setSelectedcat("");setCurrentsubcat("");unselectCat()}}>{currentcat}</p> {currentsubcat !="" && <div className='cat-triangle'></div>}<p className="navigation-row_elem" onClick={() => {setSelectedcat("");unselectCat();setFiltBut(!filtBut)}}>{currentsubcat}</p> {selectedcat !="search" && selectedcat !="search_" && selectedcat !="" && (selectedcat != currentsubcat || (selectedcat == currentsubcat && Object.keys(cattree[currentcat][currentsubcat]).length > 1)) && <div className='cat-triangle'></div>}{selectedcat !="search" && selectedcat !="search_" && selectedcat !="" && (selectedcat != currentsubcat || (selectedcat == currentsubcat && Object.keys(cattree[currentcat][currentsubcat]).length > 1)) && <p onClick={() => {unselectCat();setFiltBut(!filtBut)}} className="navigation-row_elem">{selectedcat}</p>}
+         <div className='subcats-list'>{currentcat !="" && <div className='cat-triangle'></div>}<p className="navigation-row_elem" onClick={() => {setSelectedcat("");setCurrentsubcat("");unselectCat()}}>{currentcat}</p> {currentsubcat !="" && <div className='cat-triangle'></div>}<p className="navigation-row_elem" onClick={() => {setSelectedcat("");unselectCat();setFiltBut(!filtBut)}}>{currentsubcat}</p> {selectedcat !="search" && selectedcat !="search_" && selectedcat !="" && (selectedcat != currentsubcat || (selectedcat == currentsubcat && Object.keys(cattree[currentcat][currentsubcat]).length > 1)) && <div className='cat-triangle'></div>}{selectedcat !="search" && selectedcat !="search_" && selectedcat !="" && (selectedcat != currentsubcat || (selectedcat == currentsubcat && Object.keys(cattree[currentcat][currentsubcat]).length > 1)) && <p onClick={() => {unselectCat();setFiltBut(!filtBut)}} className="navigation-row_elem">{selectedcat}</p>}</div>
       </div>
       <input
         className='navigation-row__searh'
@@ -418,9 +418,9 @@ function App() {
       </div>}
     </div>
 
-    <div className='filts-row'>
+    <div className='filts-row filts-row-first'>
     {selectedcat !="" && selectedcat !="search" && selectedcat !="search_" && <div className='filts-row__wrap'>
-    <div className='columns_list'><p>Наименование</p><p>Размер</p><p>Марка/ГОСТ</p></div><div className='filts__wrap'><div>
+    <div className='columns_list'><p>Наименование</p><p className='position__size'>Размер</p><p className='position__size'>Марка/ГОСТ</p></div><div className='filts__wrap'><div>
     <select className="filt-select" value={optionListSizeSelected} onChange={(e) => setoptionListSizeSelected(e.target.value)}>
     <option key={-1}>Все размеры</option>
     {optionListSize.rows.map((x) => {return(<option key={x.size}>{x.size}</option>)})}
