@@ -1818,7 +1818,7 @@ input[type="submit"] {
   }
   @include mobile {
     font-size: 15px;
-    padding: 18px 10px;
+    padding: 10px 10px;
   }
 }
 
@@ -1855,7 +1855,6 @@ input[type="submit"] {
 .house-ico {
   height: 18px;
   width: 18px;
-  margin-top: 3px;
   margin-right: 10px;
   background-image: url("images/icons/home.png");
   background-size: cover;
@@ -1898,6 +1897,7 @@ input[type="submit"] {
 .catalog__home {
   display: flex;
   align-items: center;
+  padding-right: 4px;
 }
 
 .catalog__home:hover {
@@ -1924,6 +1924,10 @@ input[type="submit"] {
   font-family: "Noto Sans", sans-serif;
   font-size: 20px;
   transition: all 0.5s;
+  @include mobile {
+    height: 50px;
+    font-size: 18px;
+  }
 }
 
 .category:hover {
@@ -1941,6 +1945,10 @@ input[type="submit"] {
   transition: all 0.5s;
   overflow: hidden;
   border-bottom: solid 1px lightgray;
+
+  @include mobile {
+    height: 44px;
+  }
 }
 
 .catalog-position__wrap:hover {
@@ -1989,6 +1997,8 @@ input[type="submit"] {
   @include mobile {
     grid-template-columns: 250px auto min-content;
     padding-left: 10px;
+
+    height: 60px;
   }
 }
 
@@ -2284,7 +2294,7 @@ input[type="submit"] {
   @media screen and (max-width: 1000px) {
     overflow-x: scroll;
     overflow-y: hidden;
-    scrollbar-width: 0;
+    scrollbar-width: none;
   }
 }
 .subcats-list::-webkit-scrollbar {
@@ -2293,5 +2303,11 @@ input[type="submit"] {
 .filts-row-first {
   @media screen and (max-width: 680px) {
     display: none;
+  }
+}
+
+.position__name {
+  @include mobile {
+    margin: 0 auto;
   }
 }
