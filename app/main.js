@@ -270,6 +270,7 @@ function App() {
 
   const paginate = (pageNumber) => {
     setCurrentPage(pageNumber);
+    catalog.scrollIntoView();
  };
 
   const callBackendAPI = async () => {
