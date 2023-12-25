@@ -2117,3 +2117,38 @@ input[type="submit"] {
 .filt-select {
   width: 87px;
 }
+
+.filts-row-second {
+  background-color: white;
+  display: none;
+
+  @media screen and (max-width: 1400px) {
+    display: flex;
+  }
+}
+
+.filts-row-second .filt-select {
+  color: black;
+}
+
+.filts-row-second .filt-button {
+  color: black;
+}
+
+.filts-row-second .filts-row__wrap {
+  color: black;
+}
+
+.filts__wrap {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: 25px;
+  color: white;
+  gap: 10px;
+  @media screen and (max-width: 1400px) {
+    display: none;
+  }
+}

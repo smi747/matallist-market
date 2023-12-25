@@ -400,9 +400,10 @@ function App() {
           }
         }}/>
     </div>
-    <div className='filts-row'>
+
+    <div className='filts-row filts-row-second'>
     {selectedcat !="" && selectedcat !="search" && selectedcat !="search_" && <div className='filts-row__wrap'>
-    <div className='columns_list'><p>Наименование</p><p>Размер</p><p>Марка/ГОСТ</p></div><div>
+    <div>
     <select className="filt-select" value={optionListSizeSelected} onChange={(e) => setoptionListSizeSelected(e.target.value)}>
     <option key={-1}>Все размеры</option>
     {optionListSize.rows.map((x) => {return(<option key={x.size}>{x.size}</option>)})}
@@ -415,6 +416,23 @@ function App() {
   <button className="filt-button" onClick={(e) => {setoptionListMarkSelectedSend(optionListMarkSelected);setoptionListSizeSelectedSend(optionListSizeSelected);setCurrentPage(1);setFiltBut(!filtBut)}}>Применить✓</button>
   <button className="filt-button" onClick={(e) => {setoptionListSizeSelected("Все размеры");setoptionListMarkSelected("Все марки");setoptionListMarkSelectedSend("Все марки");setoptionListSizeSelectedSend("Все размеры");setCurrentPage(1);setFiltBut(!filtBut)}}>Сброс⮾</button>
       </div>}
+    </div>
+
+    <div className='filts-row'>
+    {selectedcat !="" && selectedcat !="search" && selectedcat !="search_" && <div className='filts-row__wrap'>
+    <div className='columns_list'><p>Наименование</p><p>Размер</p><p>Марка/ГОСТ</p></div><div className='filts__wrap'><div>
+    <select className="filt-select" value={optionListSizeSelected} onChange={(e) => setoptionListSizeSelected(e.target.value)}>
+    <option key={-1}>Все размеры</option>
+    {optionListSize.rows.map((x) => {return(<option key={x.size}>{x.size}</option>)})}
+  </select>&#9662;</div>
+  <div>
+  <select className="filt-select" value={optionListMarkSelected} onChange={(e) => setoptionListMarkSelected(e.target.value)}>
+    <option key={-1}>Все марки</option>
+    {optionListMark.rows.map((x) => {return(<option key={x.mark}>{x.mark}</option>)})}
+  </select>&#9662;</div>
+  <button className="filt-button" onClick={(e) => {setoptionListMarkSelectedSend(optionListMarkSelected);setoptionListSizeSelectedSend(optionListSizeSelected);setCurrentPage(1);setFiltBut(!filtBut)}}>Применить✓</button>
+  <button className="filt-button" onClick={(e) => {setoptionListSizeSelected("Все размеры");setoptionListMarkSelected("Все марки");setoptionListMarkSelectedSend("Все марки");setoptionListSizeSelectedSend("Все размеры");setCurrentPage(1);setFiltBut(!filtBut)}}>Сброс⮾</button>
+      </div></div>}
     </div>
   
       {/*(selectedcat == "search" || selectedcat == "search_") ? prevSearchInput == "" ? "Задан пустой поисковой запрос" : "Поиск по запросу: "+prevSearchInput : selectedcat*/}
