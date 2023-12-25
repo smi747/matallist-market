@@ -1928,7 +1928,7 @@ input[type="submit"] {
 
   display: grid;
   padding-left: 100px;
-  grid-template-columns: 450px 200px 200px auto;
+  grid-template-columns: 450px 200px 160px auto auto;
 }
 
 .catalog-position:hover {
@@ -1997,7 +1997,7 @@ input[type="submit"] {
 
 .columns_list {
   display: grid;
-  grid-template-columns: 450px 200px 200px;
+  grid-template-columns: 450px 200px 160px;
   position: absolute;
   left: 100px;
 }
@@ -2020,6 +2020,7 @@ input[type="submit"] {
   border: 1px solid gray;
   border-radius: 5px;
   padding: 5px;
+  margin-left: auto;
   margin-right: 25px;
 }
 .add-position-button {

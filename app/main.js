@@ -238,7 +238,7 @@ const CatalogPosition = ({x, onClick, selectedPosition, handleCoefChange_1, hand
           <div className='position_quantity position_quantity_catalog'><p className='position__setcount'>УКАЖИТЕ КОЛИЧЕСТВО:&nbsp;</p>
           <div className='input_wrap'><input className="position_quantity_i position_quantity_i_catalog" onClick={e => e.stopPropagation()} onChange={(e)=>handleCoefChange_1(e)} value={coef_1}></input><div className="ed_izm">{selectedPosition.units}</div></div>=
           <div className='input_wrap'><input className="position_quantity_i position_quantity_i_catalog" onClick={e => e.stopPropagation()} onChange={(e)=>handleCoefChange_2(e)} value={coef_2}></input><div className="ed_izm">{selectedPosition.unitssecond}</div></div></div>
-          <div className='position__add-button'>ДОБАВИТЬ В КОРЗИНУ</div></div>}<div className='add-position-button'><div className='d24'></div></div></div></div>}
+          <div className='position__add-button'>ДОБАВИТЬ В КОРЗИНУ</div></div>}</div><div className='add-position-button'><div className='d24'></div></div></div>}
     </div>
   );
 };
