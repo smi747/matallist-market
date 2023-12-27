@@ -2351,3 +2351,12 @@ body {
   cursor: pointer;
   font-weight: 700;
 }
+
+.mobile-mark {
+  color: gray;
+  display: none;
+
+  @media screen and (max-width: 680px) {
+    display: inline;
+  }
+}

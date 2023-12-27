@@ -233,7 +233,7 @@ const Paginate = ({ postsPerPage, totalPosts, paginate, selectedPage }) => {
 const CatalogPosition = ({x, onClick, selectedPosition, handleCoefChange_1, handleCoefChange_2, coef_1, coef_2}) => {
   return(
     <div onClick={onClick} className={x.idposition == selectedPosition.idposition ? "catalog-position__wrap catalog-position__wrap_active" : "catalog-position__wrap"}>
-      {/*x.idposition != selectedPosition.idposition*/ true && <div className={"catalog-position"}><div className='position__name'>{x.name}</div><div className='position__size'>{x.size}</div><div className='position__size'>{x.mark}</div><div className='addbutton-calc-wrap'>
+      {/*x.idposition != selectedPosition.idposition*/ true && <div className={"catalog-position"}><div className='position__name'>{x.name}&nbsp;<span className='mobile-mark'>{x.mark != "nan" && x.mark}</span></div><div className='position__size'>{x.size}</div><div className='position__size'>{x.mark != "nan" && x.mark}</div><div className='addbutton-calc-wrap'>
         {x.idposition == selectedPosition.idposition && <div className="position__calc">
           <div className='position_quantity position_quantity_catalog'><p className='position__setcount'>УКАЖИТЕ КОЛИЧЕСТВО:&nbsp;</p>
           <div className='input_wrap'><input className="position_quantity_i position_quantity_i_catalog" onClick={e => e.stopPropagation()} onChange={(e)=>handleCoefChange_1(e)} value={coef_1}></input><div className="ed_izm">{selectedPosition.units}</div></div>=
@@ -407,7 +407,7 @@ function App() {
     <div>
     <select className="filt-select" value={optionListSizeSelected} onChange={(e) => setoptionListSizeSelected(e.target.value)}>
     <option key={-1}>Все размеры</option>
-    {optionListSize.rows.map((x) => {return(<option key={x.size}>{x.size}</option>)})}
+    {optionListSize.rows.sort((a, b) => a.size.localeCompare(b.size, undefined, { numeric: true })).map((x) => {return(<option key={x.size}>{x.size}</option>)})}
   </select>&#9662;</div>
   <div>
   <select className="filt-select" value={optionListMarkSelected} onChange={(e) => setoptionListMarkSelected(e.target.value)}>
@@ -432,7 +432,7 @@ function App() {
     {optionListMark.rows.map((x) => {return(<option key={x.mark}>{x.mark}</option>)})}
   </select>&#9662;</div>
   <button className="filt-button" onClick={(e) => {setoptionListMarkSelectedSend(optionListMarkSelected);setoptionListSizeSelectedSend(optionListSizeSelected);setCurrentPage(1);setFiltBut(!filtBut)}}>Применить✓</button>
-  <button className="filt-button" onClick={(e) => {setoptionListSizeSelected("Все размеры");setoptionListMarkSelected("Все марки");setoptionListMarkSelectedSend("Все марки");setoptionListSizeSelectedSend("Все размеры");setCurrentPage(1);setFiltBut(!filtBut)}}>Сброс⮾</button>
+  <button className="filt-button" onClick={(e) => {setoptionListSizeSelected("Все размеры");setoptionListMarkSelected("Все марки");setoptionListMarkSelectedSend("Все марки");setoptionListSizeSelectedSend("Все размеры");setCurrentPage(1);setFiltBut(!filtBut)}}>Сброс☓</button>
       </div></div>}
     </div>
   
