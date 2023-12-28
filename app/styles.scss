@@ -2008,12 +2008,12 @@ input[type="submit"] {
   grid-template-columns: 450px 200px auto max-content min-content;
 
   @media screen and (max-width: 1600px) {
-    grid-template-columns: 450px minmax(auto, 200px) minmax(auto, min-content) auto min-content;
+    grid-template-columns: 450px minmax(auto, 200px) minmax(min-content, auto) auto min-content;
     grid-template-rows: 44px 44px;
     height: 100%;
   }
   @media screen and (max-width: 970px) {
-    grid-template-columns: 350px minmax(auto, 150px) minmax(auto, min-content) auto min-content;
+    grid-template-columns: 350px minmax(auto, 150px) minmax(min-content, auto) auto min-content;
     padding-left: 50px;
   }
 
