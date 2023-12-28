@@ -2069,7 +2069,7 @@ input[type="submit"] {
   border: none;
   appearance: none;
   -webkit-appearance: none;
-  text-align: right;
+  text-align: right !important;
 }
 
 .filts-row select:hover {

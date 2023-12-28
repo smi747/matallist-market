@@ -403,7 +403,7 @@ function App() {
               setSelectedcat("");setCurrentsubcat("");setCurrentcat("");unselectCat();setSearchInput("");
             }
           //}
-        }}/>{searchInput != "" && <div onClick={() => {setSelectedcat("");setCurrentsubcat("");setCurrentcat("");unselectCat();setSearchInput("")}} className='search-clear'>☓</div>}</div>
+        }}/>{searchInput != "" && <div onClick={() => {setSelectedcat("");setCurrentsubcat("");setCurrentcat("");unselectCat();setSearchInput("")}} className='search-clear'>&#9747;</div>}</div>
     </div>
 
     <div className='filts-row filts-row-second'>
@@ -436,7 +436,7 @@ function App() {
     {optionListMark.rows.map((x) => {return(<option key={x.mark}>{x.mark}</option>)})}
   </select>&#9662;</div>
   <button className="filt-button" onClick={(e) => {setoptionListMarkSelectedSend(optionListMarkSelected);setoptionListSizeSelectedSend(optionListSizeSelected);setCurrentPage(1);setFiltBut(!filtBut)}}>Применить✓</button>
-  <button className="filt-button" onClick={(e) => {setoptionListSizeSelected("Все размеры");setoptionListMarkSelected("Все марки");setoptionListMarkSelectedSend("Все марки");setoptionListSizeSelectedSend("Все размеры");setCurrentPage(1);setFiltBut(!filtBut)}}>Сброс☓</button>
+  <button className="filt-button" onClick={(e) => {setoptionListSizeSelected("Все размеры");setoptionListMarkSelected("Все марки");setoptionListMarkSelectedSend("Все марки");setoptionListSizeSelectedSend("Все размеры");setCurrentPage(1);setFiltBut(!filtBut)}}>Сброс&#9747;</button>
       </div>}</div>}
     </div>
   
