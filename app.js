@@ -22,8 +22,8 @@ async function get_db(ofs, lim, selcat, searchinp, filt_sz, filt_mk) {
     let res = [{count: 0, rows: []}, {count: 0, rows: []}, {count: 0, rows: []}];
     if (selcat == "search" || selcat == "search_") {
         res = [await Positions.findAndCountAll({where: {
-            [Op.or]: [
-              { 'name': { [Op.like]: '%' + searchinp + '%' } }
+            [Op.and]: [
+                searchinp.split(" ").map(x => {return { 'name': { [Op.like]: '%' + x + '%' } }})
             ]
           },
             offset: ofs, limit: lim}), {count: 0, rows: []}, {count: 0, rows: []}]

@@ -283,7 +283,7 @@ function App() {
       filt_mark: optionListMarkSelectedSend,
   }));
     const body = await response.json();
-    setSearchInput("");
+    //setSearchInput("");
 
     if (response.status !== 200) {
       throw Error(body.message)
@@ -371,7 +371,7 @@ function App() {
     <div className="app">
     <div className="navigation-row">
       <div className="navigation-row__cats">
-        <div className="catalog__home" onClick={() => {setSelectedcat("");setCurrentsubcat("");setCurrentcat("");unselectCat()}}>
+        <div className="catalog__home" onClick={() => {setSelectedcat("");setCurrentsubcat("");setCurrentcat("");unselectCat();setSearchInput("");}}>
           <div className='house-ico'></div>
           <p className="navigation-row_elem" style={{fontWeight: 700}}>Каталог</p>
         </div>
@@ -384,7 +384,7 @@ function App() {
         onChange={handleChange}
         value={searchInput}
         onKeyUp={event => {
-          if (event.key === 'Enter') {
+          //if (event.key === 'Enter') {
             
             if (searchInput != "") {
               setCurrentsubcat("");
@@ -398,7 +398,10 @@ function App() {
               else {
                 setSelectedcat('search_');
             }}
-          }
+            else {
+              setSelectedcat("");setCurrentsubcat("");setCurrentcat("");unselectCat();setSearchInput("");
+            }
+          //}
         }}/>
     </div>
 
@@ -420,8 +423,8 @@ function App() {
     </div>
 
     <div className='filts-row filts-row-first'>
-    {selectedcat !="" && selectedcat !="search" && selectedcat !="search_" && <div className='filts-row__wrap'>
-    <div className='columns_list'><p>Наименование</p><p className='position__size'>Размер</p><p className='position__size'>Марка/ГОСТ</p></div><div className='filts__wrap'><div>
+    {selectedcat !="" && <div className='filts-row__wrap'>
+    <div className='columns_list'><p>Наименование</p><p className='position__size'>Размер</p><p className='position__size'>Марка/ГОСТ</p></div>{selectedcat !="search" && selectedcat !="search_" && <div className='filts__wrap'><div>
     <select className="filt-select" value={optionListSizeSelected} onChange={(e) => setoptionListSizeSelected(e.target.value)}>
     <option key={-1}>Все размеры</option>
     {optionListSize.rows.map((x) => {return(<option key={x.size}>{x.size}</option>)})}
@@ -433,13 +436,13 @@ function App() {
   </select>&#9662;</div>
   <button className="filt-button" onClick={(e) => {setoptionListMarkSelectedSend(optionListMarkSelected);setoptionListSizeSelectedSend(optionListSizeSelected);setCurrentPage(1);setFiltBut(!filtBut)}}>Применить✓</button>
   <button className="filt-button" onClick={(e) => {setoptionListSizeSelected("Все размеры");setoptionListMarkSelected("Все марки");setoptionListMarkSelectedSend("Все марки");setoptionListSizeSelectedSend("Все размеры");setCurrentPage(1);setFiltBut(!filtBut)}}>Сброс☓</button>
-      </div></div>}
+      </div>}</div>}
     </div>
   
       {/*(selectedcat == "search" || selectedcat == "search_") ? prevSearchInput == "" ? "Задан пустой поисковой запрос" : "Поиск по запросу: "+prevSearchInput : selectedcat*/}
       {/*(selectedcat !="" || currentcat != "") && <div className='catlist' onClick={() => {selectedcat != "" ? (function() {setSelectedcat("");setCurrentPage(1);setoptionListSizeSelected("Все размеры");setoptionListMarkSelected("Все марки");setSelectedPosition({idposition: 0, name: "", size: "", mark: "", coef: "1", units: "", units_1: ""})})() : currentsubcat != "" ? setCurrentsubcat("") : setCurrentcat("");setSearchInput("");}}>Назад</div>*/}
       <div className='position-list'>
-        {selectedcat != "" && (state.rows.length > 0 ? state.rows.map((x) => {return(<CatalogPosition key={x.idposition} onClick={(e) => {selectedPosition.idposition == x.idposition ? setSelectedPosition({idposition: -1, name: "", size: "", mark: "", coef: "1", units: "", units_1: ""}):showPosition(x);}} x={x} showPosition={showPosition} selectedPosition={selectedPosition} handleCoefChange_1={handleCoefChange_1} handleCoefChange_2={handleCoefChange_2} coef_1={coef_1} coef_2={coef_2}/>)}) : ((selectedcat == "search" || selectedcat == "search_") ? <div className='noresults'>По данному запросу ничего не найдено.<br/>Вернитесь в <div onClick={() => {setSelectedcat("");setCurrentsubcat("");setCurrentcat("");unselectCat()}} className='noresults__catalog'>Каталог</div></div> : ""))}
+        {selectedcat != "" && (state.rows.length > 0 ? state.rows.map((x) => {return(<CatalogPosition key={x.idposition} onClick={(e) => {selectedPosition.idposition == x.idposition ? setSelectedPosition({idposition: -1, name: "", size: "", mark: "", coef: "1", units: "", units_1: ""}):showPosition(x);}} x={x} showPosition={showPosition} selectedPosition={selectedPosition} handleCoefChange_1={handleCoefChange_1} handleCoefChange_2={handleCoefChange_2} coef_1={coef_1} coef_2={coef_2}/>)}) : ((selectedcat == "search" || selectedcat == "search_") ? <div className='noresults'>По данному запросу ничего не найдено.<br/>Измените запрос или вернитесь в <div onClick={() => {setSelectedcat("");setCurrentsubcat("");setCurrentcat("");unselectCat();setSearchInput("")}} className='noresults__catalog'>Каталог</div></div> : ""))}
       </div>
       <ul className='categories-list'>
       {catlist}
