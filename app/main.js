@@ -377,6 +377,7 @@ function App() {
         </div>
          <div className='subcats-list'>{currentcat !="" && <div className='cat-triangle'></div>}<p className="navigation-row_elem" onClick={() => {setSelectedcat("");setCurrentsubcat("");unselectCat()}}>{currentcat}</p> {currentsubcat !="" && <div className='cat-triangle'></div>}<p className="navigation-row_elem" onClick={() => {setSelectedcat("");unselectCat();setFiltBut(!filtBut)}}>{currentsubcat}</p> {selectedcat !="search" && selectedcat !="search_" && selectedcat !="" && (selectedcat != currentsubcat || (selectedcat == currentsubcat && Object.keys(cattree[currentcat][currentsubcat]).length > 1)) && <div className='cat-triangle'></div>}{selectedcat !="search" && selectedcat !="search_" && selectedcat !="" && (selectedcat != currentsubcat || (selectedcat == currentsubcat && Object.keys(cattree[currentcat][currentsubcat]).length > 1)) && <p onClick={() => {unselectCat();setFiltBut(!filtBut)}} className="navigation-row_elem">{selectedcat}</p>}</div>
       </div>
+      <div className='search-wrapper'>
       <input
         className='navigation-row__searh'
         type="text"
@@ -402,7 +403,7 @@ function App() {
               setSelectedcat("");setCurrentsubcat("");setCurrentcat("");unselectCat();setSearchInput("");
             }
           //}
-        }}/>
+        }}/>{searchInput != "" && <div onClick={() => {setSelectedcat("");setCurrentsubcat("");setCurrentcat("");unselectCat();setSearchInput("")}} className='search-clear'>☓</div>}</div>
     </div>
 
     <div className='filts-row filts-row-second'>
