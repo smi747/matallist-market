@@ -1773,11 +1773,11 @@ input[type="submit"] {
   gap: 15px;
   font-family: "Noto Sans", sans-serif;
   font-size: 16px;
-  margin: 25px 0 15px;
+  margin: 25px 0 25px;
 
   @include mobile {
     gap: 3px;
-    font-size: 14px;
+    font-size: 15px;
   }
 }
 
@@ -1787,7 +1787,7 @@ input[type="submit"] {
   border-radius: 8px;
 
   @include mobile {
-    padding: 2px 5px;
+    padding: 2px 7px;
   }
 }
 
@@ -2005,14 +2005,15 @@ input[type="submit"] {
 
   display: grid;
   padding-left: 100px;
-  grid-template-columns: 450px 200px max-content auto min-content;
+  grid-template-columns: 450px 200px auto max-content min-content;
 
   @media screen and (max-width: 1600px) {
+    grid-template-columns: 450px minmax(auto, 200px) minmax(auto, min-content) auto min-content;
     grid-template-rows: 44px 44px;
     height: 100%;
   }
   @media screen and (max-width: 970px) {
-    grid-template-columns: 350px 150px min-content auto min-content;
+    grid-template-columns: 350px minmax(auto, 150px) minmax(auto, min-content) auto min-content;
     padding-left: 50px;
   }
 
@@ -2031,6 +2032,7 @@ input[type="submit"] {
 .position__size {
   @media screen and (max-width: 680px) {
     display: none;
+    font-size: 14px;
   }
 }
 
@@ -2170,7 +2172,7 @@ input[type="submit"] {
   @media screen and (max-width: 1600px) {
     grid-column-start: 4;
     grid-column-end: 6;
-    margin-left: auto;
+    justify-self: end;
   }
   @include mobile {
     grid-column-start: unset;
