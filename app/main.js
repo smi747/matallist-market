@@ -299,29 +299,31 @@ function App() {
   }, [currentPage, selectedcat, filtBut])
   
 
-  let catlist = []
-  for (let obj in cattree) {
-    catlist.push(<li className='category' key={obj} onClick={() => setCurrentcat(obj)}>{obj.toUpperCase()}</li>);
-  }
-  if (currentcat != "") {
-    catlist = [];
-    for (let obj in cattree[currentcat]) {
-      catlist.push(<li className='category' key={obj} onClick={() => setCurrentsubcat(obj)}>{obj.toUpperCase()}</li>);
+  let catlist = [];
+  if (typeof cattree[0] === "undefined") {
+    for (let obj in cattree) {
+      catlist.push(<li className='category' key={obj} onClick={() => setCurrentcat(obj)}>{obj.toUpperCase()}</li>);
     }
-  }
-  if (selectedcat != "") {
-    catlist = [];
-  }
-  else
-    if (currentsubcat != "") {
+    if (currentcat != "") {
       catlist = [];
-      if (Object.keys(cattree[currentcat][currentsubcat]).length == 1 && Object.keys(cattree[currentcat][currentsubcat])[0] == currentsubcat)
-        setSelectedcat(currentsubcat);
-      else
-        for (let obj in cattree[currentcat][currentsubcat]) {
-          catlist.push(<li className='category' key={obj} onClick={() => setSelectedcat(obj)}>{obj.toUpperCase()}</li>);
+      for (let obj in cattree[currentcat]) {
+        catlist.push(<li className='category' key={obj} onClick={() => setCurrentsubcat(obj)}>{obj.toUpperCase()}</li>);
       }
-  }
+    }
+    if (selectedcat != "") {
+      catlist = [];
+    }
+    else
+      if (currentsubcat != "") {
+        catlist = [];
+        if (Object.keys(cattree[currentcat][currentsubcat]).length == 1 && Object.keys(cattree[currentcat][currentsubcat])[0] == currentsubcat)
+          setSelectedcat(currentsubcat);
+        else
+          for (let obj in cattree[currentcat][currentsubcat]) {
+            catlist.push(<li className='category' key={obj} onClick={() => setSelectedcat(obj)}>{obj.toUpperCase()}</li>);
+        }
+    }
+}
 
   const handleChange = (e) => {
     e.preventDefault();
