@@ -181,9 +181,32 @@ Array.prototype.forEach.call( inputs, function( input )
 	});
 });
 
+
+
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { useEffect, useState } from 'react';
+
+import {createStore} from 'redux';
+import { Provider, useDispatch, useSelector } from 'react-redux';
+
+const cartState = {
+  items: [],
+};
+
+const reducer = (state = cartState, action) => {
+  switch (action.type) {
+    case  "add_cart":
+
+      return {...state, items: [...state.items, action.payload]};
+    default:
+      return state;
+  }
+};
+
+const store = createStore(reducer);
+
+
 
 const root = createRoot(document.getElementById('reactcatalog'));
 
@@ -230,7 +253,7 @@ const Paginate = ({ postsPerPage, totalPosts, paginate, selectedPage }) => {
   );
 };
 
-const CatalogPosition = ({x, onClick, selectedPosition, handleCoefChange_1, handleCoefChange_2, coef_1, coef_2}) => {
+const CatalogPosition = ({x, onClick, selectedPosition, handleCoefChange_1, handleCoefChange_2, coef_1, coef_2, addToCart}) => {
   return(
     <div onClick={onClick} className={x.idposition == selectedPosition.idposition ? "catalog-position__wrap catalog-position__wrap_active" : "catalog-position__wrap"}>
       {/*x.idposition != selectedPosition.idposition*/ true && <div className={"catalog-position"}><div className='position__name'>{x.name}&nbsp;<span className='mobile-mark'>{x.mark != "nan" && x.mark}</span></div><div className='position__size'>{x.size}</div><div className='position__size'>{x.mark != "nan" && x.mark}</div><div className='addbutton-calc-wrap'>
@@ -238,7 +261,7 @@ const CatalogPosition = ({x, onClick, selectedPosition, handleCoefChange_1, hand
           <div className='position_quantity position_quantity_catalog'><p className='position__setcount'>УКАЖИТЕ КОЛИЧЕСТВО:&nbsp;</p>
           <div className='input_wrap'><input className="position_quantity_i position_quantity_i_catalog" onClick={e => e.stopPropagation()} onChange={(e)=>handleCoefChange_1(e)} value={coef_1}></input><div className="ed_izm">{selectedPosition.units}</div></div>=
           <div className='input_wrap'><input className="position_quantity_i position_quantity_i_catalog" onClick={e => e.stopPropagation()} onChange={(e)=>handleCoefChange_2(e)} value={coef_2}></input><div className="ed_izm">{selectedPosition.unitssecond}</div></div></div>
-          <div className='position__add-button'>ДОБАВИТЬ В КОРЗИНУ</div></div>}</div><div className='add-position-button'><div className='d24'></div></div></div>}
+          <div className='position__add-button' onClick={() => addToCart(x)}>ДОБАВИТЬ В КОРЗИНУ</div></div>}</div><div className='add-position-button'><div className='d24'></div></div></div>}
     </div>
   );
 };
@@ -266,6 +289,12 @@ function App() {
   
   const [coef_1, setCoef_1] = useState("");
   const [coef_2, setCoef_2] = useState("");
+
+  const dispatch = useDispatch();
+
+  const addToCart = (x) => {
+    dispatch({type: "add_cart", payload: x})
+  }
   
 
   const paginate = (pageNumber) => {
@@ -445,7 +474,7 @@ function App() {
       {/*(selectedcat == "search" || selectedcat == "search_") ? prevSearchInput == "" ? "Задан пустой поисковой запрос" : "Поиск по запросу: "+prevSearchInput : selectedcat*/}
       {/*(selectedcat !="" || currentcat != "") && <div className='catlist' onClick={() => {selectedcat != "" ? (function() {setSelectedcat("");setCurrentPage(1);setoptionListSizeSelected("Все размеры");setoptionListMarkSelected("Все марки");setSelectedPosition({idposition: 0, name: "", size: "", mark: "", coef: "1", units: "", units_1: ""})})() : currentsubcat != "" ? setCurrentsubcat("") : setCurrentcat("");setSearchInput("");}}>Назад</div>*/}
       <div className='position-list'>
-        {selectedcat != "" && (state.rows.length > 0 ? state.rows.map((x) => {return(<CatalogPosition key={x.idposition} onClick={(e) => {selectedPosition.idposition == x.idposition ? setSelectedPosition({idposition: -1, name: "", size: "", mark: "", coef: "1", units: "", units_1: ""}):showPosition(x);}} x={x} showPosition={showPosition} selectedPosition={selectedPosition} handleCoefChange_1={handleCoefChange_1} handleCoefChange_2={handleCoefChange_2} coef_1={coef_1} coef_2={coef_2}/>)}) : ((selectedcat == "search" || selectedcat == "search_") ? <div className='noresults'>По данному запросу ничего не найдено.<br/>Измените запрос или вернитесь в <div onClick={() => {setSelectedcat("");setCurrentsubcat("");setCurrentcat("");unselectCat();setSearchInput("")}} className='noresults__catalog'>Каталог</div></div> : ""))}
+        {selectedcat != "" && (state.rows.length > 0 ? state.rows.map((x) => {return(<CatalogPosition addToCart={addToCart} key={x.idposition} onClick={(e) => {selectedPosition.idposition == x.idposition ? setSelectedPosition({idposition: -1, name: "", size: "", mark: "", coef: "1", units: "", units_1: ""}):showPosition(x);}} x={x} showPosition={showPosition} selectedPosition={selectedPosition} handleCoefChange_1={handleCoefChange_1} handleCoefChange_2={handleCoefChange_2} coef_1={coef_1} coef_2={coef_2}/>)}) : ((selectedcat == "search" || selectedcat == "search_") ? <div className='noresults'>По данному запросу ничего не найдено.<br/>Измените запрос или вернитесь в <div onClick={() => {setSelectedcat("");setCurrentsubcat("");setCurrentcat("");unselectCat();setSearchInput("")}} className='noresults__catalog'>Каталог</div></div> : ""))}
       </div>
       <ul className='categories-list'>
       {catlist}
@@ -461,4 +490,16 @@ function App() {
     
   );
 }
-root.render(<App />)
+root.render(<Provider store={store}><App /></Provider>)
+
+const root_2 = createRoot(document.getElementById('reactnumber'));
+
+function Number() {
+  const dispatch = useDispatch();
+  const items = useSelector(state => state.items);
+  return (
+    <div>{items.length}</div>
+    );
+}
+
+root_2.render(<Provider store={store}><Number /></Provider>)
