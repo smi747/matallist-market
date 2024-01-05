@@ -197,8 +197,11 @@ const cartState = {
 const reducer = (state = cartState, action) => {
   switch (action.type) {
     case  "add_cart":
-
       return {...state, items: [...state.items, action.payload]};
+    case "remove_cart":
+      let tmp = [...state.items];
+      tmp.splice(action.payload, 1);
+      return {...state, items: tmp};
     default:
       return state;
   }
@@ -503,3 +506,29 @@ function Number() {
 }
 
 root_2.render(<Provider store={store}><Number /></Provider>)
+
+const root_3 = createRoot(document.getElementById('reactcart'));
+
+function Cart() {
+  const dispatch = useDispatch();
+  const items = useSelector(state => state.items);
+
+  const removeFromCart = (x) => {
+    dispatch({type: "remove_cart", payload: x})
+  }
+
+  return (
+    <div className="positions">
+      {items.map((item, i) => {return(
+        <div key={i} className="cart_position">
+                <div className="position_name">{item.name}</div>
+                {/*<div className="position_quantity"><input type="text" className="position_quantity_i" value="100"></input>&nbsp;/&nbsp;<div className="input_wrap"><input type="text" className="position_quantity_i" value="1000"></input><div className="ed_izm">штуки</div></div></div>*/}
+                <div className="position_close"><div className="position_close_img" onClick={() => removeFromCart(i)}></div></div>
+              </div>
+      )})}
+      <a href="#catalog" className="cart_position cart_add" onClick={() => cart.classList.remove('openedcart')}>добавить товар...</a>
+    </div>
+    );
+}
+
+root_3.render(<Provider store={store}><Cart /></Provider>)
