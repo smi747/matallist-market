@@ -92,6 +92,7 @@ var _getAllFilesFromFolder = function(dir) {
   };
 
 const express = require("express");
+var send = require('./mail.js');
   
 const app = express();
 // создаем парсер для данных в формате json
@@ -102,6 +103,19 @@ app.post("/user", jsonParser, function (request, response) {
     if(!request.body) return response.sendStatus(400);
      
     response.json(request.body); // отправляем пришедший ответ обратно
+});
+
+const urlencodedParser = express.urlencoded({extended: false});
+const child_process = require('child_process');
+const multer = require('multer');
+const storage = multer.memoryStorage()
+const upload = multer({ storage: storage })
+app.post("/", upload.single('form-reqs'), function (request, response) {
+    if(!request.body) return response.sendStatus(400);
+    response.sendFile(__dirname + "//app/index.html");
+    let childProcess = child_process.fork('mail.js');
+    childProcess.send({0: request.body, 1: request.file})
+    console.log(request.body);
 });
   
 app.get("/", function(request, response){
