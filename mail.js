@@ -57,6 +57,6 @@ async function send(inp, file) {
     transporter.close();
 }
 
-process.on('message', (msg) => {
-    send(msg[0], msg[1]);
-});
+process.on('message', async (msg) => {
+    await send(msg[0], msg[1]);
+    process.exit(0)});
