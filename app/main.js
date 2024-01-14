@@ -195,12 +195,22 @@ const cartState = {
 };
 
 const reducer = (state = cartState, action) => {
+  let tmp = [];
   switch (action.type) {
     case  "add_cart":
       return {...state, items: [...state.items, action.payload]};
     case "remove_cart":
-      let tmp = [...state.items];
+      tmp = [...state.items];
       tmp.splice(action.payload, 1);
+      return {...state, items: tmp};
+    case "change_qs":
+      tmp = [...state.items];
+      console.log(tmp[action.payload.x]);
+      if (action.payload.q_1 != null)
+        tmp[action.payload.x].q_1 = action.payload.q_1;
+      if (action.payload.q_2 != null)
+        tmp[action.payload.x].q_2 = action.payload.q_2;
+      console.log(tmp[action.payload.x]);
       return {...state, items: tmp};
     default:
       return state;
@@ -264,7 +274,7 @@ const CatalogPosition = ({x, onClick, selectedPosition, handleCoefChange_1, hand
           <div className='position_quantity position_quantity_catalog'><p className='position__setcount'>УКАЖИТЕ КОЛИЧЕСТВО:&nbsp;</p>
           <div className='input_wrap'><input className="position_quantity_i position_quantity_i_catalog" onClick={e => e.stopPropagation()} onChange={(e)=>handleCoefChange_1(e)} value={coef_1}></input><div className="ed_izm">{selectedPosition.units}</div></div>=
           <div className='input_wrap'><input className="position_quantity_i position_quantity_i_catalog" onClick={e => e.stopPropagation()} onChange={(e)=>handleCoefChange_2(e)} value={coef_2}></input><div className="ed_izm">{selectedPosition.unitssecond}</div></div></div>
-          <div className='position__add-button' onClick={() => {addToCart(x); document.getElementById("position_added_alarm").classList.add('position_added_alarm_visible'); setTimeout(() => {document.getElementById("position_added_alarm").classList.remove('position_added_alarm_visible')}, 4000)}}>ДОБАВИТЬ В КОРЗИНУ</div></div>}</div><div className='add-position-button'><div className='d24'></div></div></div>}
+          <div className='position__add-button' onClick={() => {addToCart(Object.assign({}, x), coef_1, coef_2); document.getElementById("position_added_alarm").classList.add('position_added_alarm_visible'); setTimeout(() => {document.getElementById("position_added_alarm").classList.remove('position_added_alarm_visible')}, 4000)}}>ДОБАВИТЬ В КОРЗИНУ</div></div>}</div><div className='add-position-button'><div className='d24'></div></div></div>}
     </div>
   );
 };
@@ -288,14 +298,16 @@ function App() {
   const [optionListSizeSelectedSend, setoptionListSizeSelectedSend] = useState("Все размеры");
   const [optionListMarkSelectedSend, setoptionListMarkSelectedSend] = useState("Все марки");
   const [filtBut, setFiltBut] = useState(false);
-  const [selectedPosition, setSelectedPosition] = useState({idposition: -1, name: "", size: "", mark: "", coef: "1", units: "", units_1: ""});
+  const [selectedPosition, setSelectedPosition] = useState({idposition: -1, name: "", size: "", mark: "", coef: "1", units: "", unitssecond: ""});
   
   const [coef_1, setCoef_1] = useState("");
   const [coef_2, setCoef_2] = useState("");
 
   const dispatch = useDispatch();
 
-  const addToCart = (x) => {
+  const addToCart = (x, c1, c2) => {
+    x.q_1 = c1;
+    x.q_2 = c2;
     dispatch({type: "add_cart", payload: x})
   }
   
@@ -398,7 +410,7 @@ function App() {
     setoptionListMarkSelected("Все марки");
     setoptionListMarkSelectedSend("Все марки");
     setoptionListSizeSelectedSend("Все размеры");
-    setSelectedPosition({idposition: -1, name: "", size: "", mark: "", coef: "1", units: "", units_1: ""});
+    setSelectedPosition({idposition: -1, name: "", size: "", mark: "", coef: "1", units: "", unitssecond: ""});
   }
 
   return (
@@ -477,7 +489,7 @@ function App() {
       {/*(selectedcat == "search" || selectedcat == "search_") ? prevSearchInput == "" ? "Задан пустой поисковой запрос" : "Поиск по запросу: "+prevSearchInput : selectedcat*/}
       {/*(selectedcat !="" || currentcat != "") && <div className='catlist' onClick={() => {selectedcat != "" ? (function() {setSelectedcat("");setCurrentPage(1);setoptionListSizeSelected("Все размеры");setoptionListMarkSelected("Все марки");setSelectedPosition({idposition: 0, name: "", size: "", mark: "", coef: "1", units: "", units_1: ""})})() : currentsubcat != "" ? setCurrentsubcat("") : setCurrentcat("");setSearchInput("");}}>Назад</div>*/}
       <div className='position-list'>
-        {selectedcat != "" && (state.rows.length > 0 ? state.rows.map((x) => {return(<CatalogPosition addToCart={addToCart} key={x.idposition} onClick={(e) => {selectedPosition.idposition == x.idposition ? setSelectedPosition({idposition: -1, name: "", size: "", mark: "", coef: "1", units: "", units_1: ""}):showPosition(x);}} x={x} showPosition={showPosition} selectedPosition={selectedPosition} handleCoefChange_1={handleCoefChange_1} handleCoefChange_2={handleCoefChange_2} coef_1={coef_1} coef_2={coef_2}/>)}) : ((selectedcat == "search" || selectedcat == "search_") ? <div className='noresults'>По данному запросу ничего не найдено.<br/>Измените запрос или вернитесь в <div onClick={() => {setSelectedcat("");setCurrentsubcat("");setCurrentcat("");unselectCat();setSearchInput("")}} className='noresults__catalog'>Каталог</div></div> : ""))}
+        {selectedcat != "" && (state.rows.length > 0 ? state.rows.map((x) => {return(<CatalogPosition addToCart={addToCart} key={x.idposition} onClick={(e) => {selectedPosition.idposition == x.idposition ? setSelectedPosition({idposition: -1, name: "", size: "", mark: "", coef: "1", units: "", unitssecond: ""}):showPosition(x);}} x={x} showPosition={showPosition} selectedPosition={selectedPosition} handleCoefChange_1={handleCoefChange_1} handleCoefChange_2={handleCoefChange_2} coef_1={coef_1} coef_2={coef_2}/>)}) : ((selectedcat == "search" || selectedcat == "search_") ? <div className='noresults'>По данному запросу ничего не найдено.<br/>Измените запрос или вернитесь в <div onClick={() => {setSelectedcat("");setCurrentsubcat("");setCurrentcat("");unselectCat();setSearchInput("")}} className='noresults__catalog'>Каталог</div></div> : ""))}
       </div>
       <ul className='categories-list'>
       {catlist}
@@ -517,12 +529,40 @@ function Cart() {
     dispatch({type: "remove_cart", payload: x})
   }
 
+  const changeQs = (x, y, z) => {
+    dispatch({type: "change_qs", payload: {x: x, q_1: y, q_2:z}})
+  }
+
+  var n = new RegExp('^([0-9][0-9]*\\.?[0-9]?[0-9]?[0-9]?)?$', "gm");
+  const handleCoefChange_1 = (e, item, i) => {
+    if (n.test(e.target.value)){
+      changeQs(i, e.target.value, null);
+      if (item.units == "тн")
+        changeQs(i, null, (parseFloat(e.target.value) * 1000 / item.coef).toFixed(3));
+      else
+        changeQs((i, null, parseFloat(e.target.value) * item.coef / 1000).toFixed(3));
+      if (e.target.value == "")
+        changeQs(i, null, "");
+      }
+  }
+  const handleCoefChange_2 = (e, item, i) => {
+    if (n.test(e.target.value)){
+      changeQs(i, null, e.target.value);
+      if (item.units == "тн") 
+        changeQs(i, (parseFloat(e.target.value) * item.coef / 1000).toFixed(3), null);
+      else
+        changeQs(i, (parseFloat(e.target.value) * 1000 / item.coef).toFixed(3), null);
+      if (e.target.value == "")
+        changeQs(i, "", null);
+      }
+  }
+
   return (
     <div className="positions">
       {items.map((item, i) => {return(
         <div key={i} className="cart_position">
                 <div className="position_name">{item.name}</div>
-                {/*<div className="position_quantity"><input type="text" className="position_quantity_i" value="100"></input>&nbsp;/&nbsp;<div className="input_wrap"><input type="text" className="position_quantity_i" value="1000"></input><div className="ed_izm">штуки</div></div></div>*/}
+                {<div className="position_quantity"><div className="input_wrap"><input type="text" onChange={(e) => handleCoefChange_1(e, item, i)} className="position_quantity_i" value={item.q_1}></input><div className="ed_izm">{item.units}</div></div>&nbsp;/&nbsp;<div className="input_wrap"><input type="text" onChange={(e) => handleCoefChange_2(e, item, i)} className="position_quantity_i" value={item.q_2}></input><div className="ed_izm">{item.unitssecond}</div></div></div>}
                 <div className="position_close"><div className="position_close_img" onClick={() => removeFromCart(i)}></div></div>
               </div>
       )})}
