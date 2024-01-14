@@ -192,6 +192,7 @@ import { Provider, useDispatch, useSelector } from 'react-redux';
 
 const cartState = {
   items: [],
+  totalweight: 0,
 };
 
 const reducer = (state = cartState, action) => {
@@ -205,13 +206,13 @@ const reducer = (state = cartState, action) => {
       return {...state, items: tmp};
     case "change_qs":
       tmp = [...state.items];
-      console.log(tmp[action.payload.x]);
       if (action.payload.q_1 != null)
         tmp[action.payload.x].q_1 = action.payload.q_1;
       if (action.payload.q_2 != null)
         tmp[action.payload.x].q_2 = action.payload.q_2;
-      console.log(tmp[action.payload.x]);
       return {...state, items: tmp};
+    case "change_tw":
+      return {...state, totalweight: action.payload}
     default:
       return state;
   }
@@ -540,7 +541,7 @@ function Cart() {
       if (item.units == "тн")
         changeQs(i, null, (parseFloat(e.target.value) * 1000 / item.coef).toFixed(3));
       else
-        changeQs((i, null, parseFloat(e.target.value) * item.coef / 1000).toFixed(3));
+        changeQs(i, null, (parseFloat(e.target.value) * item.coef / 1000).toFixed(3));
       if (e.target.value == "")
         changeQs(i, null, "");
       }
@@ -572,3 +573,45 @@ function Cart() {
 }
 
 root_3.render(<Provider store={store}><Cart /></Provider>)
+
+
+
+
+const root_4 = createRoot(document.getElementById('form_positions_reactroot'));
+
+function HiddenPositions() {
+  const dispatch = useDispatch();
+  const items = useSelector(state => state.items);
+  const totalweight = useSelector(state => state.totalweight);
+
+  let tmp_text = "";
+  items.forEach((item) => item.units == "тн" ? tmp_text += item.name + " " + item.mark + "|" + item.q_1 + "|" + item.units + "|" + item.q_2 + "|" + item.unitssecond  + "~": tmp_text += item.name + " " + item.mark + "|" + item.q_2 + "|" + item.unitssecond + "|" + item.q_1 + "|" + item.units + "~");
+  tmp_text += "`" + totalweight;
+  return <input readOnly type="text" name="form_positions" id="form_positions" className="form_input" value={tmp_text} required></input>
+}
+
+root_4.render(<Provider store={store}><HiddenPositions /></Provider>)
+
+
+const root_5 = createRoot(document.getElementById('weight_reactroot'));
+
+function WeightCount() {
+  const dispatch = useDispatch();
+  const items = useSelector(state => state.items);
+  const totalweight = useSelector(state => state.totalweight);
+
+  const changeTW = (x) => {
+    dispatch({type: "change_tw", payload: x})
+  }
+
+  useEffect(() => {
+    let weight = 0;
+    items.forEach((item) => item.units == "тн" ? item.q_1 == "" ? {} : weight += parseFloat(item.q_1) : item.q_1 == "" ? {} : weight += parseFloat(item.q_2));
+    changeTW(weight);
+  }, [items])
+  
+
+  return <p className="total_weight_text">ОБЩИЙ ВЕС:&nbsp;{totalweight}</p>
+}
+
+root_5.render(<Provider store={store}><WeightCount /></Provider>)

@@ -227,7 +227,7 @@
               </div>
                 <a href="#catalog" class="cart_position cart_add" onclick="cart.classList.remove('openedcart')">добавить товар...</a>
             </div></div>
-              <div class="cart_position total_weight"><p class="total_weight_text">ОБЩИЙ ВЕС: 100 тонн</p></div>
+              <div class="cart_position total_weight" id="weight_reactroot"></div>
             <div class="form_wrap">
             <div class="cart_row_3">ОФОРМЛЕНИЕ ЗАКАЗА</div>
             <form method="POST" enctype="multipart/form-data" action="" class="cart_form">
@@ -253,7 +253,7 @@
               <p class="form_jur_text">Для юридических лиц, укажите ваш ИНН или прикрепите файл с реквизитами.</p>
               <div class="form_section">
                 <label for="form-inn" class="form_text">ИНН</label>
-                <input type="text" name="form-inn" id="form-inn" class="form_input" required>
+                <input type="text" name="form-inn" id="form-inn" class="form_input">
               </div>
               <div class="form_section">
                 <label for="form-reqs" class="form_text">Файл с реквизитами</label>
@@ -268,7 +268,8 @@
                 <a href="#catalog" class="backto" onclick="cart.classList.remove('openedcart')">+ ПРОДОЛЖИТЬ ПОКУПКИ</a>
               </div>
               <div class="form_section form_section_submit">
-                <input type="submit" class="form_submitbutton" value="ОТПРАВИТЬ"></form>
+                <input type="submit" class="form_submitbutton" value="ОТПРАВИТЬ">
+                <div style="display: none;" class="form_positions_reactroot" id="form_positions_reactroot"></div></form>
               </div>
             </form>
           </div>
