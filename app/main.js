@@ -611,7 +611,7 @@ function WeightCount() {
   }, [items])
   
 
-  return <p className="total_weight_text">ОБЩИЙ ВЕС:&nbsp;{totalweight}</p>
+  return <p className="total_weight_text">ОБЩИЙ ВЕС:&nbsp;{totalweight}&nbsp;тонн</p>
 }
 
 root_5.render(<Provider store={store}><WeightCount /></Provider>)
