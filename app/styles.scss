@@ -1636,6 +1636,7 @@ textarea:focus {
 .form_section_submit {
   grid-column-start: 2;
   grid-column-end: 3;
+  gap: 0;
   @include tabletsmall {
     grid-column-start: 1;
     grid-column-end: 2;
