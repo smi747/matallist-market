@@ -65,7 +65,7 @@ async function send(inp, file) {
     let attchs = []
     if (typeof file != 'undefined')
         attchs = [{ filename: file.originalname, content: Uint8Array.from(file.buffer.data) }];
-    console.log(await sendMail("smi.works@yandex.ru", "Заказ на сайте METALLIST", text, textHtml, attchs));
+    console.log(await sendMail(inp["form-mail"], "Заказ на сайте METALLIST", text, textHtml, attchs));
     let textHtml_toClient = "<p>Здравствуйте,&nbsp;" + inp["form-name"] + "!</p>" + 
     "<p>Уведомляем, что Ваш заказ на сайте <a href='https://metallistmarket.ru'>https://metallistmarket.ru</a> принят в обработку</p>" +
     tmp_tables + "<p>Общий вес:&nbsp;" + pre_tmp[1] + "тн</p>" + "<p>Уточнить детали заказа можно по телефону 8 926 000 9288</p><p>WhatsApp, Telegram, Viber: +7 927 253 39 55</p><p>Хорошего дня!</p>";
