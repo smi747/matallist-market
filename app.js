@@ -98,12 +98,6 @@ const app = express();
 // создаем парсер для данных в формате json
 const jsonParser = express.json();
   
-app.post("/user", jsonParser, function (request, response) {
-    console.log(request.body);
-    if(!request.body) return response.sendStatus(400);
-     
-    response.json(request.body); // отправляем пришедший ответ обратно
-});
 
 const urlencodedParser = express.urlencoded({extended: false});
 const child_process = require('child_process');
@@ -115,7 +109,7 @@ app.post("/", upload.single('form-reqs'), function (request, response) {
     response.redirect(303, '/prg');
     let childProcess = child_process.fork('mail.js');
     childProcess.send({0: request.body, 1: request.file})
-    console.log(request.body);
+    //console.log(request.body);
 });
 app.get('/prg', (req, res) => res.redirect(303, '/?ordered=1'));
   
