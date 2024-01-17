@@ -18,7 +18,7 @@ window.onresize = bringmenu;
 window.addEventListener("load", bringmenu);
 window.addEventListener("load", set_section);
 
-document.addEventListener("mouseup", function(event) {
+document.addEventListener("mousedown", function(event) {
   var obj = document.getElementById("main__menu");
   if (!obj.contains(event.target)) {
     main__menu.classList.remove("opened");
