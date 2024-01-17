@@ -187,18 +187,19 @@ const orderedHidden = Array.from(document.getElementsByClassName("ordered-hidden
 function is_ordered() {
   const urlParams = new URLSearchParams(window.location.search);
   const ordered = urlParams.get('ordered')
-  if (ordered == "1") {
-    document.getElementById("order_completed").style.display='block';
+  if (ordered == "1" || ordered == "2") {
     orderedHidden.forEach(
       function(element, index, array) {
           element.classList.add("hidden-important")
       }
     );
+    if (ordered == "2") {
+      document.getElementById('orderen-unhidden').innerHTML = "Ошибка при обработке заказа.<br><br>Пожалуйста, повторите попытку или свяжитесь с нами по телефону 8-960-889-76-67.<br><br>WhatsApp, Telegram, Viber: +79272533955";
+    }
     document.getElementById('orderen-unhidden').style.display = 'block';
     cart.classList.add('openedcart');
   }
   else {
-    document.getElementById("order_completed").style.display='none';
     orderedHidden.forEach(
       function(element, index, array) {
           element.classList.remove("hidden-important");
@@ -305,7 +306,7 @@ const CatalogPosition = ({x, onClick, selectedPosition, handleCoefChange_1, hand
           <div className='position_quantity position_quantity_catalog'><p className='position__setcount'>УКАЖИТЕ КОЛИЧЕСТВО:&nbsp;</p>
           <div className='input_wrap'><input className="position_quantity_i position_quantity_i_catalog" onClick={e => e.stopPropagation()} onChange={(e)=>handleCoefChange_1(e)} value={coef_1}></input><div className="ed_izm">{selectedPosition.units}</div></div>=
           <div className='input_wrap'><input className="position_quantity_i position_quantity_i_catalog" onClick={e => e.stopPropagation()} onChange={(e)=>handleCoefChange_2(e)} value={coef_2}></input><div className="ed_izm">{selectedPosition.unitssecond}</div></div></div>
-          <div className='position__add-button' onClick={() => {addToCart(Object.assign({}, x), coef_1, coef_2); document.getElementById("position_added_alarm").classList.add('position_added_alarm_visible'); setTimeout(() => {document.getElementById("position_added_alarm").classList.add('position_added_alarm_visible')}, 4000)}}>ДОБАВИТЬ В КОРЗИНУ</div></div>}</div><div className='add-position-button'><div className='d24'></div></div></div>}
+          <div className='position__add-button' onClick={() => {addToCart(Object.assign({}, x), coef_1, coef_2); document.getElementById("position_added_alarm").classList.add('position_added_alarm_visible'); setTimeout(() => {document.getElementById("position_added_alarm").classList.remove('position_added_alarm_visible')}, 4000)}}>ДОБАВИТЬ В КОРЗИНУ</div></div>}</div><div className='add-position-button'><div className='d24'></div></div></div>}
     </div>
   );
 };

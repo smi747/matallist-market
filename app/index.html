@@ -11,6 +11,16 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <link rel="icon" type="image/x-icon" href="images/favicon.ico">
     <title>Металлист Маркет</title>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+     <script>
+       function onSubmit(token) {
+        if (document.getElementById("cart_form").checkValidity())
+          document.getElementById("cart_form").submit();
+        else
+        alert("Заполните обязательные поля");
+          grecaptcha.reset();
+       }
+     </script>
 </head>
 <body class="body" id="body">
     <header class="header">
@@ -231,7 +241,7 @@
               <div class="cart_position total_weight ordered-hidden" id="weight_reactroot"></div>
             <div class="form_wrap ordered-hidden">
             <div class="cart_row_3">ОФОРМЛЕНИЕ ЗАКАЗА</div>
-            <form method="POST" enctype="multipart/form-data" action="" class="cart_form">
+            <form method="POST" enctype="multipart/form-data" action="" class="cart_form" id="cart_form">
               <div class="form_section">
                 <label for="form-name" class="form_text">Имя/название организации*</label>
                 <input type="text" name="form-name" id="form-name" class="form_input" required>
@@ -269,7 +279,7 @@
                 <a href="#catalog" class="backto" onclick="cart.classList.remove('openedcart')">+ ПРОДОЛЖИТЬ ПОКУПКИ</a>
               </div>
               <div class="form_section form_section_submit">
-                <input type="submit" class="form_submitbutton" value="ОТПРАВИТЬ">
+                <input type="submit" class="form_submitbutton g-recaptcha" data-sitekey="6LeBGlQpAAAAADNQRfvuHUD7KBFwJcfVKNZmqABz" data-callback="onSubmit" value="ОТПРАВИТЬ">
                 <div style="display: none;" class="form_positions_reactroot" id="form_positions_reactroot"></div></form>
               </div>
             <!--</form>-->
@@ -277,7 +287,6 @@
           </div></div>
           <div class="position_added_alarm" id="position_added_alarm">Товар добавлен в&nbsp;<span class="popup_cart" onclick="main__menu.classList.remove('opened');cart.classList.add('openedcart')">корзину</span>!</div>
         </main>
-        <div style="display: none;" class="" id="order_completed">124124</div>
     <script src="js/main.min.js"></script>
 </body>
 </html>

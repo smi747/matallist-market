@@ -98,21 +98,41 @@ const app = express();
 // создаем парсер для данных в формате json
 const jsonParser = express.json();
   
+app.post("/user", jsonParser, function (request, response) {
+    console.log(request.body);
+    if(!request.body) return response.sendStatus(400);
+     
+    response.json(request.body); // отправляем пришедший ответ обратно
+});
 
 const urlencodedParser = express.urlencoded({extended: false});
 const child_process = require('child_process');
 const multer = require('multer');
 const storage = multer.memoryStorage()
 const upload = multer({ storage: storage })
-app.post("/", upload.single('form-reqs'), function (request, response) {
-    if(!request.body) return response.sendStatus(400);
-    response.redirect(303, '/prg');
+
+const request = require("request");
+app.post("/", upload.single('form-reqs'), function (req, res) {
+    let secretKey = "6LeBGlQpAAAAAHJaQlMm1QDG1NR2WFK5FPVPMC1A"; // Put your secret key here.
+    let verificationUrl = "https://www.google.com/recaptcha/api/siteverify?secret=" + secretKey + "&response=" + req.body['g-recaptcha-response'] + "&remoteip=" + req.connection.remoteAddress;
+    // Google will respond with success or error scenario on url request sent.
+    request(verificationUrl,function(error,response,body) {
+    body = JSON.parse(body);
+    // Success will be true or false depending upon captcha validation.
+    if(body.success !== undefined && !body.success) {
+    return res.redirect(303, '/prgf');
+    }
+    if(!req.body) return res.sendStatus(400);
+    res.redirect(303, '/prg');
     let childProcess = child_process.fork('mail.js');
-    childProcess.send({0: request.body, 1: request.file})
-    //console.log(request.body);
+    childProcess.send({0: req.body, 1: req.file})
+    console.log(req.body);
+    });
+    
 });
 app.get('/prg', (req, res) => res.redirect(303, '/?ordered=1'));
-  
+app.get('/prgf', (req, res) => res.redirect(303, '/?ordered=2'));
+
 app.get("/", function(request, response){
       
     if (request.query.q === "test") {
