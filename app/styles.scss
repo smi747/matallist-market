@@ -1695,10 +1695,8 @@ input[type="submit"] {
   width: 100%;
   font-size: 10px;
   @include tabletsmall {
-    bottom: -13px;
   }
   @include mobile {
-    bottom: -13px;
   }
 }
 
@@ -2381,7 +2379,8 @@ body {
 
 .position_added_alarm {
   position: fixed;
-  display: flex;
+  //display: flex;
+  text-align: center;
   left: 50%;
   bottom: 10%;
   transform: translateX(-50%);
@@ -2392,7 +2391,7 @@ body {
 
   color: white;
   //background-color: #a4c4a9;
-  background-color: #6da476;
+  background-color: rgba(109, 164, 118, 0.85);
   font-family: Arial, Helvetica, sans-serif;
   font-weight: bold;
   letter-spacing: 1px;
@@ -2416,4 +2415,14 @@ body {
 
 .position_added_alarm_visible .popup_cart:hover {
   color: lightgrey;
+}
+
+.hidden-important {
+  display: none !important;
+}
+
+.cart_row_4 {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  font-size: 17px;
 }

@@ -205,10 +205,11 @@
           <div class="cart" id="cart"><div class="cart_" id="cart_">
             <div class="cart_row_1">
               <div class="cart_row_1_text">КОРЗИНА</div>
-              <div class="cart_row_1_close other_opacity_elements_s" onclick="cart.classList.remove('openedcart')"></div>
+              <div class="cart_row_1_close other_opacity_elements_s" onclick="is_ordered();cart.classList.remove('openedcart')"></div>
             </div>
-            <div class="cart_row_2"><div class="cart_row_2_text">Наименование</div><div class="cart_row_2_text">Количество (тонн/ед.изм.)</div></div>
-            <div id="reactcart">
+            <div class="cart_row_2"><div class="cart_row_2_text ordered-hidden">Наименование</div><div class="cart_row_2_text ordered-hidden">Количество (тонн/ед.изм.)</div></div>
+            <div style="display: none;" class="cart_row_4" id="orderen-unhidden">Ваш заказ принят в обработку.<br><br>В течение дня наш сотрудник даст ответ или свяжется с Вами для уточнения деталей по заказу.<br><br>Если Вы ничего не получите, то свяжитесь с нами по телефону 8-960-889-76-67 и уточните информацию по Вашему заказу.<br><br>WhatsApp, Telegram, Viber: +79272533955</div>
+            <div id="reactcart" class="ordered-hidden">
             <div class="positions">
               <div class="cart_position">
                 <div class="position_name">Балка двутавровая низколегированная 20К1 09Г2С</div>
@@ -227,20 +228,20 @@
               </div>
                 <a href="#catalog" class="cart_position cart_add" onclick="cart.classList.remove('openedcart')">добавить товар...</a>
             </div></div>
-              <div class="cart_position total_weight" id="weight_reactroot"></div>
-            <div class="form_wrap">
+              <div class="cart_position total_weight ordered-hidden" id="weight_reactroot"></div>
+            <div class="form_wrap ordered-hidden">
             <div class="cart_row_3">ОФОРМЛЕНИЕ ЗАКАЗА</div>
             <form method="POST" enctype="multipart/form-data" action="" class="cart_form">
               <div class="form_section">
-                <label for="form-name" class="form_text">Имя/название организации</label>
+                <label for="form-name" class="form_text">Имя/название организации*</label>
                 <input type="text" name="form-name" id="form-name" class="form_input" required>
               </div>
               <div class="form_section">
-                <label for="form-phone" class="form_text">Телефон</label>
+                <label for="form-phone" class="form_text">Телефон*</label>
                 <input type="text" name="form-phone" id="form-phone" class="form_input" required>
               </div>
               <div class="form_section">
-                <label for="form-mail" class="form_text">E-mail</label>
+                <label for="form-mail" class="form_text">E-mail*</label>
                 <input type="text" name="form-mail" id="form-mail" class="form_input" required>
               </div>
               <div class="form_section">
@@ -271,11 +272,12 @@
                 <input type="submit" class="form_submitbutton" value="ОТПРАВИТЬ">
                 <div style="display: none;" class="form_positions_reactroot" id="form_positions_reactroot"></div></form>
               </div>
-            </form>
+            <!--</form>-->
           </div>
           </div></div>
-          <div class="position_added_alarm" id="position_added_alarm">Товар добавлен в&nbsp;<p class="popup_cart" onclick="main__menu.classList.remove('opened');cart.classList.add('openedcart')">корзину</p>!</div>
+          <div class="position_added_alarm" id="position_added_alarm">Товар добавлен в&nbsp;<span class="popup_cart" onclick="main__menu.classList.remove('opened');cart.classList.add('openedcart')">корзину</span>!</div>
         </main>
+        <div style="display: none;" class="" id="order_completed">124124</div>
     <script src="js/main.min.js"></script>
 </body>
 </html>

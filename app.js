@@ -117,7 +117,7 @@ app.post("/", upload.single('form-reqs'), function (request, response) {
     childProcess.send({0: request.body, 1: request.file})
     console.log(request.body);
 });
-app.get('/prg', (req, res) => res.redirect(303, '/'));
+app.get('/prg', (req, res) => res.redirect(303, '/?ordered=1'));
   
 app.get("/", function(request, response){
       
@@ -140,5 +140,5 @@ app.get('/express_backend', (req, res) => { //Строка 9
   
 app.use(express.static('app'));
   
-app.listen(3010);
+app.listen(3000);
 

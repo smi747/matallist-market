@@ -26,6 +26,7 @@ document.addEventListener("mouseup", function(event) {
   obj = document.getElementById("cart_");
   if (!obj.contains(event.target)) {
     cart.classList.remove("openedcart");
+    is_ordered();
   }
 });
 
@@ -181,6 +182,35 @@ Array.prototype.forEach.call( inputs, function( input )
 	});
 });
 
+const orderedHidden = Array.from(document.getElementsByClassName("ordered-hidden"));
+
+function is_ordered() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const ordered = urlParams.get('ordered')
+  if (ordered == "1") {
+    document.getElementById("order_completed").style.display='block';
+    orderedHidden.forEach(
+      function(element, index, array) {
+          element.classList.add("hidden-important")
+      }
+    );
+    document.getElementById('orderen-unhidden').style.display = 'block';
+    cart.classList.add('openedcart');
+  }
+  else {
+    document.getElementById("order_completed").style.display='none';
+    orderedHidden.forEach(
+      function(element, index, array) {
+          element.classList.remove("hidden-important");
+      });
+      document.getElementById('orderen-unhidden').style.display = 'none';
+  }
+  const url = new URL(window.location);
+  url.searchParams.delete('ordered');
+  window.history.pushState(null, '', url.toString());
+}
+window.addEventListener("load", is_ordered);
+window.is_ordered = is_ordered;
 
 
 import React from 'react';
@@ -275,10 +305,11 @@ const CatalogPosition = ({x, onClick, selectedPosition, handleCoefChange_1, hand
           <div className='position_quantity position_quantity_catalog'><p className='position__setcount'>УКАЖИТЕ КОЛИЧЕСТВО:&nbsp;</p>
           <div className='input_wrap'><input className="position_quantity_i position_quantity_i_catalog" onClick={e => e.stopPropagation()} onChange={(e)=>handleCoefChange_1(e)} value={coef_1}></input><div className="ed_izm">{selectedPosition.units}</div></div>=
           <div className='input_wrap'><input className="position_quantity_i position_quantity_i_catalog" onClick={e => e.stopPropagation()} onChange={(e)=>handleCoefChange_2(e)} value={coef_2}></input><div className="ed_izm">{selectedPosition.unitssecond}</div></div></div>
-          <div className='position__add-button' onClick={() => {addToCart(Object.assign({}, x), coef_1, coef_2); document.getElementById("position_added_alarm").classList.add('position_added_alarm_visible'); setTimeout(() => {document.getElementById("position_added_alarm").classList.remove('position_added_alarm_visible')}, 4000)}}>ДОБАВИТЬ В КОРЗИНУ</div></div>}</div><div className='add-position-button'><div className='d24'></div></div></div>}
+          <div className='position__add-button' onClick={() => {addToCart(Object.assign({}, x), coef_1, coef_2); document.getElementById("position_added_alarm").classList.add('position_added_alarm_visible'); setTimeout(() => {document.getElementById("position_added_alarm").classList.add('position_added_alarm_visible')}, 4000)}}>ДОБАВИТЬ В КОРЗИНУ</div></div>}</div><div className='add-position-button'><div className='d24'></div></div></div>}
     </div>
   );
 };
+
 
 
 function App() {
