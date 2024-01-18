@@ -19,6 +19,7 @@ window.addEventListener("load", bringmenu);
 window.addEventListener("load", set_section);
 
 document.addEventListener("mousedown", function(event) {
+  if (event.target.getParent == null) {return};
   var obj = document.getElementById("main__menu");
   if (!obj.contains(event.target)) {
     main__menu.classList.remove("opened");
