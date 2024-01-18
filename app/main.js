@@ -18,14 +18,20 @@ window.onresize = bringmenu;
 window.addEventListener("load", bringmenu);
 window.addEventListener("load", set_section);
 
-document.addEventListener("mousedown", function(event) {
-  if (event.target.getParent == null) {return};
+var clickedOnScrollbar = function(mouseX){
+  if( cart.scrollWidth <= mouseX ){
+    return true;
+  }
+}
+document.body.addEventListener("mousedown", function(event) {
+  var p = event.target;
   var obj = document.getElementById("main__menu");
   if (!obj.contains(event.target)) {
     main__menu.classList.remove("opened");
   }
+
   obj = document.getElementById("cart_");
-  if (!obj.contains(event.target)) {
+  if (!obj.contains(event.target) && !clickedOnScrollbar(event.clientX)) {
     cart.classList.remove("openedcart");
     is_ordered();
   }
