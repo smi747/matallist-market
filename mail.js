@@ -42,18 +42,18 @@ let mns = today.getMinutes();
 
 let text = "Unsupported html content";
 async function send(inp, file) {
-    let tmp_tables = "<style>td, th {text-align: center;padding:3px;border: 1px solid black;}</style><table style='border-collapse: collapse;'><tr><th>Товар</th><th>Количесвто (ед.изм.)</th><th>Вес (тонн)</th></tr>";
+    let tmp_tables = "<table style='border-collapse: collapse;'><tr><th>Товар</th><th>Количесвто (ед.изм.)</th><th>Вес (тонн)</th></tr>";
     let pre_tmp = inp["form_positions"].split("`");
     let tmp = pre_tmp[0].split("~");
     let tmp_2 = tmp.map((item) => item.split("|"));
     for (const i of tmp_2) {
         if (i[0] != "") {
             tmp_tables += "<tr>";
-            tmp_tables += "<td>" + i[0] + "</td><td>" + i[3] + " " + i[4] + "</td><td>" + i[1] + " " + i[2] + "</td>";
+            tmp_tables += "<td style='text-align: center;padding:3px;border: 1px solid black;'>" + i[0] + "</td><td style='text-align: center;padding:3px;border: 1px solid black;'>" + i[3] + " " + i[4] + "</td><td style='text-align: center;padding:3px;border: 1px solid black;'>" + i[1] + " " + i[2] + "</td>";
             tmp_tables += "</tr>";
         }
     }
-    tmp_tables += "<tr><td style='border:none'></td><td style='border:none;text-align: end;' colspan='2'>Общий вес:&nbsp;" + pre_tmp[1] + "&nbsp;тн</td></tr></table>";
+    tmp_tables += "<tr><td style='border:none'></td><td style='padding:3px;border:none;text-align: end;' colspan='2'>Общий вес:&nbsp;" + pre_tmp[1] + "&nbsp;тн</td></tr></table>";
 
     let textHtml = "<p>Заказ от&nbsp;" + dd.toString() + "." + mm.toString() + "." + yyyy.toString() + "&nbsp;" + hrs.toString() + ":" + mns.toString() + "</p>" + 
     "<p>Клиент:&nbsp;" + inp["form-name"] + "</p>" + 
