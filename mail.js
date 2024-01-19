@@ -42,7 +42,7 @@ let mns = today.getMinutes();
 
 let text = "Unsupported html content";
 async function send(inp, file) {
-    let tmp_tables = "<style>td, th {padding:3px;border: 1px solid black;}</style><table style='border-collapse: collapse;'><tr><th>Товар</th><th>Количество (тонн)</th><th>Количесвто (ед.изм.)</th></tr>";
+    let tmp_tables = "<style>td, th {padding:3px;border: 1px solid black;}</style><table style='border-collapse: collapse;'><tr><th>Товар</th><th>Вес (тонн)</th><th>Количесвто (ед.изм.)</th></tr>";
     let pre_tmp = inp["form_positions"].split("`");
     let tmp = pre_tmp[0].split("~");
     let tmp_2 = tmp.map((item) => item.split("|"));
