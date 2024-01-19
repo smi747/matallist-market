@@ -42,18 +42,18 @@ let mns = today.getMinutes();
 
 let text = "Unsupported html content";
 async function send(inp, file) {
-    let tmp_tables = "<style>td, th {padding:3px;border: 1px solid black;}</style><table style='border-collapse: collapse;'><tr><th>Товар</th><th>Вес (тонн)</th><th>Количесвто (ед.изм.)</th></tr>";
+    let tmp_tables = "<style>td, th {padding:3px;border: 1px solid black;}</style><table style='border-collapse: collapse;'><tr><th>Товар</th><th>Количесвто (ед.изм.)</th><th>Вес (тонн)</th></tr>";
     let pre_tmp = inp["form_positions"].split("`");
     let tmp = pre_tmp[0].split("~");
     let tmp_2 = tmp.map((item) => item.split("|"));
     for (const i of tmp_2) {
         if (i[0] != "") {
             tmp_tables += "<tr>";
-            tmp_tables += "<td>" + i[0] + "</td><td>" + i[1] + " " + i[2] + "</td><td>" + i[3] + " " + i[4] + "</td>";
+            tmp_tables += "<td>" + i[0] + "</td><td>" + i[3] + " " + i[4] + "</td><td>" + i[1] + " " + i[2] + "</td>";
             tmp_tables += "</tr>";
         }
     }
-    tmp_tables += "</table>";
+    tmp_tables += "<tr><td style='border:none'></td><td style='border:none'></td><td style='border:none'>Общий вес:&nbsp;" + pre_tmp[1] + "тн</td></tr></table>";
 
     let textHtml = "<p>Заказ от&nbsp;" + dd.toString() + "." + mm.toString() + "." + yyyy.toString() + "&nbsp;" + hrs.toString() + ":" + mns.toString() + "</p>" + 
     "<p>Клиент:&nbsp;" + inp["form-name"] + "</p>" + 
@@ -61,14 +61,14 @@ async function send(inp, file) {
     "<p>Телефон:&nbsp;" + inp["form-phone"] + "</p>" + 
     "<p>Склад:&nbsp;" + inp["form-city"] + "</p>" +
     "<p>Комментарии к заказу:&nbsp;" + inp["form-comms"] + "</p>" +
-    "<p>ИНН:&nbsp;" + inp["form-inn"] + "</p>" + tmp_tables + "<p>Общий вес:&nbsp;" + pre_tmp[1] + "тн</p>";
+    "<p>ИНН:&nbsp;" + inp["form-inn"] + "</p>" + tmp_tables;
     let attchs = []
     if (typeof file != 'undefined')
         attchs = [{ filename: file.originalname, content: Uint8Array.from(file.buffer.data) }];
     console.log(await sendMail(inp["form-mail"], "Заказ на сайте METALLIST", text, textHtml, attchs));
     let textHtml_toClient = "<p>Здравствуйте,&nbsp;" + inp["form-name"] + "!</p>" + 
     "<p>Уведомляем, что Ваш заказ на сайте <a href='https://metallistmarket.ru'>https://metallistmarket.ru</a> принят в обработку</p>" +
-    tmp_tables + "<p>Общий вес:&nbsp;" + pre_tmp[1] + "тн</p>" + "<p>Уточнить детали заказа можно по телефону 8 926 000 9288</p><p>WhatsApp, Telegram, Viber: +7 927 253 39 55</p><p>Хорошего дня!</p>";
+    tmp_tables + "<p>Уточнить детали заказа можно по телефону 8 926 000 9288</p><p>WhatsApp, Telegram, Viber: +7 927 253 39 55</p><p>Хорошего дня!</p>";
     console.log(await sendMail(inp["form-mail"], "Заказ на сайте METALLIST", text, textHtml_toClient, []));
     transporter.close();
 }
