@@ -53,7 +53,7 @@ async function send(inp, file) {
             tmp_tables += "</tr>";
         }
     }
-    tmp_tables += "<tr><td style='border:none'></td><td style='border:none'></td><td style='border:none'>Общий вес:&nbsp;" + pre_tmp[1] + "тн</td></tr></table>";
+    tmp_tables += "<tr><td style='border:none'></td><td style='border:none;text-align: end;' colspan='2'>Общий вес:&nbsp;" + pre_tmp[1] + "тн</td></tr></table>";
 
     let textHtml = "<p>Заказ от&nbsp;" + dd.toString() + "." + mm.toString() + "." + yyyy.toString() + "&nbsp;" + hrs.toString() + ":" + mns.toString() + "</p>" + 
     "<p>Клиент:&nbsp;" + inp["form-name"] + "</p>" + 
