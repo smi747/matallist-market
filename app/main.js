@@ -423,24 +423,26 @@ function App() {
 
   var n = new RegExp('^([0-9][0-9]*\\.?[0-9]?[0-9]?[0-9]?)?$', "gm");
   const handleCoefChange_1 = (e) => {
-    if (n.test(e.target.value)){
-      setCoef_1(e.target.value);
+    let replaced = e.target.value.replace(',', '.').replace('\'', '.')
+    if (n.test(replaced)){
+      setCoef_1(replaced);
       if (selectedPosition.units == "тн")
-        setCoef_2((parseFloat(e.target.value) * 1000 / selectedPosition.coef).toFixed(3));
+        setCoef_2((parseFloat(replaced) * 1000 / selectedPosition.coef).toFixed(3));
       else
-        setCoef_2((parseFloat(e.target.value) * selectedPosition.coef / 1000).toFixed(3));
-      if (e.target.value == "")
+        setCoef_2((parseFloat(replaced) * selectedPosition.coef / 1000).toFixed(3));
+      if (replaced == "")
         setCoef_2("");
       }
   }
   const handleCoefChange_2 = (e) => {
-    if (n.test(e.target.value)){
-      setCoef_2(e.target.value);
+    let replaced = e.target.value.replace(',', '.').replace('\'', '.')
+    if (n.test(replaced)){
+      setCoef_2(replaced);
       if (selectedPosition.units == "тн") 
-        setCoef_1((parseFloat(e.target.value) * selectedPosition.coef / 1000).toFixed(3));
+        setCoef_1((parseFloat(replaced) * selectedPosition.coef / 1000).toFixed(3));
       else
-        setCoef_1((parseFloat(e.target.value) * 1000 / selectedPosition.coef).toFixed(3));
-      if (e.target.value == "")
+        setCoef_1((parseFloat(replaced) * 1000 / selectedPosition.coef).toFixed(3));
+      if (replaced == "")
         setCoef_1("");
       }
   }
@@ -548,6 +550,7 @@ function App() {
 root.render(<Provider store={store}><App /></Provider>)
 
 const root_2 = createRoot(document.getElementById('reactnumber'));
+const root_2_2 = createRoot(document.getElementById('reactnumber_2'));
 
 function Number() {
   const dispatch = useDispatch();
@@ -558,6 +561,7 @@ function Number() {
 }
 
 root_2.render(<Provider store={store}><Number /></Provider>)
+root_2_2.render(<Provider store={store}><Number /></Provider>)
 
 const root_3 = createRoot(document.getElementById('reactcart'));
 
@@ -575,24 +579,26 @@ function Cart() {
 
   var n = new RegExp('^([0-9][0-9]*\\.?[0-9]?[0-9]?[0-9]?)?$', "gm");
   const handleCoefChange_1 = (e, item, i) => {
-    if (n.test(e.target.value)){
-      changeQs(i, e.target.value, null);
+    let replaced = e.target.value.replace(',', '.').replace('\'', '.')
+    if (n.test(replaced)){
+      changeQs(i, replaced, null);
       if (item.units == "тн")
-        changeQs(i, null, (parseFloat(e.target.value) * 1000 / item.coef).toFixed(3));
+        changeQs(i, null, (parseFloat(replaced) * 1000 / item.coef).toFixed(3));
       else
-        changeQs(i, null, (parseFloat(e.target.value) * item.coef / 1000).toFixed(3));
-      if (e.target.value == "")
+        changeQs(i, null, (parseFloat(replaced) * item.coef / 1000).toFixed(3));
+      if (replaced == "")
         changeQs(i, null, "");
       }
   }
   const handleCoefChange_2 = (e, item, i) => {
-    if (n.test(e.target.value)){
-      changeQs(i, null, e.target.value);
+    let replaced = e.target.value.replace(',', '.').replace('\'', '.')
+    if (n.test(replaced)){
+      changeQs(i, null, replaced);
       if (item.units == "тн") 
-        changeQs(i, (parseFloat(e.target.value) * item.coef / 1000).toFixed(3), null);
+        changeQs(i, (parseFloat(replaced) * item.coef / 1000).toFixed(3), null);
       else
-        changeQs(i, (parseFloat(e.target.value) * 1000 / item.coef).toFixed(3), null);
-      if (e.target.value == "")
+        changeQs(i, (parseFloat(replaced) * 1000 / item.coef).toFixed(3), null);
+      if (replaced == "")
         changeQs(i, "", null);
       }
   }
@@ -612,7 +618,6 @@ function Cart() {
 }
 
 root_3.render(<Provider store={store}><Cart /></Provider>)
-
 
 
 
