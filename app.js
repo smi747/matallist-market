@@ -197,16 +197,12 @@ app.post("/admin", checkAuthenticated, multer({ storage: storageConfig }).single
             cwd: 'GFG',
             encoding: 'utf8',
             shell: true});
-        command_2.on('close', (code) => {
-            if (code !== 0) {
-            console.log(`2grep process exited with code ${code}`);
-            }
             const command_3 = exec('mysql -padmin < musqlscript');
             command_3.on('close', (code) => {
                 if (code !== 0) {
                 console.log(`2grep process exited with code ${code}`);
                 };
-                res.send(`completed`);})})
+                res.send(`completed`);})
     });
 });
 
