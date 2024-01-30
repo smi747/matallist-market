@@ -130,7 +130,7 @@ app.post("/user", jsonParser, function (request, response) {
 
 const urlencodedParser = express.urlencoded({extended: false});
 const child_process = require('child_process');
-const { spawn } = require('child_process');
+const { spawn, exec } = require('child_process');
 const multer = require('multer');
 const storage = multer.memoryStorage()
 const upload = multer({ storage: storage })
@@ -193,13 +193,13 @@ app.post("/admin", checkAuthenticated, multer({ storage: storageConfig }).single
         if (code !== 0) {
         console.log(`grep process exited with code ${code}`);
         }
-        const command_2 = spawn('sudo', ["cp", "GFG", "var/lib/mysql/positions"]);
+        const command_2 = exec('sudo cp GFG /var/lib/mysql/positions');
         command_2.on('close', (code) => {
             if (code !== 0) {
             console.log(`2grep process exited with code ${code}`);
             }
-            const command_3 = spawn('mysql', ["-padmin", "<", "musqlscript"]);
-            command_2.on('close', (code) => {
+            const command_3 = exec('mysql -padmin < musqlscript');
+            command_3.on('close', (code) => {
                 if (code !== 0) {
                 console.log(`2grep process exited with code ${code}`);
                 };
