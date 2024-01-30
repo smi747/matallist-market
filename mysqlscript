@@ -1,6 +1,6 @@
 USE positions;
 DELETE FROM position;
-LOAD DATA INFILE 'GFG' 
+LOAD DATA INFILE '~/matallist-market/GFG' 
 INTO TABLE position 
 FIELDS TERMINATED BY ':'
 LINES TERMINATED BY '\n'
