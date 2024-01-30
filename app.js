@@ -91,6 +91,29 @@ var _getAllFilesFromFolder = function(dir) {
   
   };
 
+const userlist = [{id: 0, email: "admin", password: "123"}]
+
+const passport = require('passport');
+const localStrategy = require('passport-local').Strategy;
+const session = require('express-session');
+
+
+function initializePassport(passport, getUserByEmail, getUserById) {
+    const authenticateUser = (email, password, done) => {
+        const user = getUserByEmail(email);
+        if (user == null)
+            return done(null, false);
+        if (password == user.password)
+            return done(null, user)
+        else
+            return done(null, false)
+    }
+    passport.use(new localStrategy({usernameField: 'login'}, authenticateUser))
+    passport.serializeUser((user, done) => { done(null, user.id) })
+    passport.deserializeUser((id, done) => { return done(null, getUserById(id)) })
+}
+initializePassport(passport, email => userlist.find(user => user.email === email), id => userlist.find(user => user.id === id));
+
 const express = require("express");
 var send = require('./mail.js');
   
@@ -128,10 +151,49 @@ app.post("/", upload.single('form-reqs'), function (req, res) {
     childProcess.send({0: req.body, 1: req.file})
     console.log(req.body);
     });
-    
 });
+
 app.get('/prg', (req, res) => res.redirect(303, '/?ordered=1'));
 app.get('/prgf', (req, res) => res.redirect(303, '/?ordered=2'));
+
+
+app.use(session({secret: "SECRET", resave:false, saveUninitialized:false, cookie: { maxAge: 60 * 60 * 1000 }}));
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(urlencodedParser);
+
+app.get('/admin', checkAuthenticated, (req, res) => {
+    res.sendFile(__dirname + "//admin.html");
+});
+app.get('/login', (req, res) => {
+    res.sendFile(__dirname + "//app/auth.html");
+});
+
+const storageConfig = multer.diskStorage({
+    destination: (req, file, cb) =>{
+        cb(null, "uploads");
+    },
+    filename: (req, file, cb) =>{
+        cb(null, file.originalname);
+    }
+});
+app.post("/admin", checkAuthenticated, multer({ storage: storageConfig }).single('form-reqs'), function (req, res) {
+    res.sendFile(__dirname + "//admin.html");
+});
+
+
+
+app.post('/login', passport.authenticate('local', {
+    successRedirect: "/admin",
+    failureRedirect: "/login",
+
+}));
+
+function checkAuthenticated(req, res, next) {
+    if (req.isAuthenticated())
+        return next()
+    res.redirect("/login");
+}
 
 app.get("/", function(request, response){
       
