@@ -1,5 +1,6 @@
 import pandas as pd
-import csv, json, sys
+import csv, json
+#import sys
 
 filename = input()
 xl = pd.ExcelFile(filename)
@@ -68,4 +69,4 @@ with open("cattree.json", "w", encoding='utf-8') as outfile:
     outfile.write(send_to_js)
 
 
-sys.stdout.write("update completed")
+#sys.stdout.write("update completed")
