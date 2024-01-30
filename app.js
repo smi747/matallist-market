@@ -196,10 +196,14 @@ app.post("/admin", checkAuthenticated, multer({ storage: storageConfig }).single
         const command_2 = spawn('sudo', ["cp", "GFG", "var/lib/mysql/positions"]);
         command_2.on('close', (code) => {
             if (code !== 0) {
-            console.log(`grep process exited with code ${code}`);
+            console.log(`2grep process exited with code ${code}`);
             }
             const command_3 = spawn('mysql', ["-padmin", "<", "musqlscript"]);
-            res.send(`completed`);})
+            command_2.on('close', (code) => {
+                if (code !== 0) {
+                console.log(`2grep process exited with code ${code}`);
+                };
+                res.send(`completed`);})})
     });
 });
 
