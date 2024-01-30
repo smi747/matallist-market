@@ -193,7 +193,7 @@ app.post("/admin", checkAuthenticated, multer({ storage: storageConfig }).single
         if (code !== 0) {
         console.log(`grep process exited with code ${code}`);
         }
-        const command_3 = spawn('mysql', ["-padmin < musqlscript"]);
+        const command_3 = exec('mysql -padmin < mysqlscript');
         command_3.on('close', (code) => {
             if (code !== 0) {
             console.log(`2grep process exited with code ${code}`);
