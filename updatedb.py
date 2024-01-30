@@ -35,7 +35,7 @@ for i in snames:
                 reslist.append([indx,row[0], tmp, row[2], row[3], current_units, row[8], i, current_cat, current_subcat, 0])
                 indx+=1
 
-with open('GFG', 'w', encoding="utf-8", newline='\n') as f:
+with open('/var/lib/mysql/positions/GFG', 'w', encoding="utf-8", newline='\n') as f:
     # using csv.writer method from CSV package
     write = csv.writer(f, delimiter = ":", quoting = csv.QUOTE_NONE, quotechar='')
 
