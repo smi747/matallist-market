@@ -1,4 +1,5 @@
-DELETE FROM table_name;
+USE positions;
+DELETE FROM position;
 LOAD DATA INFILE 'GFG' 
 INTO TABLE position 
 FIELDS TERMINATED BY ':'
