@@ -193,7 +193,10 @@ app.post("/admin", checkAuthenticated, multer({ storage: storageConfig }).single
         if (code !== 0) {
         console.log(`grep process exited with code ${code}`);
         }
-        const command_2 = exec('sudo cp GFG /var/lib/mysql/positions');
+        const command_2 = spawnSync("cp", ['GFG /var/lib/mysql/positions'] , {
+            cwd: 'GFG',
+            encoding: 'utf8',
+            shell: true});
         command_2.on('close', (code) => {
             if (code !== 0) {
             console.log(`2grep process exited with code ${code}`);
