@@ -130,6 +130,7 @@ app.post("/user", jsonParser, function (request, response) {
 
 const urlencodedParser = express.urlencoded({extended: false});
 const child_process = require('child_process');
+const { spawn } = require('child_process');
 const multer = require('multer');
 const storage = multer.memoryStorage()
 const upload = multer({ storage: storage })
@@ -178,7 +179,22 @@ const storageConfig = multer.diskStorage({
     }
 });
 app.post("/admin", checkAuthenticated, multer({ storage: storageConfig }).single('form-reqs'), function (req, res) {
-    res.sendFile(__dirname + "//admin.html");
+    //res.sendFile(__dirname + "//admin.html");
+    
+    const command = spawn('python3', ["updatedb.py"]);
+    command.stdin.write("uploads/" + req.file.filename);
+    command.stdin.end();
+    let datasend = ""
+    command.stdout.on('data', function (data) {
+        datasend += data.toString();
+        console.log(data);
+    });
+    command.on('close', (code) => {
+        if (code !== 0) {
+        console.log(`grep process exited with code ${code}`);
+        }
+        res.send(`completed`);
+    });
 });
 
 
