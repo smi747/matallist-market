@@ -197,38 +197,48 @@ const storageConfig = multer.diskStorage({
 });
 app.post("/admin", checkAuthenticated, multer({ storage: storageConfig }).single('form-reqs'), function (req, res) {
     //res.sendFile(__dirname + "//admin.html");
-    if (req.file) {
-    console.log("file received")
-    const command = spawn('python3', ["updatedb.py"]);
-    command.stdin.write("uploads/" + req.file.filename);
-    command.stdin.end();
-    let datasend = ""
-    command.stdout.on('data', function (data) {
-        datasend += data.toString();
-        console.log(data);
-    });
-    command.on('close', (code) => {
-        if (code !== 0) {
-        console.log(`grep process exited with code ${code}`);
+    if (req.query.p == 1) {
+        if (!req.file) {
+            res.send(`<p>Пустой файл!</p><p>Вернитесь в <a href="/admin">панель администратора</a> или на <a href="/">главную страницу</a></p>`);
         }
-        const command_3 = exec('mysql -padmin < mysqlscript');
-        command_3.on('close', (code) => {
-            if (code !== 0) {
-            console.log(`2grep process exited with code ${code}`);
-            };
-            res.send(`completed`);})
-    });
+        else {
+            console.log("file processing")
+            const command = spawn('python3', ["updatedb.py"]);
+            command.stdin.write("uploads/" + req.file.filename);
+            command.stdin.end();
+            let datasend = ""
+            command.stdout.on('data', function (data) {
+                datasend += data.toString();
+                console.log(data);
+            });
+            command.on('close', (code) => {
+                if (code !== 0) {
+                console.log(`grep process exited with code ${code}`);
+                res.send(`<p>Возникла ошибка во время обработки файла! Повторите попытку или обратитесь к системному администратору</p><p>Вернитесь в <a href="/admin">панель администратора</a> или на <a href="/">главную страницу</a></p>`);
+                }
+                else {
+                const command_3 = exec('mysql -padmin < mysqlscript');
+                command_3.on('close', (code) => {
+                    if (code !== 0) {
+                    console.log(`2grep process exited with code ${code}`);
+                    res.send(`<p>Возникла ошибка во время записи в базу данных! Повторите попытку или обратитесь к системному администратору</p><p>Вернитесь в <a href="/admin">панель администратора</a> или на <a href="/">главную страницу</a></p>`)
+                    }
+                    else {
+                    res.send(`<p>Успешно завершено!</p><p>Вернитесь в <a href="/admin">панель администратора</a> или на <a href="/">главную страницу</a></p>`);}})
+                }});
+            }
     }
     
-    if (req.body) {
+    if (req.query.p == 2) {
+        console.log("index.html processing")
         fs.writeFile('app/index.html', req.body["form-html"], err => {
         if (err) {
             console.error(err);
+            res.send(`<p>Возникла ошибка! Повторите попытку или обратитесь к системному администратору</p><p>Вернитесь в <a href="/admin">панель администратора</a> или на <a href="/">главную страницу</a></p>`);
         } else {
-            // file written successfully
+            res.send(`<p>Успешно завершено!</p><p>Вернитесь в <a href="/admin">панель администратора</a> или на <a href="/">главную страницу</a></p>`);
         }
         });
-        res.send(`completed`);
     }
 });
 

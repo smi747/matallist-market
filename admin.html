@@ -5,14 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Панель администрирования</title>
 </head>
-<body>
-    <form method="POST" enctype="multipart/form-data" action="">
-        <div class="form_section">
-            <label for="form-reqs" class="form_text">Файл с реквизитами</label>
+<body style="padding: 0; margin: 0; height: 100%; background-color: aliceblue;">
+    <form method="POST" enctype="multipart/form-data" action="?p=1">
+        <p style="font-size: 25px; margin: 20px 10px 0; padding:0; border-bottom: 1px solid;font-family: Arial;">Обновление каталога</p>
+        <div class="form_section" style="display: flex; flex-direction: column; gap: 10px; padding: 20px;">
+            <label for="form-reqs" class="form_text">Загрузите файл (xls, xlsx):</label>
             <input type="file" name="form-reqs" id="form-reqs" class="form_inputfile">
+            <input style="width: max-content;padding: 5px;font-weight: bold;" type="submit" value="ОБНОВИТЬ">
         </div>
-        <textarea spellcheck="false" type="text" name="form-html">~~~</textarea>
-        <input type="submit" value="ОТПРАВИТЬ">
+    </form>
+    <form method="POST" enctype="multipart/form-data" action="?p=2">
+        <p style="font-size: 25px; margin: 20px 10px 0; padding:0; border-bottom: 1px solid;font-family: Arial;">Редактирование главной страницы (index.html)</p>
+        <div style="margin: 20px;display: flex;justify-content: center; flex-direction: column;align-items: center;gap: 10px;">
+            <p style="align-self: start; margin: 0;">Совет: воспользуйтесь поиском по странице (Shift+F3), чтобы найти фрагмент, который хотите править</p>
+            <textarea spellcheck="false" type="text" name="form-html" style="width: 90vw;height: 50vh;">~~~</textarea>
+            <input style="width: max-content;padding: 5px;font-weight: bold;align-self: start;" type="submit" value="СОХРАНИТЬ ИЗМЕНЕНИЯ">
+        </div>
     </form>
 </body>
 </html>
