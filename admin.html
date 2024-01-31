@@ -11,7 +11,7 @@
         <div class="form_section" style="display: flex; flex-direction: column; gap: 10px; padding: 20px;">
             <label for="form-reqs" class="form_text">Загрузите файл (xls, xlsx):</label>
             <input type="file" name="form-reqs" id="form-reqs" class="form_inputfile">
-            <input style="width: max-content;padding: 5px;font-weight: bold;" type="submit" value="ОБНОВИТЬ">
+            <input onclick='this.value="Загрузка..."' style="width: max-content;padding: 5px;font-weight: bold;" type="submit" value="ОБНОВИТЬ">
         </div>
     </form>
     <form method="POST" enctype="multipart/form-data" action="?p=2">
