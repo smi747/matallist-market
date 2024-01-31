@@ -163,8 +163,25 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(urlencodedParser);
 
+const {Transform} = require('node:stream');
+
 app.get('/admin', checkAuthenticated, (req, res) => {
-    res.sendFile(__dirname + "//admin.html");
+    const replacementTransform = new Transform()
+    const content = fs.readFileSync("app/index.html");
+    replacementTransform._transform = function(data, encoding, done) {
+        const str = data.toString().replace('~~~', content)
+        this.push(str)
+        done()
+    }
+
+    res.write('<!-- Begin stream -->\n');
+    let stream = fs.createReadStream('admin.html')
+    stream.pipe(replacementTransform)
+    .on('end', () => {
+        res.write('\n<!-- End stream -->')
+    }).pipe(res).on('end', () => {res.sendFile(__dirname + "//admin.html");})
+
+    
 });
 app.get('/login', (req, res) => {
     res.sendFile(__dirname + "//app/auth.html");
@@ -180,7 +197,8 @@ const storageConfig = multer.diskStorage({
 });
 app.post("/admin", checkAuthenticated, multer({ storage: storageConfig }).single('form-reqs'), function (req, res) {
     //res.sendFile(__dirname + "//admin.html");
-    
+    if (req.file) {
+    console.log("file received")
     const command = spawn('python3', ["updatedb.py"]);
     command.stdin.write("uploads/" + req.file.filename);
     command.stdin.end();
@@ -200,6 +218,18 @@ app.post("/admin", checkAuthenticated, multer({ storage: storageConfig }).single
             };
             res.send(`completed`);})
     });
+    }
+    
+    if (req.body) {
+        fs.writeFile('app/index.html', req.body["form-html"], err => {
+        if (err) {
+            console.error(err);
+        } else {
+            // file written successfully
+        }
+        });
+        res.send(`completed`);
+    }
 });
 
 

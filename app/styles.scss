@@ -1631,6 +1631,12 @@ textarea:focus {
 
 .form_textarea {
   resize: none;
+  background-color: white;
+  min-height: 150px;
+}
+
+.form_textarea:focus {
+  outline: 0;
 }
 
 .form_section_submit {
