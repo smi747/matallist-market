@@ -1,5 +1,8 @@
 require('dotenv').config();
+var fs=require('fs');
 const {Sequelize, Op} = require('sequelize');
+
+var cattree=fs.readFileSync('cattree.json', 'utf8');
 
 const sequelize = new Sequelize(
     process.env.DB_NAME,
@@ -217,6 +220,7 @@ app.post("/admin", checkAuthenticated, multer({ storage: storageConfig }).single
                 res.send(`<p>Возникла ошибка во время обработки файла! Повторите попытку или обратитесь к системному администратору</p><p>Вернитесь в <a href="/admin">панель администратора</a> или на <a href="/">главную страницу</a></p>`);
                 }
                 else {
+                cattree=fs.readFileSync('cattree.json', 'utf8');
                 const command_3 = exec('mysql -padmin < mysqlscript');
                 command_3.on('close', (code) => {
                     if (code !== 0) {
@@ -267,8 +271,8 @@ app.get("/", function(request, response){
     response.sendFile(__dirname + "//app/index.html");
 });
 
-var fs=require('fs');
-var cattree=fs.readFileSync('cattree.json', 'utf8');
+
+
 
 app.get('/express_backend', (req, res) => { //Строка 9
     get_db(parseInt(req.query.ofs), parseInt(req.query.lim), req.query.selcat, req.query.searchinp, req.query.filt_size, req.query.filt_mark).then((data) => {res.send({ express: JSON.stringify(data[0]), sizes: JSON.stringify(data[1]), marks: JSON.stringify(data[2]),catinfo: cattree })})
