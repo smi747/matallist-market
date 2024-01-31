@@ -308,9 +308,9 @@ const Paginate = ({ postsPerPage, totalPosts, paginate, selectedPage }) => {
 const CatalogPosition = ({x, onClick, selectedPosition, handleCoefChange_1, handleCoefChange_2, coef_1, coef_2, addToCart}) => {
   return(
     <div onClick={onClick} className={x.idposition == selectedPosition.idposition ? "catalog-position__wrap catalog-position__wrap_active" : "catalog-position__wrap"}>
-      {/*x.idposition != selectedPosition.idposition*/ true && <div className={"catalog-position"}><div className='position__name'>{x.name}&nbsp;<span className='mobile-mark'>{x.mark != "nan" && x.mark}</span></div><div className='position__size'>{x.size}</div><div className='position__size'>{x.mark != "nan" && x.mark}</div><div className='addbutton-calc-wrap'>
+      {/*x.idposition != selectedPosition.idposition*/ true && <div className={"catalog-position"}><div className='position__name'>{x.name}<pre> </pre><span className='mobile-mark'>{x.mark != "nan" && x.mark}</span></div><div className='position__size'>{x.size}</div><div className='position__size'>{x.mark != "nan" && x.mark}</div><div className='addbutton-calc-wrap'>
         {x.idposition == selectedPosition.idposition && <div className="position__calc">
-          <div className='position_quantity position_quantity_catalog'><p className='position__setcount'>УКАЖИТЕ КОЛИЧЕСТВО:&nbsp;</p>
+          <div className='position_quantity position_quantity_catalog'><p className='position__setcount'>УКАЖИТЕ КОЛИЧЕСТВО:<pre> </pre></p>
           <div className='input_wrap'><input className="position_quantity_i position_quantity_i_catalog" onClick={e => e.stopPropagation()} onChange={(e)=>handleCoefChange_1(e)} value={coef_1}></input><div className="ed_izm">{selectedPosition.units}</div></div>=
           <div className='input_wrap'><input className="position_quantity_i position_quantity_i_catalog" onClick={e => e.stopPropagation()} onChange={(e)=>handleCoefChange_2(e)} value={coef_2}></input><div className="ed_izm">{selectedPosition.unitssecond}</div></div></div>
           <div className='position__add-button' onClick={() => {addToCart(Object.assign({}, x), coef_1, coef_2); document.getElementById("position_added_alarm").classList.add('position_added_alarm_visible'); setTimeout(() => {document.getElementById("position_added_alarm").classList.remove('position_added_alarm_visible')}, 4000)}}>ДОБАВИТЬ В КОРЗИНУ</div></div>}</div><div className='add-position-button'><div className='d24'></div></div></div>}
@@ -608,7 +608,7 @@ function Cart() {
       {items.map((item, i) => {return(
         <div key={i} className="cart_position">
                 <div className="position_name">{item.name}</div>
-                {<div className="position_quantity"><div className="input_wrap"><input type="text" onChange={(e) => handleCoefChange_1(e, item, i)} className="position_quantity_i" value={item.q_1}></input><div className="ed_izm">{item.units}</div></div>&nbsp;/&nbsp;<div className="input_wrap"><input type="text" onChange={(e) => handleCoefChange_2(e, item, i)} className="position_quantity_i" value={item.q_2}></input><div className="ed_izm">{item.unitssecond}</div></div></div>}
+                {<div className="position_quantity"><div className="input_wrap"><input type="text" onChange={(e) => handleCoefChange_1(e, item, i)} className="position_quantity_i" value={item.q_1}></input><div className="ed_izm">{item.units}</div></div><pre> / </pre><div className="input_wrap"><input type="text" onChange={(e) => handleCoefChange_2(e, item, i)} className="position_quantity_i" value={item.q_2}></input><div className="ed_izm">{item.unitssecond}</div></div></div>}
                 <div className="position_close"><div className="position_close_img" onClick={() => removeFromCart(i)}></div></div>
               </div>
       )})}
@@ -655,7 +655,7 @@ function WeightCount() {
   }, [items])
   
 
-  return <p className="total_weight_text">ОБЩИЙ ВЕС:&nbsp;{totalweight}&nbsp;тонн</p>
+  return <p className="total_weight_text"><pre>ОБЩИЙ ВЕС: </pre><pre>{totalweight} </pre>тонн</p>
 }
 
 root_5.render(<Provider store={store}><WeightCount /></Provider>)

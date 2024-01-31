@@ -6,6 +6,11 @@
   margin: 0;
 }
 
+pre {
+  font: unset;
+  display: inline;
+}
+
 html {
   scroll-behavior: smooth;
 }
