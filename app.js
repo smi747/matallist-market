@@ -79,7 +79,7 @@ var _getAllFilesFromFolder = function(dir) {
     var filesystem = require("fs");
     var results = [];
   
-    filesystem.readdirSync(dir).forEach(function(file) {
+    /*filesystem.readdirSync(dir).forEach(function(file) {
   
         file = dir+'/'+file;
         var stat = filesystem.statSync(file);
@@ -88,9 +88,9 @@ var _getAllFilesFromFolder = function(dir) {
             results = results.concat(_getAllFilesFromFolder(file))
         } else results.push(file);
   
-    });
+    });*/
   
-    return results;
+    return filesystem.readdirSync(dir);
   
   };
 
@@ -279,6 +279,12 @@ app.get('/express_backend', (req, res) => { //Строка 9
      //Строка 10
   }); //Строка 11
   
+app.get('/get_otherpages', (req, res) => {
+let tmp = _getAllFilesFromFolder("app/otherpages");
+console.log(tmp);
+res.send({ express: JSON.stringify(tmp)})
+});
+
 app.use(express.static('app'));
   
 app.listen(3000);

@@ -1,0 +1,113 @@
+
+<style>
+    .pagestyle {
+    color: white;
+    padding: 0 100px;
+    font-family: "Noto Sans", sans-serif;
+    font-size: 21px;
+    text-align: center;
+    @media (max-width: 767px) {
+      padding: 0 50px;
+      font-size: 16px;
+    }
+    @media (max-width: 450px) {
+      padding: 0 20px;
+      font-size: 15px;
+    }}
+    table {
+      border-collapse: collapse;
+    }
+    td {
+      padding: 1px;
+      border-bottom: 1px solid #ffffff61;
+    }
+    a {
+      margin-top: 15px;
+      color: white;
+      text-decoration: underline;
+    }
+    a:hover {
+      color: blue;
+    }
+</style>
+<table class="pagestyle">
+<tr>
+    <td>Полное наименование организации </td>
+    <td>Общество с ограниченной ответственностью «Металлист»</td>
+</tr>
+<tr>
+    <td>ИНН</td>
+    <td>3435094634</td>
+</tr>
+<tr>
+    <td>КПП</td>
+    <td>343501001</td>
+</tr>
+<tr>
+    <td>ОГРН</td>
+    <td>1083435004575</td>
+</tr>
+<tr>
+    <td>ОКПО</td>
+    <td>87267660</td>
+</tr>
+<tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+</tr>
+<tr>
+    <td>Банковские реквизиты:</td>
+    <td></td>
+</tr>
+<tr>
+    <td>Наименование банка получателя</td>
+    <td>Волгоградское отделение №8621 ПАО "СБЕРБАНК"</td>
+</tr>
+<tr>
+    <td>БИК</td>
+    <td>041806647</td>
+</tr>
+<tr>
+    <td>Р/сч</td>
+    <td>40702810311000010272</td>
+</tr>
+<tr>
+    <td>К/сч</td>
+    <td>30101810100000000647</td>
+</tr>
+<tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+</tr>
+<tr>
+    <td>Адрес юридический</td>
+    <td>404118, Волгоградская область, г.Волжский, ул.Мира, 142-30</td>
+</tr>
+<tr>
+    <td>Адрес почтовый</td>
+    <td>404118, Волгоградская область, г.Волжский, ул. Мира, 142-30</td>
+</tr>
+<tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+</tr>
+<tr>
+    <td>Телефон</td>
+    <td>8-92-6000-92-88, 8-960-889-7667</td>
+</tr>
+<tr>
+    <td>E-mail</td>
+    <td>zakaz@metallistmarket.ru</td>
+</tr>
+<tr>
+    <td>Сайт</td>
+    <td>www.metallistmarket.ru</td>
+</tr>
+<tr>
+    <td>Директор</td>
+    <td>Кудряшов Сергей Александрович 
+    (действует на основании Устава)
+    </td>
+</tr>
+</table>
+<a href="partner.doc" download>Скачать версию для печати</a>

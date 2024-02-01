@@ -661,174 +661,11 @@ function WeightCount() {
 root_5.render(<Provider store={store}><WeightCount /></Provider>)
 
 
-const about_page = `<style>
-.pagestyle {
-color: white;
-padding: 0 100px;
-font-family: "Noto Sans", sans-serif;
-font-size: 21px;
-text-align: center;
-@media (max-width: 767px) {
-  padding: 0 50px;
-  font-size: 16px;
-}
-@media (max-width: 450px) {
-  padding: 0 20px;
-  font-size: 15px;
-}}
-</style>
-<p class="pagestyle">Металлист это надежный партнер по поставкам металлопроката и сопутствующих услуг. На рынке металлопрокта более 15 лет.<br>
-Наша компания одной из первых на рынке ввела прозрачную схему расчета металлопроката и стальных труб, что означает – ни одной дописки или выдуманных расходов. Проверьте нас!<br>
-<br>
-Осуществляем доставку товаров в любую точку России, как одной позиции, так и формирование многопозиционного заказа с территории одной базы.<br>
-<br>
-Наша компания реализует ряд основных программ:<br>
-<br>
--увеличение услуг первичной переработки металлопродукции для того, чтобы потребители металла смогли отказаться от услуг собственных вспомогательных цехов.<br>
-<br>
--программа увеличения региональных складов по продаже металлопроката и стальной трубы.<br>
-<br>
-Наши клиенты: сотни крупнейших предприятий самых разных отраслей промышленности.<br>
-<br>
-Присоединяйтесь к числу наших заказчиков и деловых партнеров.<br>
-<br>
-<br>
-Мы изучаем рейтинг, отзывы и предложения.<br>
-<br>
-Покупая металл у нас, можно быть уверенным – это хороший выбор!<br>
-<br>
-Мы признательны, что вы стали нашим клиентом, и благодарим вас за это решение.<br>
-<br>
-<br>
-<br>
-Компания «Металлист» была основана в 2008 году.<br>
-По состоянию на 2024 год мы добились следующих показателей:<br>
-- 16 лет стабильной работы;<br>
-- прозрачная схема расчета металлопроката и стальных труб;<br>
-- доставка более чем в 50 регионов России, как одной позиции, так и многопозиционного заказа;<br>
-- 15 услуг первичной переработки металлопродукции.<br>
-<br>
-Сделка под ключ: подготовим, соберем, отправим любой ТК или доставим до покупателя металл разного вида. Оказываем комплексные услуги, потому что вы экономите свое время и деньги.  <br>
-<br>
-Мы постоянно изучаем рейтинги, отзывы и предложения. Ведь строить воздушные замки – не в наших правилах.<br>
-<br>
-Покупая металл у нас, можно быть уверенным – это хороший выбор!</p>`
+//const about_page = ``
 
-const req_page = `
-<style>
-.pagestyle {
-color: white;
-padding: 0 100px;
-font-family: "Noto Sans", sans-serif;
-font-size: 21px;
-text-align: center;
-@media (max-width: 767px) {
-  padding: 0 50px;
-  font-size: 16px;
-}
-@media (max-width: 450px) {
-  padding: 0 20px;
-  font-size: 15px;
-}}
-table {
-  border-collapse: collapse;
-}
-td {
-  padding: 1px;
-  border-bottom: 1px solid #ffffff61;
-}
-a {
-  margin-top: 15px;
-  color: white;
-  text-decoration: underline;
-}
-a:hover {
-  color: blue;
-}
-</style>
-<table class="pagestyle">
-<tr>
-  <td>Полное наименование организации </td>
-  <td>Общество с ограниченной ответственностью «Металлист»</td>
-</tr>
-<tr>
-  <td>ИНН</td>
-  <td>3435094634</td>
-</tr>
-<tr>
-  <td>КПП</td>
-  <td>343501001</td>
-</tr>
-<tr>
-  <td>ОГРН</td>
-  <td>1083435004575</td>
-</tr>
-<tr>
-  <td>ОКПО</td>
-  <td>87267660</td>
-</tr>
-<tr>
-  <td>&nbsp;</td>
-  <td>&nbsp;</td>
-</tr>
-<tr>
-  <td>Банковские реквизиты:</td>
-  <td></td>
-</tr>
-<tr>
-  <td>Наименование банка получателя</td>
-  <td>Волгоградское отделение №8621 ПАО "СБЕРБАНК"</td>
-</tr>
-<tr>
-  <td>БИК</td>
-  <td>041806647</td>
-</tr>
-<tr>
-  <td>Р/сч</td>
-  <td>40702810311000010272</td>
-</tr>
-<tr>
-  <td>К/сч</td>
-  <td>30101810100000000647</td>
-</tr>
-<tr>
-  <td>&nbsp;</td>
-  <td>&nbsp;</td>
-</tr>
-<tr>
-  <td>Адрес юридический</td>
-  <td>404118, Волгоградская область, г.Волжский, ул.Мира, 142-30</td>
-</tr>
-<tr>
-  <td>Адрес почтовый</td>
-  <td>404118, Волгоградская область, г.Волжский, ул. Мира, 142-30</td>
-</tr>
-<tr>
-  <td>&nbsp;</td>
-  <td>&nbsp;</td>
-</tr>
-<tr>
-  <td>Телефон</td>
-  <td>8-92-6000-92-88, 8-960-889-7667</td>
-</tr>
-<tr>
-  <td>E-mail</td>
-  <td>zakaz@metallistmarket.ru</td>
-</tr>
-<tr>
-  <td>Сайт</td>
-  <td>www.metallistmarket.ru</td>
-</tr>
-<tr>
-  <td>Директор</td>
-  <td>Кудряшов Сергей Александрович 
-  (действует на основании Устава)
-  </td>
-</tr>
-</table>
-<a href="partner.doc" download>Скачать версию для печати</a>`
+//const req_page = ``
 
-function open_otherpage(x) {
+async function open_otherpage(x) {
   const element = document.createElement("div");
   element.classList.add("cover_menu");
   element.classList.add("cover_menu_dark");
@@ -837,7 +674,8 @@ function open_otherpage(x) {
   cross.setAttribute("onclick", "this.parentElement.remove()");
   cross.classList.add("cross");
 
-  element.innerHTML = eval(x);
+  let response = await fetch('otherpages/'+x);
+  element.innerHTML = await response.text();
   //var text = document.createElement("p");
   //text.innerText = x;
   //text.classList.add("otherpage");
@@ -857,3 +695,30 @@ function open_otherpage(x) {
 }
 
 window.open_otherpage=open_otherpage;
+
+const root_6 = createRoot(document.getElementById('otherpages_reactroot'));
+
+function OtherpagesList() {
+  const [state, setState] = useState([]);
+
+  const callBackendAPI = async () => {
+    const response = await fetch('/get_otherpages');
+    const body = await response.json();
+    //setSearchInput("");
+
+    if (response.status !== 200) {
+      throw Error(body.message)
+    }
+    return body;
+  };
+  useEffect(() => {
+    callBackendAPI()
+    .then(res => setState(JSON.parse(res.express)))
+    .catch(err => console.log(err));
+  }, [])
+  // получение GET маршрута с сервера Express, который соответствует GET из server.js
+  return (
+    <div className='another_links'>{state.map((item) => {return <p key={item} className="another_link" onClick={() =>{main__menu.classList.remove('opened');open_otherpage(item)}}>{item}</p>})}</div>
+    );
+}
+root_6.render(<OtherpagesList />)
