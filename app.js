@@ -251,10 +251,41 @@ app.post("/admin", checkAuthenticated, multer({ storage: storageConfig }).single
                 console.error(err);
                 res.send(`<p>Возникла ошибка! Повторите попытку или обратитесь к системному администратору</p><p>Вернитесь в <a href="/admin">панель администратора</a> или на <a href="/">главную страницу</a></p>`);
             } else {
+                fs.rename('app/otherpages/'+req.query.page, 'app/otherpages/'+req.body["form-name"], err => {
+                    if (err) {
+                        console.error(err);
+                        res.send(`<p>Возникла ошибка! Повторите попытку или обратитесь к системному администратору</p><p>Вернитесь в <a href="/admin">панель администратора</a> или на <a href="/">главную страницу</a></p>`);
+                    }
+                    else
+                        res.send(`<p>Успешно завершено!</p><p>Вернитесь в <a href="/admin">панель администратора</a> или на <a href="/">главную страницу</a></p>`);
+            })
+            }});
+        console.log(req.query.page)
+    }
+    if (req.query.p == 4)
+    {
+        fs.unlink('app/otherpages/'+req.query.page, err => {
+            if (err) {
+                console.error(err);
+                res.send(`<p>Возникла ошибка! Повторите попытку или обратитесь к системному администратору</p><p>Вернитесь в <a href="/admin">панель администратора</a> или на <a href="/">главную страницу</a></p>`);
+            } else {
                 res.send(`<p>Успешно завершено!</p><p>Вернитесь в <a href="/admin">панель администратора</a> или на <a href="/">главную страницу</a></p>`);
             }
             });
         console.log(req.query.page)
+    }
+    if (req.query.p == 5)
+    {
+        fs.writeFile('app/otherpages/'+req.body["form-name"], '<!--Пишите свой код здесь;)-->', err => {
+            if (err) {
+                console.error(err);
+                res.send(`<p>Возникла ошибка! Повторите попытку или обратитесь к системному администратору</p><p>Вернитесь в <a href="/admin">панель администратора</a> или на <a href="/">главную страницу</a></p>`);
+            } else {
+                res.send(`<p>Успешно завершено!</p><p>Вернитесь в <a href="/admin">панель администратора</a> или на <a href="/">главную страницу</a></p>`);
+
+            }});
+        console.log(req.query.page)
+    
     }
 });
 
