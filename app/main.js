@@ -310,7 +310,7 @@ const CatalogPosition = ({x, onClick, selectedPosition, handleCoefChange_1, hand
     <div onClick={onClick} className={x.idposition == selectedPosition.idposition ? "catalog-position__wrap catalog-position__wrap_active" : "catalog-position__wrap"}>
       {/*x.idposition != selectedPosition.idposition*/ true && <div className={"catalog-position"}><div className='position__name'>{x.name}<pre> </pre><span className='mobile-mark'>{x.mark != "nan" && x.mark}</span></div><div className='position__size'>{x.size}</div><div className='position__size'>{x.mark != "nan" && x.mark}</div><div className='addbutton-calc-wrap'>
         {x.idposition == selectedPosition.idposition && <div className="position__calc">
-          <div className='position_quantity position_quantity_catalog'><p className='position__setcount'>УКАЖИТЕ КОЛИЧЕСТВО:<pre> </pre></p>
+          <div className='position_quantity position_quantity_catalog'><p className='position__setcount'>УКАЖИТЕ КОЛИЧЕСТВО:</p><pre> </pre>
           <div className='input_wrap'><input className="position_quantity_i position_quantity_i_catalog" onClick={e => e.stopPropagation()} onChange={(e)=>handleCoefChange_1(e)} value={coef_1}></input><div className="ed_izm">{selectedPosition.units}</div></div>=
           <div className='input_wrap'><input className="position_quantity_i position_quantity_i_catalog" onClick={e => e.stopPropagation()} onChange={(e)=>handleCoefChange_2(e)} value={coef_2}></input><div className="ed_izm">{selectedPosition.unitssecond}</div></div></div>
           <div className='position__add-button' onClick={() => {addToCart(Object.assign({}, x), coef_1, coef_2); document.getElementById("position_added_alarm").classList.add('position_added_alarm_visible'); setTimeout(() => {document.getElementById("position_added_alarm").classList.remove('position_added_alarm_visible')}, 4000)}}>ДОБАВИТЬ В КОРЗИНУ</div></div>}</div><div className='add-position-button'><div className='d24'></div></div></div>}
@@ -655,7 +655,205 @@ function WeightCount() {
   }, [items])
   
 
-  return <p className="total_weight_text"><pre>ОБЩИЙ ВЕС: </pre><pre>{totalweight.toFixed(3)} </pre>тонн</p>
+  return <span className="total_weight_text"><pre>ОБЩИЙ ВЕС: </pre><pre>{totalweight.toFixed(3)} </pre>тонн</span>
 }
 
 root_5.render(<Provider store={store}><WeightCount /></Provider>)
+
+
+const about_page = `<style>
+.pagestyle {
+color: white;
+padding: 0 100px;
+font-family: "Noto Sans", sans-serif;
+font-size: 21px;
+text-align: center;
+@media (max-width: 767px) {
+  padding: 0 50px;
+  font-size: 16px;
+}
+@media (max-width: 450px) {
+  padding: 0 20px;
+  font-size: 15px;
+}}
+</style>
+<p class="pagestyle">Металлист это надежный партнер по поставкам металлопроката и сопутствующих услуг. На рынке металлопрокта более 15 лет.<br>
+Наша компания одной из первых на рынке ввела прозрачную схему расчета металлопроката и стальных труб, что означает – ни одной дописки или выдуманных расходов. Проверьте нас!<br>
+<br>
+Осуществляем доставку товаров в любую точку России, как одной позиции, так и формирование многопозиционного заказа с территории одной базы.<br>
+<br>
+Наша компания реализует ряд основных программ:<br>
+<br>
+-увеличение услуг первичной переработки металлопродукции для того, чтобы потребители металла смогли отказаться от услуг собственных вспомогательных цехов.<br>
+<br>
+-программа увеличения региональных складов по продаже металлопроката и стальной трубы.<br>
+<br>
+Наши клиенты: сотни крупнейших предприятий самых разных отраслей промышленности.<br>
+<br>
+Присоединяйтесь к числу наших заказчиков и деловых партнеров.<br>
+<br>
+<br>
+Мы изучаем рейтинг, отзывы и предложения.<br>
+<br>
+Покупая металл у нас, можно быть уверенным – это хороший выбор!<br>
+<br>
+Мы признательны, что вы стали нашим клиентом, и благодарим вас за это решение.<br>
+<br>
+<br>
+<br>
+Компания «Металлист» была основана в 2008 году.<br>
+По состоянию на 2024 год мы добились следующих показателей:<br>
+- 16 лет стабильной работы;<br>
+- прозрачная схема расчета металлопроката и стальных труб;<br>
+- доставка более чем в 50 регионов России, как одной позиции, так и многопозиционного заказа;<br>
+- 15 услуг первичной переработки металлопродукции.<br>
+<br>
+Сделка под ключ: подготовим, соберем, отправим любой ТК или доставим до покупателя металл разного вида. Оказываем комплексные услуги, потому что вы экономите свое время и деньги.  <br>
+<br>
+Мы постоянно изучаем рейтинги, отзывы и предложения. Ведь строить воздушные замки – не в наших правилах.<br>
+<br>
+Покупая металл у нас, можно быть уверенным – это хороший выбор!</p>`
+
+const req_page = `
+<style>
+.pagestyle {
+color: white;
+padding: 0 100px;
+font-family: "Noto Sans", sans-serif;
+font-size: 21px;
+text-align: center;
+@media (max-width: 767px) {
+  padding: 0 50px;
+  font-size: 16px;
+}
+@media (max-width: 450px) {
+  padding: 0 20px;
+  font-size: 15px;
+}}
+table {
+  border-collapse: collapse;
+}
+td {
+  padding: 1px;
+  border-bottom: 1px solid #ffffff61;
+}
+a {
+  margin-top: 15px;
+  color: white;
+  text-decoration: underline;
+}
+a:hover {
+  color: blue;
+}
+</style>
+<table class="pagestyle">
+<tr>
+  <td>Полное наименование организации </td>
+  <td>Общество с ограниченной ответственностью «Металлист»</td>
+</tr>
+<tr>
+  <td>ИНН</td>
+  <td>3435094634</td>
+</tr>
+<tr>
+  <td>КПП</td>
+  <td>343501001</td>
+</tr>
+<tr>
+  <td>ОГРН</td>
+  <td>1083435004575</td>
+</tr>
+<tr>
+  <td>ОКПО</td>
+  <td>87267660</td>
+</tr>
+<tr>
+  <td>&nbsp;</td>
+  <td>&nbsp;</td>
+</tr>
+<tr>
+  <td>Банковские реквизиты:</td>
+  <td></td>
+</tr>
+<tr>
+  <td>Наименование банка получателя</td>
+  <td>Волгоградское отделение №8621 ПАО "СБЕРБАНК"</td>
+</tr>
+<tr>
+  <td>БИК</td>
+  <td>041806647</td>
+</tr>
+<tr>
+  <td>Р/сч</td>
+  <td>40702810311000010272</td>
+</tr>
+<tr>
+  <td>К/сч</td>
+  <td>30101810100000000647</td>
+</tr>
+<tr>
+  <td>&nbsp;</td>
+  <td>&nbsp;</td>
+</tr>
+<tr>
+  <td>Адрес юридический</td>
+  <td>404118, Волгоградская область, г.Волжский, ул.Мира, 142-30</td>
+</tr>
+<tr>
+  <td>Адрес почтовый</td>
+  <td>404118, Волгоградская область, г.Волжский, ул. Мира, 142-30</td>
+</tr>
+<tr>
+  <td>&nbsp;</td>
+  <td>&nbsp;</td>
+</tr>
+<tr>
+  <td>Телефон</td>
+  <td>8-92-6000-92-88, 8-960-889-7667</td>
+</tr>
+<tr>
+  <td>E-mail</td>
+  <td>zakaz@metallistmarket.ru</td>
+</tr>
+<tr>
+  <td>Сайт</td>
+  <td>www.metallistmarket.ru</td>
+</tr>
+<tr>
+  <td>Директор</td>
+  <td>Кудряшов Сергей Александрович 
+  (действует на основании Устава)
+  </td>
+</tr>
+</table>
+<a href="partner.doc" download>Скачать версию для печати</a>`
+
+function open_otherpage(x) {
+  const element = document.createElement("div");
+  element.classList.add("cover_menu");
+  element.classList.add("cover_menu_dark");
+  var cross = document.createElement("div");
+  
+  cross.setAttribute("onclick", "this.parentElement.remove()");
+  cross.classList.add("cross");
+
+  element.innerHTML = eval(x);
+  //var text = document.createElement("p");
+  //text.innerText = x;
+  //text.classList.add("otherpage");
+  //element.appendChild(text);
+  
+  element.append(cross)
+  body.appendChild(element);
+  /*
+  fetch('http://localhost:3000/?q=test')
+  .then((response) => {
+    return response.text();
+  })
+  .then((data) => {
+    alert(data);
+  });
+  */
+}
+
+window.open_otherpage=open_otherpage;
