@@ -6,6 +6,11 @@
     <title>Панель администрирования</title>
 </head>
 <body style="padding: 0; margin: 0; height: 100%; background-color: aliceblue;">
+    <style>
+        .unvisible {
+            display: none;
+        }
+    </style>
     <form method="POST" enctype="multipart/form-data" action="?p=1">
         <p style="font-size: 25px; margin: 20px 10px 0; padding:0; border-bottom: 1px solid;font-family: Arial;">Обновление каталога</p>
         <div class="form_section" style="display: flex; flex-direction: column; gap: 10px; padding: 20px;">
@@ -22,5 +27,69 @@
             <input style="width: max-content;padding: 5px;font-weight: bold;align-self: start;" type="submit" value="СОХРАНИТЬ ИЗМЕНЕНИЯ">
         </div>
     </form>
+    <p style="font-size: 25px; margin: 20px 10px 0; padding:0; border-bottom: 1px solid;font-family: Arial;">Редактирование дополнительных страниц</p>
+    <div id="root">
 </body>
+<script>
+    const load = async (pn) => {
+        let tmp = document.createElement("textarea");
+        
+        let response = await fetch('otherpages/'+pn);
+        tmp.innerText = await response.text();
+
+        document.getElementById(pn).appendChild(tmp);
+    }
+
+    const callBackendAPI = async () => {
+        const response = await fetch('/get_otherpages');
+        const body = await response.json();
+        //setSearchInput("");
+
+        if (response.status !== 200) {
+        throw Error(body.message)
+        }
+        return body;
+    };
+    let pagelist = [];
+    callBackendAPI()
+    .then(res => {pagelist = JSON.parse(res.express);pagelist.map(async x => {
+        let tmp_form = document.createElement("form");
+        tmp_form.setAttribute("style", "margin: 20px;display: flex;justify-content: center;flex-direction: column;align-items: center;gap: 10px;")
+        tmp_form.setAttribute("method", "POST");
+        tmp_form.setAttribute("action", "?p=3&page="+x)
+        let div_wrap = document.createElement("div");
+        div_wrap.setAttribute("style", "display:flex;align-items:center;gap:10px")
+        let tmp_1 = document.createElement("p");
+        let tmp_2 = document.createElement("button");
+        let tmp_3 = document.createElement("textarea");
+        let response = await fetch('otherpages/'+x);
+        tmp_3.innerText = await response.text();
+        //let string = "load('" + x + "')";
+        tmp_3.setAttribute("id", x)
+        tmp_3.setAttribute("class", "unvisible")
+        tmp_2.setAttribute("style", "height: fit-content;")
+        tmp_3.setAttribute("style", "width: 90vw;height: 50vh;")
+        tmp_3.setAttribute("spellcheck", "false")
+        tmp_3.setAttribute("type", "text");
+        tmp_3.setAttribute("name", "form-html");
+        tmp_2.setAttribute("onclick", "document.getElementById('" + x + "').classList.toggle('unvisible')");
+        tmp_2.innerText = "ПОКАЗАТЬ/СКРЫТЬ";
+        tmp_1.innerText = x;
+        div_wrap.appendChild(tmp_1);
+        div_wrap.appendChild(tmp_2);
+        
+        let tmp_4 = document.createElement("input");
+        tmp_4.setAttribute("type", "submit");
+        tmp_4.setAttribute("value", "СОХРАНИТЬ ИЗМЕНЕНИЯ");
+
+        div_wrap.appendChild(tmp_4);
+        tmp_form.appendChild(div_wrap);
+        tmp_form.appendChild(tmp_3);
+        
+        root.appendChild(tmp_form);
+    })})
+    .catch(err => console.log(err));
+    
+    
+</script>
 </html>
