@@ -276,7 +276,23 @@ app.post("/admin", checkAuthenticated, multer({ storage: storageConfig }).single
     }
     if (req.query.p == 5)
     {
-        fs.writeFile('app/otherpages/'+req.body["form-name"], '<!--Пишите свой код здесь;)-->', err => {
+        fs.writeFile('app/otherpages/'+req.body["form-name"], `<style>
+        .pagestyle {
+        color: white;
+        padding: 0 100px;
+        font-family: "Noto Sans", sans-serif;
+        font-size: 21px;
+        text-align: center;
+        @media (max-width: 767px) {
+            padding: 0 50px;
+            font-size: 16px;
+        }
+        @media (max-width: 450px) {
+            padding: 0 20px;
+            font-size: 15px;
+        }}
+        </style>
+        <p class="pagestyle"><!--Пишите свой текст здесь;)--></p>`, err => {
             if (err) {
                 console.error(err);
                 res.send(`<p>Возникла ошибка! Повторите попытку или обратитесь к системному администратору</p><p>Вернитесь в <a href="/admin">панель администратора</a> или на <a href="/">главную страницу</a></p>`);
