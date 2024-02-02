@@ -374,10 +374,11 @@ res.send({ express: JSON.stringify(tmp)})
 app.get('/get_photos', (req, res) => {
     let tmp = _getAllFilesFromFolder("app/images/slider");
     let result = [];
-    if (!fs.existsSync("app/images/slider/"+x)){
-        fs.mkdirSync("app/images/slider/"+x);
-    }
-    tmp.map(x => result.push(_getAllFilesFromFolder("app/images/slider/"+x)));
+    
+    tmp.map(x => {
+        if (!fs.existsSync("app/images/slider/"+x)){
+            fs.mkdirSync("app/images/slider/"+x);
+        };result.push(_getAllFilesFromFolder("app/images/slider/"+x))});
     res.send({ express: JSON.stringify(result)})
     });
 
