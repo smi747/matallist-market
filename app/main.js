@@ -72,22 +72,7 @@ var swiper = new Swiper(".mySwiper", {
   },
 });
 
-function get_photos(x) {
-  let tmp;
-  if (x == 0)
-    tmp = ["images/slider/01/IMG_4318.jpg"];
-  if (x == 1)
-    tmp = [];
-  if (x == 2)
-    tmp = ["images/slider/03/IMG_1216.jpg", "images/slider/03/IMG_1217.jpg"];
-  if (x == 3)
-    tmp = ["images/slider/04/IMG_4316.jpg", "images/slider/04/IMG_4317.jpg", "images/slider/04/IMG_5322.jpg", "images/slider/04/4.jpg"];
-  if (x == 4)
-    tmp = ["images/slider/05/10.jpg", "images/slider/05/IMG_3837.jpg", "images/slider/05/IMG_3838.jpg", "images/slider/05/IMG_3850.jpg", "images/slider/05/5.jpg", "images/slider/05/6.JPG"];
-  if (x == 5)
-    tmp = ["images/slider/06/1.jpg"];
-  if (x == 6)
-    tmp = ["images/slider/07/IMG_3844.jpg"];
+function get_photos(x, tmp) {
 
   var element = document.createElement("div");
   element.classList.add("cover_menu");
@@ -97,7 +82,7 @@ function get_photos(x) {
 
   for (const elem of tmp) {
     var photo = document.createElement("img");
-    photo.setAttribute("src", elem);
+    photo.setAttribute("src", "images/slider/0"+(x+1)+"/"+elem);
     photo.classList.add("cover_menu_photo");
     element.appendChild(photo);
   }
@@ -722,3 +707,59 @@ function OtherpagesList() {
     );
 }
 root_6.render(<OtherpagesList />)
+
+
+
+const root_7 = createRoot(document.getElementById('swiper_reactroot'));
+function SwiperReact() {
+  const [state, setState] = useState(["ГИБКА МЕТАЛЛА", "ДОСТАВКА", "ЛАЗЕРНАЯ РЕЗКА", "ПЛАЗМЕННАЯ РЕЗКА", "РЕЗКА ЛЕНТОЧНОПИЛЬНЫМ СТАНКОМ", "РУБКА ГИЛЬОТИНОЙ", "СВЕРЛЕНИЕ ОТВЕРСТИЙ",]);
+  const [photoslist, setPhotoslist] = useState([[],[],[],[],[],[],[]]);
+
+  useEffect(() => {
+    swiper = new Swiper(".mySwiper", {
+      effect: "coverflow",
+      grabCursor: true,
+      centeredSlides: true,
+      slidesPerView: "auto",
+      coverflowEffect: {
+        rotate: 50,
+        stretch: 0,
+        depth: 100,
+        modifier: 1,
+        slideShadows: true,
+      },
+      pagination: {
+        el: ".swiper-pagination",
+      },
+      initialSlide: 2,
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+    })
+    // Your code here
+  }, []);
+  const callBackendAPI = async () => {
+    const response = await fetch('/get_photos');
+    const body = await response.json();
+    //setSearchInput("");
+
+    if (response.status !== 200) {
+      throw Error(body.message)
+    }
+    return body;
+  };
+  useEffect(() => {
+    callBackendAPI()
+    .then(res => setPhotoslist(JSON.parse(res.express)))
+    .catch(err => console.log(err));
+  }, [])
+
+  return (
+    <div class="swiper mySwiper"><div className="swiper-wrapper">{state.map((x, i) => {return photoslist[i].length == 0 ? '' : <div key={i} className="swiper-slide" onClick={() => get_photos(i, photoslist[i])}><div className="subtext">{x}</div><img src={"images/slider/0"+(i+1)+"/"+photoslist[i][0]} /></div>})}
+    </div><div className="swiper-pagination"></div>
+    <div className="swiper-button-next"></div>
+    <div className="swiper-button-prev"></div></div>
+    );
+}
+root_7.render(<SwiperReact />)

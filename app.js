@@ -340,9 +340,16 @@ app.get('/express_backend', (req, res) => { //Строка 9
   
 app.get('/get_otherpages', (req, res) => {
 let tmp = _getAllFilesFromFolder("app/otherpages");
-console.log(tmp);
 res.send({ express: JSON.stringify(tmp)})
 });
+
+app.get('/get_photos', (req, res) => {
+    let tmp = _getAllFilesFromFolder("app/images/slider");
+    let result = [];
+    tmp.map(x => result.push(_getAllFilesFromFolder("app/images/slider/"+x)));
+    res.send({ express: JSON.stringify(result)})
+    });
+
 
 app.use(express.static('app'));
   
