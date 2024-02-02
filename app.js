@@ -305,6 +305,34 @@ app.post("/admin", checkAuthenticated, multer({ storage: storageConfig }).single
     }
 });
 
+const storage_photo = multer.memoryStorage()
+app.post("/change_photo", checkAuthenticated, multer({ storage: storage_photo }).single('form-photo'), function (req, res) {
+    if (req.file) {
+        fs.writeFile('app/images/slider/'+req.query.dir+"/"+req.file.originalname, req.file.buffer, err => {
+                if (err) {
+                    console.error(err);
+                    res.send(`<p>Возникла ошибка! Повторите попытку или обратитесь к системному администратору</p><p>Вернитесь в <a href="/admin">панель администратора</a> или на <a href="/">главную страницу</a></p>`);
+                } else {
+                    res.send(`<p>Успешно завершено!</p><p>Вернитесь в <a href="/admin">панель администратора</a> или на <a href="/">главную страницу</a></p>`);
+                }});
+            }
+            else {
+                res.send(`<p>Пустой файл!</p><p>Вернитесь в <a href="/admin">панель администратора</a> или на <a href="/">главную страницу</a></p>`);
+            }
+});
+
+app.post("/delete_photo", checkAuthenticated, multer({ storage: storage_photo }).single('form-photo'), function (req, res) {
+        fs.unlink('app/images/slider/'+req.query.dir+"/"+req.query.ph, err => {
+            if (err) {
+                console.error(err);
+                res.send(`<p>Возникла ошибка! Повторите попытку или обратитесь к системному администратору</p><p>Вернитесь в <a href="/admin">панель администратора</a> или на <a href="/">главную страницу</a></p>`);
+            } else {
+                res.send(`<p>Успешно завершено!</p><p>Вернитесь в <a href="/admin">панель администратора</a> или на <a href="/">главную страницу</a></p>`);
+            }
+            });
+        console.log(req.query.page)
+});
+
 
 
 app.post('/login', passport.authenticate('local', {
