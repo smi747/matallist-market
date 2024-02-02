@@ -283,11 +283,11 @@ app.post("/admin", checkAuthenticated, multer({ storage: storageConfig }).single
         font-family: "Noto Sans", sans-serif;
         font-size: 21px;
         text-align: center;
-        @media (max-width: 767px) {
+        @media screen and (max-width: 767px) {
             padding: 0 50px;
             font-size: 16px;
         }
-        @media (max-width: 450px) {
+        @media screen and (max-width: 450px) {
             padding: 0 20px;
             font-size: 15px;
         }}
