@@ -283,14 +283,19 @@ app.post("/admin", checkAuthenticated, multer({ storage: storageConfig }).single
         font-family: "Noto Sans", sans-serif;
         font-size: 21px;
         text-align: center;
+        }
         @media screen and (max-width: 767px) {
+            .pagestyle {
             padding: 0 50px;
             font-size: 16px;
+            }
         }
         @media screen and (max-width: 450px) {
+            .pagestyle {
             padding: 0 20px;
             font-size: 15px;
-        }}
+            }
+        }
         </style>
         <p class="pagestyle"><!--Пишите свой текст здесь;)--></p>`, err => {
             if (err) {
