@@ -756,7 +756,7 @@ function SwiperReact() {
   }, [])
 
   return (
-    <div class="swiper mySwiper"><div className="swiper-wrapper">{state.map((x, i) => {return photoslist[i].length == 0 ? '' : <div key={i} className="swiper-slide" onClick={() => get_photos(i, photoslist[i])}><div className="subtext">{x}</div><img src={"images/slider/0"+(i+1)+"/"+photoslist[i][0]} /></div>})}
+    <div className="swiper mySwiper"><div className="swiper-wrapper">{state.map((x, i) => {return photoslist[i].length == 0 ? '' : <div key={i} className="swiper-slide" onClick={() => get_photos(i, photoslist[i])}><div className="subtext">{x}</div><img src={"images/slider/0"+(i+1)+"/"+photoslist[i][0]} /></div>})}
     </div><div className="swiper-pagination"></div>
     <div className="swiper-button-next"></div>
     <div className="swiper-button-prev"></div></div>
